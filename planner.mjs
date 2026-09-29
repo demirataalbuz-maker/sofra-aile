@@ -23,7 +23,7 @@ export function profileError(p){
   return '';
 }
 export function estimate(p){
-  const bmr=10*(+p.weight)+6.25*(+p.height)-5*(+p.age)+(p.sex==='male'?5:-161);
+  const bmr=9.99*(+p.weight)+6.25*(+p.height)-4.92*(+p.age)+(p.sex==='male'?5:-161);
   const maintenance=Math.round(bmr*activityFactors[p.activity]);
   const change=p.goal==='lose'?-300:p.goal==='gain'?200:0;
   const suggested=Math.max(p.sex==='male'?1500:1200,maintenance+change);
