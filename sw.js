@@ -1,4 +1,4 @@
-const CACHE='sofra-aile-v2';const CORE=['./','./index.html','./style.css','./app.js','./planner.mjs','./catalog.json','./photo-credits.json','./icon-192.png'];
+const CACHE='sofra-aile-v3';const CORE=['./','./index.html','./style.css','./app.js','./planner.mjs','./catalog.json','./photo-credits.json','./icon-192.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))),self.clients.claim()]))});
 self.addEventListener('fetch',e=>{const req=e.request;if(req.method!=='GET'||new URL(req.url).origin!==self.location.origin)return;e.respondWith(fetch(req).then(r=>{if(r.ok){const c=r.clone();caches.open(CACHE).then(cache=>cache.put(req,c)).catch(()=>{})}return r}).catch(()=>caches.match(req).then(r=>r||caches.match('./index.html'))))});

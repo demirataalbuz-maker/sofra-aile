@@ -7,6 +7,23 @@ export const SLOTS=[
 
 const activityFactors={low:1.2,light:1.375,moderate:1.55,high:1.725};
 const keys=['kcal','protein','carbs','fat'];
+const DAY=24*60*60*1000;
+
+// Store only recipe IDs and their last recommendation time, never every render.
+export function rememberRecommendations(history,entries={},now=Date.now()){
+  const kept=new Map(Object.entries(history&&typeof history==='object'?history:{}).filter(([id,time])=>
+    id.length<=200&&Number.isFinite(time)&&time<=now&&time>=now-30*DAY));
+  for(const entry of Object.values(entries||{}))if(typeof entry?.id==='string')kept.set(entry.id,now);
+  return Object.fromEntries([...kept].sort((a,b)=>b[1]-a[1]).slice(0,1000));
+}
+
+function variedPool(pool,history,now){
+  const fresh=pool.filter(r=>history[r.id]===undefined||history[r.id]<=now-7*DAY);
+  if(fresh.length)return fresh;
+  // With a small eligible catalog, cycle oldest recommendations first.
+  const oldest=Math.min(...pool.map(r=>history[r.id]));
+  return pool.filter(r=>history[r.id]===oldest);
+}
 export function profileError(p){
   if(!p||!['female','male'].includes(p.sex))return 'Hesaplama için cinsiyet seç.';
   if(!Number.isFinite(+p.age)||+p.age<19||+p.age>85)return 'Yaş 19–85 arasında olmalı.';
@@ -54,15 +71,16 @@ function score(entries,byId,p,goal){
   const ids=Object.values(entries).map(e=>e?.id);result+=(ids.length-new Set(ids).size)*.6;
   return result;
 }
-export function buildPlan(recipes,ingredients,p,random=Math.random,locked={},avoid={}){
+export function buildPlan(recipes,ingredients,p,random=Math.random,locked={},avoid={},options={}){
   const byId=new Map(recipes.map(r=>[r.id,r]));const allergies=Array.isArray(p.allergies)?p.allergies:[];
-  const pools=Object.fromEntries(SLOTS.map(([k,,categories])=>[k,recipes.filter(r=>categories.includes(r.category)&&r.id!==avoid[k]&&+r.macros?.kcal>=100&&+r.macros?.kcal<=850&&allowed(r,ingredients,allergies))]));
-  if(SLOTS.some(([k])=>!pools[k].length))return null;
+  const now=options.now??Date.now(),history=rememberRecommendations(options.history,{},now);
+  const pools=Object.fromEntries(SLOTS.map(([k,,categories])=>[k,variedPool(recipes.filter(r=>categories.includes(r.category)&&r.id!==avoid[k]&&+r.macros?.kcal>=100&&+r.macros?.kcal<=850&&allowed(r,ingredients,allergies)),history,now)]));
+  if(SLOTS.some(([k])=>locked[k]?!allowed(byId.get(locked[k].id),ingredients,allergies):!pools[k].length))return null;
   const portions=[.75,1,1.25,1.5,2];const goal=estimate(p);
   let best=null,bestScore=Infinity;
   for(let i=0;i<6000;i++){
     const entries={};
-    for(const [k] of SLOTS){const r=pools[k][Math.floor(random()*pools[k].length)];entries[k]=locked[k]||{id:r.id,portion:portions[Math.floor(random()*portions.length)]}}
+    for(const [k] of SLOTS){if(locked[k]){entries[k]=locked[k];continue}const r=pools[k][Math.floor(random()*pools[k].length)];entries[k]={id:r.id,portion:portions[Math.floor(random()*portions.length)]}}
     const value=score(entries,byId,p,goal);
     if(value<bestScore){bestScore=value;best=entries}
   }
