@@ -47,12 +47,16 @@ export function estimate(p){
   const target=p.mode==='macro' ? Math.round(+p.protein*4 + +p.carbs*4 + +p.fat*9) : (p.calorieTarget ? +p.calorieTarget : suggested);
   return {maintenance,suggested,target};
 }
+export function matchingAllergens(r,ingredients,allergies=[]){
+  if(!r)return [];
+  const restricted=new Set(Array.isArray(allergies)?allergies:[]);
+  const found=new Set(r.allergens||[]);
+  for(const [id] of r.items||[])for(const allergen of ingredients[id]?.allergens||[])found.add(allergen);
+  return [...found].filter(a=>restricted.has(a));
+}
 export function allowed(r,ingredients,allergies=[]){
   if(!r||!r.macros||!Number.isFinite(+r.macros.kcal))return false;
-  const restricted=new Set(allergies);
-  const found=[...(r.allergens||[])];
-  for(const [id] of r.items||[])found.push(...(ingredients[id]?.allergens||[]));
-  return !found.some(a=>restricted.has(a));
+  return matchingAllergens(r,ingredients,allergies).length===0;
 }
 export function totals(entries,byId){
   const sum={kcal:0,protein:0,carbs:0,fat:0};

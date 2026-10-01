@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {profileError,estimate,allowed,buildPlan,totals,SLOTS,rememberRecommendations} from '../planner.mjs';
+import {profileError,estimate,allowed,buildPlan,totals,SLOTS,rememberRecommendations,matchingAllergens} from '../planner.mjs';
 
 const catalog=JSON.parse(fs.readFileSync(new URL('../catalog.json',import.meta.url)));
 const base={age:42,height:165,weight:75,sex:'female',activity:'light',goal:'lose',mode:'calorie',calorieTarget:'',allergies:['milk']};
@@ -90,4 +90,15 @@ test('history expires and malformed persisted data is ignored',()=>{
   const history=rememberRecommendations({old:now-31*DAY,future:now+DAY,bad:'yesterday',recent:now-DAY}, {snack:{id:'new'}},now);
   assert.deepEqual(history,{new:now,recent:now-DAY});
   assert.deepEqual(rememberRecommendations(null,{},now),{});
+});
+
+test('allergen warnings include ingredient tags and deduplicate recipe tags',()=>{
+  const r={allergens:['milk'],items:[['yogurt',100],['egg',1]],macros:{kcal:200}};
+  const ingredients={yogurt:{allergens:['milk']},egg:{allergens:['egg']}};
+  assert.deepEqual(matchingAllergens(r,ingredients,['milk','egg','soy']),['milk','egg']);
+  assert.deepEqual(matchingAllergens(r,ingredients,['soy']),[]);
+  assert.deepEqual(matchingAllergens(r,ingredients),[]);
+  assert.equal(allowed(r,ingredients,['egg']),false);
+  assert.equal(allowed(r,ingredients,['soy']),true);
+  assert.deepEqual(matchingAllergens({...r,allergens:[]},ingredients,['egg']),['egg']);
 });
