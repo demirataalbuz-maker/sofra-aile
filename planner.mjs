@@ -1,3 +1,4 @@
+import {selectedSeason,seasonalAffinity} from './seasons.mjs?v=6';
 export const SLOTS=[
   ['breakfast','Kahvaltı',['Kahvaltı']],
   ['lunch','Öğle',['Tavuk','Et','Vejetaryen','Bakliyat','Balık']],
@@ -26,7 +27,7 @@ function variedPool(pool,history,now){
 }
 export function profileError(p){
   if(!p||!['female','male'].includes(p.sex))return 'Hesaplama için cinsiyet seç.';
-  if(!Number.isFinite(+p.age)||+p.age<19||+p.age>85)return 'Yaş 19–85 arasında olmalı.';
+  if(!Number.isInteger(+p.age)||+p.age<18||+p.age>85)return 'Yaş 18–85 arasında tam sayı olmalı.';
   if(!Number.isFinite(+p.height)||+p.height<120||+p.height>220)return 'Boy 120–220 cm arasında olmalı.';
   if(!Number.isFinite(+p.weight)||+p.weight<35||+p.weight>300)return 'Kilo 35–300 kg arasında olmalı.';
   if(!activityFactors[p.activity])return 'Hareket düzeyini seç.';
@@ -63,6 +64,13 @@ export function totals(entries,byId){
   for(const [slot] of SLOTS){const e=entries?.[slot],r=byId.get(e?.id);if(!r)continue;for(const k of keys)sum[k]+=Number(r.macros[k]||0)*Number(e.portion||1)}
   return sum;
 }
+export function targetStatus(entries,byId,p){
+  const actual=totals(entries,byId),goal=estimate(p),checks=[];
+  if(p.mode==='macro'){
+    for(const key of ['protein','carbs','fat'])checks.push({key,min:key===p.priority?+p[key]*.9:0,max:+p[key]*1.1});
+  }else checks.push({key:'kcal',min:goal.target*.9,max:goal.target*1.1});
+  return {actual,target:goal.target,checks,ok:checks.every(({key,min,max})=>Number.isFinite(actual[key])&&actual[key]>=min-1e-6&&actual[key]<=max+1e-6)};
+}
 function score(entries,byId,p,goal){
   const t=totals(entries,byId),target=goal.target;
   let result;
@@ -70,7 +78,7 @@ function score(entries,byId,p,goal){
     const priority=+p[p.priority];
     result=3*Math.abs(t[p.priority]-priority)/Math.max(priority,30);
     for(const k of ['protein','carbs','fat'])if(k!==p.priority){const cap=+p[k];result+=1.8*Math.max(0,t[k]-cap*1.1)/Math.max(cap,30)}
-    result+=.22*Math.abs(t.kcal-target)/Math.max(target,1200);
+    // Secondary macros are ceilings, not amounts that must be filled with calories.
   }else result=3*Math.abs(t.kcal-target)/Math.max(target,1200);
   const ids=Object.values(entries).map(e=>e?.id);result+=(ids.length-new Set(ids).size)*.6;
   return result;
@@ -81,12 +89,23 @@ export function buildPlan(recipes,ingredients,p,random=Math.random,locked={},avo
   const pools=Object.fromEntries(SLOTS.map(([k,,categories])=>[k,variedPool(recipes.filter(r=>categories.includes(r.category)&&r.id!==avoid[k]&&+r.macros?.kcal>=100&&+r.macros?.kcal<=850&&allowed(r,ingredients,allergies)),history,now)]));
   if(SLOTS.some(([k])=>locked[k]?!allowed(byId.get(locked[k].id),ingredients,allergies):!pools[k].length))return null;
   const portions=[.75,1,1.25,1.5,2];const goal=estimate(p);
+  const season=selectedSeason(p.seasonPreference,now);
+  const affinity=new Map(recipes.map(r=>[r.id,seasonalAffinity(r,ingredients,season)]));
+  const valueOf=entries=>score(entries,byId,p,goal)-.025*Object.values(entries).reduce((sum,e)=>sum+affinity.get(e.id),0);
   let best=null,bestScore=Infinity;
+  const consider=entries=>{if(!targetStatus(entries,byId,p).ok)return;const value=valueOf(entries);if(value<bestScore){bestScore=value;best=entries}};
+  const unlocked=SLOTS.filter(([k])=>!locked[k]);
+  // A swap checks every eligible recipe/portion against the original daily target.
+  // It never changes locked meals or silently expands the target to fit a dish.
+  if(unlocked.length===1){
+    const [slot]=unlocked[0];
+    for(const r of pools[slot])for(const portion of portions)consider({...locked,[slot]:{id:r.id,portion}});
+    return best;
+  }
   for(let i=0;i<6000;i++){
     const entries={};
     for(const [k] of SLOTS){if(locked[k]){entries[k]=locked[k];continue}const r=pools[k][Math.floor(random()*pools[k].length)];entries[k]={id:r.id,portion:portions[Math.floor(random()*portions.length)]}}
-    const value=score(entries,byId,p,goal);
-    if(value<bestScore){bestScore=value;best=entries}
+    consider(entries);
   }
   return best;
 }
