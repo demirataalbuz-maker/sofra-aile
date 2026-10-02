@@ -1,4 +1,41 @@
 {
-  "recipes": [],
+  "recipes": [
+    {
+      "id": "daily-2026-10-02-strawberry-peanut-yogurt-bark",
+      "addedOn": "2026-10-02",
+      "title": "Çilekli fıstık ezmeli donuk yoğurt dilimleri",
+      "summary": "Süzme yoğurtla hazırlanan, çilekli ve fıstık ezmesi desenli soğuk tatlı. 10 dakika hazırlık ve en az 3 saat dondurma gerekir. Tarif 2 kişiliktir; 8 eşit parçaya bölersen kişi başına 4 parça düşer.",
+      "category": "Tatlı",
+      "servings": 2,
+      "minutes": 190,
+      "image": "images/daily-2026-10-02-yogurt-bark.png",
+      "items": [["greekyogurt", 400], ["strawberry", 150], ["peanutbutter", 30], ["honey", 20]],
+      "macros": {"kcal": 262.1, "protein": 24.3, "carbs": 24.5, "fat": 8.7},
+      "allergens": ["milk", "peanut"],
+      "equipment": ["Dondurucu"],
+      "tools": ["Mutfak tartısı", "Yaklaşık 20 × 25 cm sığ kap veya tepsi", "Yağlı kâğıt", "Karıştırma kabı", "Kaşık", "Bıçak", "Kesme tahtası"],
+      "steps": [
+        "Dondurucuya sığan yaklaşık 20 × 25 cm sığ bir kabı yağlı kâğıtla kapla. Çilekleri yıka, saplarını ayır ve iyice kurula. Ayıklanmış çilekten 150 g tart; yaklaşık 3 mm kalınlığında dilimle.",
+        "400 g yağsız, koyu kıvamlı süzme yoğurt ile 20 g balı bir kasede pürüzsüz olana kadar kaşıkla karıştır. Yağlı veya farklı marka yoğurt kullanırsan besin değerlerinin değişeceğini unutma.",
+        "Yoğurt karışımını kâğıt kaplı kaba dök. Kaşığın arkasıyla yaklaşık 8–10 mm kalınlığında, her yeri eşit bir tabaka halinde yay.",
+        "30 g fıstık ezmesini kavanozunda karıştırıp yumuşat. Yoğurdun üzerine küçük noktalar halinde dağıt; kaşığın ucuyla kısa çizgiler çekerek desen oluştur. Çilek dilimlerini tek kat halinde üzerine yerleştir ve hafifçe bastır.",
+        "Kabı düz şekilde dondurucuya koy. En az 3 saat, orta kısmı da tamamen sertleşene kadar dondur; dondurucunun gücüne ve tabakanın kalınlığına göre daha uzun sürebilir.",
+        "Yağlı kâğıttan tutarak donmuş tabakayı çıkar. 2–3 dakika bekletip 8 yaklaşık eşit parçaya böl; 4 parça bir porsiyondur. Soğuk servis et. Artan parçaları kâğıtla ayırarak kapalı bir kapta dondurucuda sakla; yalnızca yiyeceğin kadarını çıkar."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; malzeme gramı × kaynak verisinin 100 g değeri / 100, toplam / 2. Sonuçlar bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked malzeme kayıtları",
+        "sourceIds": {"greekyogurt": "170894", "strawberry": "167762", "peanutbutter": "172470", "honey": "169640"},
+        "note": "Yaklaşık değerlerdir; kullanılan markaya göre değişir. Şeker verisi eklenmedi."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-02",
+        "description": "Bu tarif için üretilmiş temsili sunum; üçüncü taraf fotoğraf kullanılmadı.",
+        "promptFile": "images/daily-2026-10-02-yogurt-bark.provenance.json"
+      }
+    }
+  ],
   "ingredients": {}
 }
