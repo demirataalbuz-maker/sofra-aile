@@ -9,12 +9,20 @@ export const SLOTS=[
 const activityFactors={low:1.2,light:1.375,moderate:1.55,high:1.725};
 const keys=['kcal','protein','carbs','fat'];
 const DAY=24*60*60*1000;
+export const DEFAULT_TIMES={breakfast:'08:00',lunch:'13:00',snack:'16:00',dinner:'19:00'};
+export const mealItems=entry=>Array.isArray(entry?.items)?entry.items:entry?.id?[entry]:[];
+export function mealTimes(input={}){
+  return Object.fromEntries(SLOTS.map(([slot])=>[slot,/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(input?.[slot])?input[slot]:DEFAULT_TIMES[slot]]));
+}
+export function orderedSlots(times={}){
+  const values=mealTimes(times);return [...SLOTS].sort((a,b)=>values[a[0]].localeCompare(values[b[0]]));
+}
 
 // Store only recipe IDs and their last recommendation time, never every render.
 export function rememberRecommendations(history,entries={},now=Date.now()){
   const kept=new Map(Object.entries(history&&typeof history==='object'?history:{}).filter(([id,time])=>
     id.length<=200&&Number.isFinite(time)&&time<=now&&time>=now-30*DAY));
-  for(const entry of Object.values(entries||{}))if(typeof entry?.id==='string')kept.set(entry.id,now);
+  for(const entry of Object.values(entries||{}))for(const part of mealItems(entry))if(typeof part?.id==='string')kept.set(part.id,now);
   return Object.fromEntries([...kept].sort((a,b)=>b[1]-a[1]).slice(0,1000));
 }
 
@@ -61,7 +69,7 @@ export function allowed(r,ingredients,allergies=[]){
 }
 export function totals(entries,byId){
   const sum={kcal:0,protein:0,carbs:0,fat:0};
-  for(const [slot] of SLOTS){const e=entries?.[slot],r=byId.get(e?.id);if(!r)continue;for(const k of keys)sum[k]+=Number(r.macros[k]||0)*Number(e.portion||1)}
+  for(const [slot] of SLOTS)for(const e of mealItems(entries?.[slot])){const r=byId.get(e?.id);if(!r)continue;for(const k of keys)sum[k]+=Number(r.macros[k]||0)*Number(e.portion||1)}
   return sum;
 }
 export function targetStatus(entries,byId,p){
@@ -80,18 +88,18 @@ function score(entries,byId,p,goal){
     for(const k of ['protein','carbs','fat'])if(k!==p.priority){const cap=+p[k];result+=1.8*Math.max(0,t[k]-cap*1.1)/Math.max(cap,30)}
     // Secondary macros are ceilings, not amounts that must be filled with calories.
   }else result=3*Math.abs(t.kcal-target)/Math.max(target,1200);
-  const ids=Object.values(entries).map(e=>e?.id);result+=(ids.length-new Set(ids).size)*.6;
+  const ids=Object.values(entries).flatMap(mealItems).map(e=>e.id);result+=(ids.length-new Set(ids).size)*.6;
   return result;
 }
 export function buildPlan(recipes,ingredients,p,random=Math.random,locked={},avoid={},options={}){
   const byId=new Map(recipes.map(r=>[r.id,r]));const allergies=Array.isArray(p.allergies)?p.allergies:[];
   const now=options.now??Date.now(),history=rememberRecommendations(options.history,{},now);
   const pools=Object.fromEntries(SLOTS.map(([k,,categories])=>[k,variedPool(recipes.filter(r=>categories.includes(r.category)&&r.id!==avoid[k]&&+r.macros?.kcal>=100&&+r.macros?.kcal<=850&&allowed(r,ingredients,allergies)),history,now)]));
-  if(SLOTS.some(([k])=>locked[k]?!allowed(byId.get(locked[k].id),ingredients,allergies):!pools[k].length))return null;
+  if(SLOTS.some(([k])=>locked[k]?mealItems(locked[k]).some(e=>!allowed(byId.get(e.id),ingredients,allergies)):!pools[k].length))return null;
   const portions=[.75,1,1.25,1.5,2];const goal=estimate(p);
   const season=selectedSeason(p.seasonPreference,now);
   const affinity=new Map(recipes.map(r=>[r.id,seasonalAffinity(r,ingredients,season)]));
-  const valueOf=entries=>score(entries,byId,p,goal)-.025*Object.values(entries).reduce((sum,e)=>sum+affinity.get(e.id),0);
+  const valueOf=entries=>score(entries,byId,p,goal)-.025*Object.values(entries).flatMap(mealItems).reduce((sum,e)=>sum+affinity.get(e.id),0);
   let best=null,bestScore=Infinity;
   const consider=entries=>{if(!targetStatus(entries,byId,p).ok)return;const value=valueOf(entries);if(value<bestScore){bestScore=value;best=entries}};
   const unlocked=SLOTS.filter(([k])=>!locked[k]);
@@ -108,4 +116,51 @@ export function buildPlan(recipes,ingredients,p,random=Math.random,locked={},avo
     consider(entries);
   }
   return best;
+}
+
+export function validReplacement(entries,slot,candidate,recipes,ingredients,p){
+  return validCandidate(entries,slot,candidate,new Map(recipes.map(r=>[r.id,r])),ingredients,p);
+}
+function validCandidate(entries,slot,candidate,byId,ingredients,p){
+  if(!SLOTS.some(([key])=>key===slot))return false;
+  const items=mealItems(candidate);
+  if(items.length<1||items.length>2||new Set(items.map(e=>e.id)).size!==items.length)return false;
+  for(const [key] of SLOTS){
+    const parts=mealItems(key===slot?candidate:entries?.[key]);
+    if(!parts.length||parts.length>2||parts.some(e=>!Number.isFinite(e.portion)||e.portion<=0||e.portion>2||!allowed(byId.get(e.id),ingredients,p.allergies)))return false;
+  }
+  return targetStatus({...entries,[slot]:candidate},byId,p).ok;
+}
+
+// Curated previews, ranked around the remaining DAILY budget. A meal has no
+// compounding ±10% allowance of its own. Selection revalidates the current day.
+export function replacementOptions(recipes,ingredients,p,entries,slot,{kind='single',history={},now=Date.now(),limit=8}={}){
+  const definition=SLOTS.find(([key])=>key===slot);if(!definition)return [];
+  const byId=new Map(recipes.map(r=>[r.id,r])),goal=estimate(p),season=selectedSeason(p.seasonPreference,now);
+  const metric=p.mode==='macro'?p.priority:'kcal',target=p.mode==='macro'?+p[metric]:goal.target;
+  const locked={...entries};delete locked[slot];const residual=Math.max(0,target-totals(locked,byId)[metric]);
+  const currentIds=new Set(mealItems(entries[slot]).map(e=>e.id));
+  const otherIds=new Set(Object.values(locked).flatMap(mealItems).map(e=>e.id));
+  const safe=recipes.filter(r=>!otherIds.has(r.id)&&r.macros?.kcal>=50&&r.macros?.kcal<=850&&allowed(r,ingredients,p.allergies));
+  const freshness=r=>history[r.id]>now-7*DAY ? .15 : 0;
+  const rank=r=>Math.abs((r.macros[metric]||0)-residual)/Math.max(30,residual)+freshness(r)-.03*seasonalAffinity(r,ingredients,season);
+  const mains=safe.filter(r=>definition[2].includes(r.category)).sort((a,b)=>rank(a)-rank(b));
+  const currentTotal=totals({[slot]:entries[slot]},byId),options=new Map();
+  const consider=items=>{
+    const candidate=items.length===1?items[0]:{items};
+    if(!validCandidate(entries,slot,candidate,byId,ingredients,p))return;
+    const key=items.map(e=>e.id).sort().join('|');
+    const daily=totals({...entries,[slot]:candidate},byId),meal=totals({[slot]:candidate},byId);
+    const value=Math.abs(daily[metric]-target)/Math.max(target,30)+.08*Math.abs(meal[metric]-currentTotal[metric])/Math.max(currentTotal[metric],30)+items.reduce((sum,e)=>sum+freshness(byId.get(e.id))-.025*seasonalAffinity(byId.get(e.id),ingredients,season),0);
+    if(!options.has(key)||value<options.get(key).value)options.set(key,{entry:candidate,daily,meal,value});
+  };
+  const portions=[.5,.75,1,1.25,1.5,2];
+  if(kind==='single'){
+    for(const r of mains)if(!currentIds.has(r.id))for(const portion of portions)consider([{id:r.id,portion}]);
+  }else{
+    const categories=slot==='breakfast'?['Ara öğün','Kahvaltı']:slot==='snack'?['Ara öğün']:['Salata','Çorba','Sebze'];
+    const sides=safe.filter(r=>categories.includes(r.category)).sort((a,b)=>a.macros.kcal-b.macros.kcal).slice(0,18);
+    for(const main of mains.slice(0,24))for(const side of sides)if(main.id!==side.id)for(const a of [.5,.75,1,1.25])for(const b of [.5,.75,1])consider([{id:main.id,portion:a},{id:side.id,portion:b}]);
+  }
+  return [...options.values()].sort((a,b)=>a.value-b.value).slice(0,Math.min(8,Math.max(0,limit)));
 }
