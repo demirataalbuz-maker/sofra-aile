@@ -1,6 +1,95 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-03-cocoa-yogurt-oat-cups",
+      "addedOn": "2026-10-03",
+      "title": "Kakaolu yoğurt dolgulu yulaf çanakları",
+      "summary": "Muz ve yulafla fırınlanan küçük çanakların içinde kakaolu süzme yoğurt dolgusu. Protein tozu gerektirmez. Tarif 6 çanak, 2 porsiyon verir; kişi başına 3 çanak düşer. Yaklaşık 10 dakika hazırlık, 20 dakika pişirme ve 20 dakika soğutma gerekir.",
+      "category": "Tatlı",
+      "servings": 2,
+      "minutes": 50,
+      "image": "images/daily-2026-10-03-oat-cups.png",
+      "items": [
+        [
+          "oats",
+          80
+        ],
+        [
+          "banana",
+          100
+        ],
+        [
+          "greekyogurt",
+          300
+        ],
+        [
+          "cocoa",
+          10
+        ],
+        [
+          "honey",
+          15
+        ],
+        [
+          "findik",
+          10
+        ]
+      ],
+      "macros": {
+        "kcal": 350.2,
+        "protein": 22.9,
+        "carbs": 53.8,
+        "fat": 7.1
+      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "nuts"
+      ],
+      "equipment": [
+        "oven"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "6 gözlü yapışmaz silikon muffin kalıbı",
+        "Fırın tepsisi",
+        "İki karıştırma kabı",
+        "Çatal",
+        "Kaşık",
+        "Bıçak",
+        "Kesme tahtası"
+      ],
+      "steps": [
+        "Fırını alt-üst ayarda 180 °C’ye ısıt. 6 gözlü yapışmaz silikon muffin kalıbını bir fırın tepsisine yerleştir. Metal kalıp yerine silikon kullan; bu tarifin malzemelerine yağ eklenmemiştir.",
+        "Kabuğu çıkarılmış olgun muzdan 100 g tart. Bir kapta çatalla püre haline getir; iri parçalar kalmasın. 80 g ince yulaf ezmesini ekle, karıştır ve yulafın nemlenmesi için 5 dakika beklet.",
+        "Karışımı 6 eşit parçaya ayır; her biri yaklaşık 30 g olur. Her parçayı kalıbın bir gözüne koy. Kaşığın arkasıyla tabana ve yanlara yaklaşık 4–5 mm kalınlığında bastır. Ortasını boş bırakarak, kenarları yaklaşık 2 cm yükselen bir çanak oluştur.",
+        "Orta rafta 18–22 dakika pişir. Kenarlar hafif altın rengi almalı ve yüzey ıslak görünmemeli; erken koyulaşırsa daha kısa pişir. Kalıbı fırından eldivenle çıkar. Çanakları kalıpta yaklaşık 20 dakika, tamamen soğuyana kadar beklet; sıcakken çıkarırsan dağılabilir.",
+        "Ayrı bir kapta 300 g yağsız, koyu kıvamlı süzme yoğurdu 10 g şekersiz kakao ve 15 g balla karıştır. Kakao topaklarını kaşıkla ez. Dolguyu çanaklar soğuyana kadar buzdolabında tut. Farklı yağ oranında veya markada yoğurt kullanırsan besin değerleri değişir.",
+        "10 g fındığı kesme tahtasında ince doğra. Soğuyan çanakları silikon kalıptan kenarlarını hafifçe esneterek çıkar. Kakaolu yoğurdu 6 çanağa eşit paylaştır; her birine yaklaşık 54 g dolgu düşer. Fındığı üzerlerine eşit dağıt.",
+        "Bir porsiyon için 3 çanak servis et. Dolgu bekledikçe yulaf tabanı yumuşar; daha diri taban için yemeden hemen önce doldur. Artan yoğurt dolgusunu kapalı kapta buzdolabında, boş çanakları ayrı sakla. Kapak görseli temsili sunumdur; fotoğraftaki adet tarifin toplam verimini göstermez."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; malzeme miktarı × gramsPerUnit × kaynak verisinin 100 g değeri / 100, toplam / 2. Bir porsiyon 3 çanak. Sonuçlar bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked malzeme kayıtları",
+        "sourceIds": {
+          "oats": "173904",
+          "banana": "173944",
+          "greekyogurt": "170894",
+          "cocoa": "169593",
+          "honey": "169640",
+          "findik": "170581"
+        },
+        "note": "Yaklaşık değerlerdir; kullanılan markaya göre değişir. Şeker verisi eklenmedi."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-03",
+        "description": "Bu tarif için üretilmiş temsili sunum; üçüncü taraf fotoğraf kullanılmadı.",
+        "promptFile": "images/daily-2026-10-03-oat-cups.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-02-strawberry-peanut-yogurt-bark",
       "addedOn": "2026-10-02",
       "title": "Çilekli fıstık ezmeli donuk yoğurt dilimleri",
@@ -9,11 +98,46 @@
       "servings": 2,
       "minutes": 190,
       "image": "images/daily-2026-10-02-yogurt-bark.png",
-      "items": [["greekyogurt", 400], ["strawberry", 150], ["peanutbutter", 30], ["honey", 20]],
-      "macros": {"kcal": 262.1, "protein": 24.3, "carbs": 24.5, "fat": 8.7},
-      "allergens": ["milk", "peanut"],
-      "equipment": ["Dondurucu"],
-      "tools": ["Mutfak tartısı", "Yaklaşık 20 × 25 cm sığ kap veya tepsi", "Yağlı kâğıt", "Karıştırma kabı", "Kaşık", "Bıçak", "Kesme tahtası"],
+      "items": [
+        [
+          "greekyogurt",
+          400
+        ],
+        [
+          "strawberry",
+          150
+        ],
+        [
+          "peanutbutter",
+          30
+        ],
+        [
+          "honey",
+          20
+        ]
+      ],
+      "macros": {
+        "kcal": 262.1,
+        "protein": 24.3,
+        "carbs": 24.5,
+        "fat": 8.7
+      },
+      "allergens": [
+        "milk",
+        "peanut"
+      ],
+      "equipment": [
+        "Dondurucu"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Yaklaşık 20 × 25 cm sığ kap veya tepsi",
+        "Yağlı kâğıt",
+        "Karıştırma kabı",
+        "Kaşık",
+        "Bıçak",
+        "Kesme tahtası"
+      ],
       "steps": [
         "Dondurucuya sığan yaklaşık 20 × 25 cm sığ bir kabı yağlı kâğıtla kapla. Çilekleri yıka, saplarını ayır ve iyice kurula. Ayıklanmış çilekten 150 g tart; yaklaşık 3 mm kalınlığında dilimle.",
         "400 g yağsız, koyu kıvamlı süzme yoğurt ile 20 g balı bir kasede pürüzsüz olana kadar kaşıkla karıştır. Yağlı veya farklı marka yoğurt kullanırsan besin değerlerinin değişeceğini unutma.",
@@ -25,7 +149,12 @@
       "nutritionCalculation": {
         "basis": "Porsiyon başına; malzeme gramı × kaynak verisinin 100 g değeri / 100, toplam / 2. Sonuçlar bir ondalığa yuvarlandı.",
         "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked malzeme kayıtları",
-        "sourceIds": {"greekyogurt": "170894", "strawberry": "167762", "peanutbutter": "172470", "honey": "169640"},
+        "sourceIds": {
+          "greekyogurt": "170894",
+          "strawberry": "167762",
+          "peanutbutter": "172470",
+          "honey": "169640"
+        },
         "note": "Yaklaşık değerlerdir; kullanılan markaya göre değişir. Şeker verisi eklenmedi."
       },
       "imageProvenance": {
