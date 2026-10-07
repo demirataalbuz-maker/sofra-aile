@@ -1,6 +1,92 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-07-roasted-pumpkin-chickpeas",
+      "addedOn": "2026-10-07",
+      "title": "Yoğurt soslu fırın balkabağı ve nohut",
+      "summary": "Fırında kızaran balkabağı ve haşlanmış nohut, limonlu sarımsaklı süzme yoğurtla servis edilir. 2 kişilik sebzeli bir ana öğündür. 10 dakika hazırlık ve yaklaşık 35 dakika pişirme gerekir.",
+      "category": "Bakliyat",
+      "servings": 2,
+      "minutes": 45,
+      "image": "images/daily-2026-10-07-pumpkin-chickpeas.png",
+      "items": [
+        [
+          "pumpkin",
+          400
+        ],
+        [
+          "chickpea",
+          300
+        ],
+        [
+          "greekyogurt",
+          250
+        ],
+        [
+          "oil",
+          10
+        ],
+        [
+          "lemon",
+          20
+        ],
+        [
+          "garlic",
+          4
+        ]
+      ],
+      "macros": {
+        "kcal": 421.1,
+        "protein": 28.2,
+        "carbs": 60.0,
+        "fat": 9.6
+      },
+      "allergens": [
+        "milk"
+      ],
+      "equipment": [
+        "oven"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Fırın tepsisi",
+        "Yağlı kâğıt",
+        "Kesme tahtası",
+        "Bıçak",
+        "Karıştırma kabı",
+        "Kaşık",
+        "Çatal"
+      ],
+      "steps": [
+        "Fırını alt-üst ayarda 200 °C’ye ısıt. Tepsiye yağlı kâğıt ser. Kabuğu ve çekirdeği çıkarılmış balkabağından 400 g tart; yaklaşık 2 cm büyüklüğünde benzer küpler halinde doğra. Sert kabağı sabit bir kesme tahtasında dikkatlice kes veya ayıklanmış balkabağı kullan.",
+        "Haşlanmış ve süzülmüş nohuttan 300 g tart. Konserve kullanıyorsan süzüp yıka, ardından temiz havlu üzerinde kurula. Kuru, çiğ nohut bu tarifte doğrudan kullanılamaz.",
+        "Balkabağını 7 g zeytinyağıyla bir kapta karıştır. Tepsiye üst üste gelmeyecek şekilde yay. Orta rafta 20 dakika pişir; ardından spatulayla küpleri çevir.",
+        "Nohudu kalan 3 g zeytinyağıyla karıştırıp balkabağının yanına tek kat yay. Birlikte 12–15 dakika daha pişir. Kabak çatal kolayca girecek kadar yumuşamalı, kenarları hafif kızarmalıdır. Gerekirse birkaç dakika daha pişir; nohut sertleşmeden çıkar.",
+        "4 g soyulmuş sarımsağı çok ince kıyıp bıçağın düz yüzüyle ez. 250 g yağsız süzme yoğurda 20 g limon suyu ve sarımsağı ekleyip karıştır. Sosu servis edene kadar buzdolabında tut. Farklı yağ oranında yoğurt kullanırsan makrolar değişir.",
+        "Fırındaki kabak ve nohudu iki tabağa eşit paylaştır. İlk sıcağı birkaç dakika çıktıktan sonra yoğurt sosunu da eşit bölerek üzerine veya yanına koy. Her tabak bir porsiyondur. Ekmek ya da pilav eklenirse onların besin değerleri bu hesaba dahil değildir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × kaynak verisinin 100 g değeri / 100, toplam / 2. Bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "pumpkin": "168448",
+          "chickpea": "173757",
+          "greekyogurt": "170894",
+          "oil": "171413",
+          "lemon": "167747",
+          "garlic": "169230"
+        },
+        "note": "Nohut haşlanmış ve süzülmüş, balkabağı ayıklanmış çiğ ağırlıktır. Yaklaşık değerler markaya göre değişir. Şeker verisi eklenmedi."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-07",
+        "description": "Bu tarif için üretilmiş temsili sunum; üçüncü taraf fotoğraf kullanılmadı.",
+        "promptFile": "images/daily-2026-10-07-pumpkin-chickpeas.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-03-cocoa-yogurt-oat-cups",
       "addedOn": "2026-10-03",
       "title": "Kakaolu yoğurt dolgulu yulaf çanakları",

@@ -1,8 +1,10 @@
+import {WEB_VERSION,newerVersion,readJson,readCatalog,latestRecipeDate,canRefreshPage} from './updates.mjs?v=8';
 import {SEASONS,selectedSeason} from './seasons.mjs?v=6';
 import {mergeCatalog} from './catalog.mjs?v=5';
 /* Sofra Aile: anonymous, device-local web edition. No account or analytics. */
 import {SLOTS,profileError,estimate,allowed,totals,buildPlan,rememberRecommendations,matchingAllergens,targetStatus,mealItems,mealTimes,orderedSlots,replacementOptions,validReplacement} from './planner.mjs?v=7';
 const storeKey='sofra-aile-v1';
+let installPrompt=null,registration=null,refreshing=false,lastAttempt=0,lastCheck='',catalogCached=false,updateReady=false,contentPending=false,booted=false;
 const ui={page:'explore',query:'',category:'Tümü',limit:24,recipe:null,servings:2,method:-1,returnPage:'explore'};
 let catalog={recipes:[],ingredients:{}};
 let credits=[];
@@ -30,9 +32,9 @@ const recipe=id=>catalog.recipes.find(r=>r.id===id);
 function save(){try{localStorage.setItem(storeKey,JSON.stringify(state));}catch{toast('Telefon depolama alanı dolu; liste kaydedilemedi.')}}
 function toast(message){let el=$('#toast');if(!el){el=document.createElement('div');el.id='toast';el.style.cssText='position:fixed;z-index:20;bottom:95px;left:50%;transform:translateX(-50%);background:#35251e;color:#fff;border-radius:12px;padding:11px 17px;box-shadow:0 6px 25px #0004;font-size:14px;min-width:180px;text-align:center';document.body.append(el)}el.textContent=message;el.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.hidden=true,2800)}
 function nav(){return `<nav class="nav" aria-label="Alt menü"><button data-page="explore" class="${ui.page==='explore'||(ui.page==='detail'&&ui.returnPage==='explore')?'on':''}"><b>⌕</b>Tarifler</button><button data-page="plan" class="${ui.page==='plan'||ui.page==='alternatives'||(ui.page==='detail'&&ui.returnPage==='plan')?'on':''}"><b>▦</b>Bugün</button><button data-page="profile" class="${ui.page==='profile'?'on':''}"><b>♙</b>Profil</button><button data-page="basket" class="${ui.page==='basket'?'on':''}"><b>☑</b>Liste <span>${state.basket.filter(x=>!x.done).length||''}</span></button></nav>`}
-function header(){return `<header class="top"><div class="brandrow"><div class="brand"><span class="mark">S</span><strong>sofra.</strong></div><span class="sub">Giriş gerektirmez · ${catalog.recipes.length} tarif</span></div></header>`}
+function header(){return `<header class="top"><div class="brandrow"><div class="brand"><span class="mark">S</span><strong>sofra.</strong></div><div class="appcontrols"><span class="sub">${catalog.recipes.length} tarif</span><button class="appsettings" data-page="application">Uygulama</button></div></div></header>`}
 function footer(){return `<p class="foot">Tarif ve makro değerleri yaklaşık bilgi içindir. Fotoğraflar sunum veya teknik örneğidir. Profilin ve alışveriş listen yalnızca bu telefonda saklanır. <a href="./kaynaklar.html">Görsel kaynakları</a></p>`}
-function render(){const app=$('#app');app.className='app';app.innerHTML=(ui.page==='detail'?detail():header()+(ui.page==='explore'?explore():ui.page==='plan'?plan():ui.page==='alternatives'?alternatives():ui.page==='profile'?profile():basket()))+footer()+nav();bind();}
+function render(){const app=$('#app');app.className='app';app.innerHTML=(ui.page==='detail'?detail():header()+(ui.page==='explore'?explore():ui.page==='plan'?plan():ui.page==='alternatives'?alternatives():ui.page==='profile'?profile():ui.page==='application'?application():basket()))+footer()+nav();bind();showUpdateNotice();}
 function explore(){let cats=['Tümü','Kahvaltı','Tavuk','Et','Sebze','Bakliyat','Balık','Tatlı','Ara öğün'];return `<h1 class="heading">Bugün ne pişirelim?</h1><p class="lead">Tarifini seç, adımlara bak, eksikleri listeye ekle.</p>${state.profile?.allergies?.length?'<p class="allergen-legend"><span class="warning-mark" aria-hidden="true">!</span> Seçtiğin alerjenleri içeren tarifler işaretli. İşaret olmaması alerjensiz olduğunu garanti etmez.</p>':''}<input class="search" id="search" type="search" inputmode="search" placeholder="Yemek veya malzeme ara" aria-label="Tarif ara" value="${esc(ui.query)}"><div class="chips" aria-label="Kategoriler">${cats.map(c=>`<button class="chip ${ui.category===c?'on':''}" data-category="${esc(c)}">${esc(c)}</button>`).join('')}</div><div id="results"></div>`}
 function visibleRecipes(){const q=ui.query.trim().toLocaleLowerCase('tr-TR');return catalog.recipes.filter(r=>(ui.category==='Tümü'||r.category===ui.category)&&(!q||(r.title+' '+r.summary+' '+(r.items||[]).map(([id])=>catalog.ingredients[id]?.name||'').join(' ')).toLocaleLowerCase('tr-TR').includes(q)))}
 function renderCards(){const box=$('#results');if(!box)return;const all=visibleRecipes();if(!all.length){box.innerHTML='<div class="empty">Bu aramada tarif bulamadık. Başka bir yemek veya malzeme dene.</div>';return}box.innerHTML=`<p class="meta">${all.length} tarif</p><div class="grid">${all.slice(0,ui.limit).map(recipeCard).join('')}</div>${all.length>ui.limit?'<button class="more" id="more">Daha fazla tarif</button>':''}`;box.querySelectorAll('[data-recipe]').forEach(b=>b.onclick=()=>openDetail(b.dataset.recipe));const more=$('#more');if(more)more.onclick=()=>{ui.limit+=24;renderCards()}}
@@ -66,9 +68,51 @@ function alternatives(){
   const label=slots.find(([key])=>key===ui.swapSlot)?.[1]||'Öğün',sum=totals(state.plan.entries,new Map(catalog.recipes.map(r=>[r.id,r]))),p=state.profile,goal=estimate(p);
   return `<button class="textlink returnmenu" data-page="plan">‹ Menüme dön</button><h1 class="heading">${label} için alternatifler</h1><p class="lead">Fotoğraflardan seç; onaylayana kadar menün aynı kalır. İkili kombin, aynı öğünde birlikte yenilecek iki yemektir.</p><div class="goalbox"><strong>${p.mode==='macro'?`Hedef: ${fmt(p.protein)} g protein · ${fmt(p.carbs)} g karb. · ${fmt(p.fat)} g yağ`:`Günlük hedef: ${fmt(goal.target)} kcal`}</strong><span>Şu an: ${macroLine(sum)}</span><span>${p.mode==='macro'?'Öncelikli makro ±%10, diğer makrolar en fazla %10 üzerinde.':`Günlük sınır: ${fmt(goal.target*.9)}–${fmt(goal.target*1.1)} kcal.`} Diğer öğünlerin korunur.</span></div><div class="chips choicekind" aria-label="Alternatif türü"><button class="chip ${ui.swapKind==='single'?'on':''}" data-kind="single" aria-pressed="${ui.swapKind==='single'}">Tek yemek</button><button class="chip ${ui.swapKind==='combo'?'on':''}" data-kind="combo" aria-pressed="${ui.swapKind==='combo'}">İkili kombin</button></div>${ui.swapOptions.length?`<div class="alternativegrid">${ui.swapOptions.map((option,index)=>`<article class="alternative"><div class="alternativefoods">${mealItems(option.entry).map(e=>{const r=recipe(e.id);return `<div class="alternativefood"><img src="${img(r.image)}" alt="${esc(r.title)} sunum görseli" loading="lazy"><div><h2>${esc(r.title)}</h2><p class="meta">${portionFmt(e.portion)} porsiyon · ${fmt(r.macros.kcal*e.portion)} kcal</p></div></div>`}).join('')}</div><div class="alternativebody"><p class="mealpreview"><strong>Bu öğün</strong><br>${macroLine(option.meal)}</p><div class="dailypreview"><strong>Seçersen günün toplamı</strong><p>${macroLine(option.daily)}</p><span>${option.daily.kcal>=sum.kcal?'+':''}${fmt(option.daily.kcal-sum.kcal)} kcal değişim · Günlük sınırlara uygun</span></div><button class="primary" data-select-option="${index}">Bunu seç</button></div></article>`).join('')}</div>`:'<div class="empty">Bu türde günlük hedefini ve alerjen tercihlerini koruyan alternatif bulunamadı. Diğer türü deneyebilirsin; mevcut öğünün değişmedi.</div>'}<p class="bottomnote">Kalan pay günün toplamından hesaplanır; her değişimde hedef yeniden yükseltilmez. Daha az kalorili bir seçimden sonra oluşan pay, sonraki alternatiflere yansır.</p>`;
 }
+function application(){
+ const installed=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true,latest=latestRecipeDate(catalog.recipes);
+ return `<h1 class="heading">Sofra cebinde</h1><p class="lead">Android ve iPhone’da aynı güncel Sofra. Ana ekrana ekle, simgesinden aç.</p><section class="panel installpanel"><span class="mark">S</span><h2>${installed?'Ana ekran uygulamasındasın':'Sofra’yı ana ekrana ekle'}</h2>${installed?'<p>Web sürümünü kullanıyorsun. Yeni tarifler için APK kurman gerekmez.</p>':`${installPrompt?'<button class="primary" id="installApp">Sofra’yı yükle</button>':''}<p><strong>Android:</strong> Bu siteyi Chrome’da aç → ⋮ menüsü → Ana ekrana ekle → Yükle. Menü adı tarayıcıya göre değişebilir.</p><p><strong>iPhone:</strong> Safari → Paylaş → Ana Ekrana Ekle → varsa “Web Uygulaması Olarak Aç”.</p>`}<p class="hint">Eski Android APK’sındaki profil ve kayıtlar web sürümüne otomatik taşınmaz. Burada Profil bölümünü bir kez doldur. Mevcut web profilin bu cihazda korunur.</p></section><section class="panel"><h2>Güncellik</h2><p>Web sürümü ${WEB_VERSION} · ${catalog.recipes.length} tarif</p><p>Son yeni tarif: <strong>${latest?esc(latest.split('-').reverse().join('.')):'Henüz yok'}</strong></p><p id="updateStatus" role="status">${catalogCached?'Çevrimdışı kayıtlı içerik gösteriliyor.':lastCheck?'Son içerik kontrolü: '+esc(lastCheck):'İçerik kontrolü bekleniyor.'}</p><button class="secondary" id="checkUpdates">Güncellemeleri kontrol et</button><p class="hint">İnternete bağlıyken açılışta ve uygulamaya döndüğünde kontrol ederiz. Açık kaldığında da düzenli kontrol yapılır. Tarif okurken veya profil yazarken ekranın kesilmez; yeni uygulama sürümü için yenileme uyarısı çıkabilir.</p></section><p class="bottomnote">Bu web sürümünde yemek saati bildirimleri henüz etkin değil. Saat kaydetmek bildirim izni vermez.</p>`;
+}
+function showUpdateNotice(){
+ let notice=$('#updateNotice');
+ if(!updateReady){notice?.remove();return}
+ if(!notice){notice=document.createElement('aside');notice.id='updateNotice';notice.className='updatenotice';notice.setAttribute('role','status');notice.innerHTML='<span>Yeni Sofra sürümü hazır. İşini bitirince yenileyebilirsin.</span><button type="button">Yenile</button>';document.body.append(notice);notice.querySelector('button').onclick=()=>location.reload()}
+}
+async function refreshContent(manual=false){
+ if(!booted||refreshing)return;
+ if(!canRefreshPage(ui.page)){contentPending=true;return}
+ if(!manual&&!contentPending&&Date.now()-lastAttempt<60000)return;
+ lastAttempt=Date.now();refreshing=true;contentPending=false;
+ const status=$('#updateStatus');if(status)status.textContent='Kontrol ediliyor…';
+ try{
+  const snapshot=await readCatalog();
+  const changed=JSON.stringify(snapshot.catalog)!==JSON.stringify(catalog);
+  if(canRefreshPage(ui.page)){catalog=snapshot.catalog;catalogCached=snapshot.cached}else if(changed)contentPending=true;
+  if(!snapshot.cached)lastCheck=new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
+  // The user may navigate to a form while the network request is in flight.
+  if(canRefreshPage(ui.page)&&(changed||ui.page==='application')){const y=scrollY;render();scrollTo(0,y)}
+  else if(changed)contentPending=true;
+  if(manual)toast(snapshot.cached?'Bağlantı yok; kayıtlı içerik korundu.':changed?'Yeni tarifler yüklendi.':'Tariflerin güncel.');
+ }catch{catalogCached=true;if($('#updateStatus'))$('#updateStatus').textContent='Güncel içerik alınamadı; mevcut tarifler korundu.';if(manual)toast('Bağlantı kurulamadı; mevcut tarifler korundu.')}
+ try{
+  await registration?.update();
+  const version=await readJson('./version.json');
+  if(!version.cached&&newerVersion(version.data)){
+   updateReady=true;showUpdateNotice();
+   // Reload only on safe screens and at most once per release in this session.
+   let tried=true;try{tried=sessionStorage.getItem('sofra-update-attempt')===version.data.version;if(!tried&&canRefreshPage(ui.page))sessionStorage.setItem('sofra-update-attempt',version.data.version)}catch{}
+   if(!tried&&canRefreshPage(ui.page))location.reload();
+  }
+ }catch{/* Offline checks do not discard the current interface. */}
+ finally{refreshing=false}
+}
+window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;if(ui.page==='application')render()});
+window.addEventListener('appinstalled',()=>{installPrompt=null;if(ui.page==='application')render()});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refreshContent()});
+window.addEventListener('online',()=>refreshContent(true));
+setInterval(()=>{if(document.visibilityState==='visible')refreshContent()},5*60*1000);
 function basket(){return `<h1 class="heading">Alışveriş listem</h1><p class="lead">Tariften eklediklerini alırken işaretle. Liste sadece bu telefonda kalır.</p>${state.basket.length?`<div class="panel">${state.basket.map((it,i)=>`<div class="basketrow ${it.done?'done':''}"><input type="checkbox" data-check="${i}" ${it.done?'checked':''} aria-label="${esc(catalog.ingredients[it.id]?.name||it.id)} alındı"><span class="itemname">${esc(catalog.ingredients[it.id]?.name||it.id)}</span><strong>${fmt(it.qty)} ${esc(catalog.ingredients[it.id]?.unit||'g')}</strong><button data-remove="${i}" aria-label="Ürünü sil">×</button></div>`).join('')}</div><button class="secondary" id="clearchecked">İşaretlenenleri temizle</button>`:'<div class="empty">Listen boş. Bir tarifi açıp malzemeleri ekleyebilirsin.</div>'}`}
 function bind(){
-  document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{ui.page=b.dataset.page;render();scrollTo(0,0)});
+  document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{ui.page=b.dataset.page;render();scrollTo(0,0);if(booted&&(contentPending||Date.now()-lastAttempt>60000))refreshContent()});
   if(ui.page==='explore'){const input=$('#search');input.oninput=()=>{ui.query=input.value;ui.limit=24;renderCards()};document.querySelectorAll('[data-category]').forEach(b=>b.onclick=()=>{ui.category=b.dataset.category;ui.limit=24;render()});renderCards()}
   if(ui.page==='detail'){const x=selected();$('#back').onclick=()=>{ui.page=ui.returnPage;render();scrollTo(0,0)};$('#minus').onclick=()=>{if(ui.servings>(ui.returnPage==='plan'?.25:1)){const y=scrollY;ui.servings=Math.max(ui.returnPage==='plan'?.25:1,ui.servings-(ui.returnPage==='plan'?.25:1));render();scrollTo(0,y)}};$('#plus').onclick=()=>{if(ui.servings<12){const y=scrollY;ui.servings=Math.min(12,ui.servings+(ui.returnPage==='plan'?.25:1));render();scrollTo(0,y)}};document.querySelectorAll('[data-method]').forEach(b=>b.onclick=()=>{ui.method=Number(b.dataset.method);const y=scrollY;render();scrollTo(0,y)});$('#add').onclick=()=>addItems(x.m.items||x.r.items,ui.servings,x.r.servings||1)}
   if(ui.page==='profile'){const form=$('#profileForm'),mode=$('#modeSelect');const updateMode=()=>{const macro=mode.value==='macro';$('#macroFields').hidden=!macro;$('#calorieFields').hidden=macro;$('#macroFields').querySelectorAll('input,select').forEach(x=>x.disabled=!macro);$('#calorieFields').querySelectorAll('input').forEach(x=>x.disabled=macro)};$('#activitySelect').onchange=e=>{$('#activityHint').textContent=activityHelp[e.target.value]||'Günlük işini, yürüyüşünü ve egzersizini birlikte düşün.'};mode.onchange=updateMode;updateMode();form.onsubmit=e=>{e.preventDefault();const f=new FormData(form);const p={age:f.get('age'),height:f.get('height'),weight:f.get('weight'),targetWeight:f.get('targetWeight'),sex:f.get('sex'),activity:f.get('activity'),seasonPreference:f.get('seasonPreference'),goal:f.get('goal'),mode:f.get('mode'),calorieTarget:f.get('calorieTarget'),protein:f.get('protein'),carbs:f.get('carbs'),fat:f.get('fat'),priority:f.get('priority'),allergies:f.getAll('allergies')};const error=profileError(p);if(error){$('#formError').textContent=error;return}state.profile=p;state.plan=null;save();ui.page='plan';render();scrollTo(0,0)}}
@@ -90,7 +134,22 @@ function bind(){
       state.plan.entries[ui.swapSlot]=selected.entry;state.history=rememberRecommendations(state.history,{[ui.swapSlot]:selected.entry});save();ui.page='plan';render();scrollTo(0,0);toast('Öğünün değişti; günlük toplamlar güncellendi.');
     });
   }
+  if(ui.page==='application'){
+    $('#checkUpdates').onclick=()=>refreshContent(true);
+    $('#installApp')?.addEventListener('click',async()=>{const prompt=installPrompt;if(!prompt)return;installPrompt=null;try{await prompt.prompt();await prompt.userChoice}catch{toast('Chrome menüsünden ana ekrana ekleyebilirsin.')}if(ui.page==='application')render()});
+  }
   if(ui.page==='basket'){document.querySelectorAll('[data-check]').forEach(b=>b.onchange=()=>{state.basket[Number(b.dataset.check)].done=b.checked;save();render()});document.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{state.basket.splice(Number(b.dataset.remove),1);save();render()});const clear=$('#clearchecked');if(clear)clear.onclick=()=>{state.basket=state.basket.filter(x=>!x.done);save();render()}}
 }
 function addItemsSilent(items,servings,base){for(const [id,n] of items){const qty=round(n*servings/base);const old=state.basket.find(x=>x.id===id);if(old){old.qty=round(old.qty+qty);old.done=false}else state.basket.push({id,qty,done:false})}}
-(async()=>{try{const [a,b]=await Promise.all([fetch('./catalog.json'),fetch('./photo-credits.json')]);if(!a.ok)throw Error('Tarif verisi yüklenemedi');const base=await a.json();catalog=mergeCatalog(base);try{const daily=await fetch('./daily-catalog.json');if(!daily.ok)throw Error('Günlük tarifler yüklenemedi');catalog=mergeCatalog(base,await daily.json());}catch(e){console.warn('Günlük tarifler açılamadı; ana katalog kullanılıyor.',e)}if(b.ok)credits=await b.json();render();if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});}catch(e){$('#app').innerHTML=`<div class="boot"><span class="mark">S</span><h1>Tarifler açılamadı</h1><p>İnternet bağlantını kontrol edip sayfayı yenile.</p><button class="primary" onclick="location.reload()">Tekrar dene</button></div>`;console.error(e)}})();
+(async()=>{try{
+ try{const snapshot=await readCatalog();catalog=snapshot.catalog;catalogCached=snapshot.cached;if(!snapshot.cached)lastCheck=new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})}
+ catch{const base=await readJson('./catalog.json');catalog=mergeCatalog(base.data);catalogCached=true;toast('Günlük eklemeler alınamadı; ana tarifler gösteriliyor.')}
+ try{credits=(await readJson('./photo-credits.json')).data}catch{}
+ booted=true;render();
+ if('serviceWorker'in navigator){
+  const hadController=Boolean(navigator.serviceWorker.controller);
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadController)refreshContent(true)});
+  try{registration=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'})}catch{}
+ }
+ refreshContent();
+}catch(e){$('#app').innerHTML=`<div class="boot"><span class="mark">S</span><h1>Tarifler açılamadı</h1><p>İnternet bağlantını kontrol edip sayfayı yenile.</p><button class="primary" onclick="location.reload()">Tekrar dene</button></div>`;console.error(e)}})();

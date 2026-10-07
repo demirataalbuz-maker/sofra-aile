@@ -1,6 +1,6 @@
 # Günlük tarif ekleme
 
-Her çalışmada Türkiye tarihine göre en fazla bir yeni tarif ekle. Sporcu tatlılarına öncelik ver; kahvaltı, ara öğün ve ana yemeklerle çeşitlendir. Katalogdaki tarifin yalnızca adını değiştirerek tekrar ekleme.
+Her çalışmada Türkiye tarihine göre en fazla bir yeni tarif ekle. Ana yemek, kahvaltı, ara öğün, çorba/salata ve tatlı arasında dengeli çeşitlilik sağla; tatlıya öncelik verme. Son eklenen tarifleri kontrol et ve arka arkaya aynı türü ekleme. Son iki tarif tatlıysa sıradaki tarif tuzlu olsun. Protein içeren seçenekleri farklı öğünlere yay. Katalogdaki tarifin yalnızca adını değiştirerek tekrar ekleme.
 
 `catalog.json` Android yayınından gelen ana katalogdur. Günlük tarifleri `daily-catalog.json` içindeki `recipes` dizisinin başına ekle. Yeni malzemeler gerekiyorsa aynı dosyanın `ingredients` alanına benzersiz kimliklerle ekle; ana katalogdaki malzemeleri değiştirme. Uygulama iki dosyayı birleştirir. Android APK güncellemesi bu işlemden ayrı yürür.
 
