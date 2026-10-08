@@ -1,6 +1,114 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-08-savory-mushroom-oats",
+      "addedOn": "2026-10-08",
+      "title": "Mantarlı, ıspanaklı ve yumurtalı tuzlu yulaf",
+      "summary": "Sebzeli yulaf, yumurta ve parmesanla hazırlanan 2 kişilik tuzlu kahvaltı. Quaker’da yayımlanan Andie Mitchell tarifinden Sofra uyarlaması: tavuk suyu yerine su, portobello yerine kültür mantarı kullanılır; kekik ve ilave tuz içermez. Bu uyarlama mutfakta denenmedi. Kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Kahvaltı",
+      "servings": 2,
+      "minutes": 35,
+      "image": "images/daily-2026-10-08-savory-oats.png",
+      "items": [
+        [
+          "oats",
+          100
+        ],
+        [
+          "mushroom",
+          200
+        ],
+        [
+          "spinach",
+          100
+        ],
+        [
+          "onion",
+          60
+        ],
+        [
+          "garlic",
+          4
+        ],
+        [
+          "parmesan",
+          20
+        ],
+        [
+          "egg",
+          2
+        ],
+        [
+          "oil",
+          10
+        ]
+      ],
+      "macros": {
+        "kcal": 392.9,
+        "protein": 21.5,
+        "carbs": 43.1,
+        "fat": 16.1
+      },
+      "allergens": [
+        "egg",
+        "gluten",
+        "milk"
+      ],
+      "equipment": [
+        "hob"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Ölçü kabı",
+        "Derin tava",
+        "Kapaklı yapışmaz tava",
+        "Kesme tahtası",
+        "Bıçak",
+        "Rende",
+        "Spatula"
+      ],
+      "steps": [
+        "Malzemeleri tart. Mantarları temizleyip ince dilimle; yıkanıp süzülmüş ıspanağı doğra. Soğanı küçük küpler halinde, sarımsağı ince kıy. Peyniri rendele. İki kişilik tarif için ayrıca 500 ml su hazırla; kişi sayısını değiştirirsen suyu da aynı oranda ayarla.",
+        "Derin tavada zeytinyağının üçte ikisini orta ateşte ısıt. Soğanı 2–3 dakika çevir. Mantarları ekleyip suyunun çoğu çekilene kadar yaklaşık 7–8 dakika pişir.",
+        "Sarımsağı ekleyip 30 saniye karıştır. Yulafı kat, 1 dakika çevir. Suyu ekle; hafif kaynayınca ateşi kıs. Dibine yapışmaması için sık karıştırarak 10–12 dakika, yulaf yumuşayana kadar pişir. Erken koyulaşırsa azar azar sıcak su ekle.",
+        "Ispanağı yulafa karıştır; yapraklar yumuşayana kadar 2–3 dakika pişir. Kıvamı kaşıkla alınabilen yumuşak bir lapa olmalı.",
+        "Bu sırada kalan yağı yapışmaz tavaya yay. Yumurtaları kır, kısık-orta ateşte kapakla pişir. Beyazı ve sarısı tamamen katılaşana kadar sürdür; gerekirse spatulayla çevir.",
+        "Yulafı iki kaseye eşit böl. Her birine bir yumurta ve peynirin yarısını koy. Her kase bir porsiyondur. Ekmek veya ekstra yağ bu makrolara dahil değildir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2. Bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "oats": "173904",
+          "mushroom": "169251",
+          "spinach": "168462",
+          "onion": "170000",
+          "garlic": "169230",
+          "parmesan": "170848",
+          "egg": "171287",
+          "oil": "171413"
+        },
+        "note": "Yulaf kuru; sebzeler ayıklanmış çiğ ağırlıktır. Her yumurta kabuksuz yaklaşık 50 g kabul edildi. Eklenen su enerji içermez. Markaya ve porsiyona göre değerler değişir. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Mushroom Oatmeal With Spinach And Thyme",
+        "author": "Andie Mitchell",
+        "publisher": "Quaker Oats",
+        "sourceUrl": "https://www.quakeroats.com/cooking-and-recipes/mushroom-oatmeal-with-spinach-and-thyme",
+        "accessedOn": "2026-10-08",
+        "kitchenTested": false,
+        "adaptation": "İki porsiyon için gram cinsinden yeniden ölçülendirildi; beyaz kültür mantarı ve su kullanıldı; kekik, karabiber ve ilave tuz çıkarıldı. Yumurta dahil edildi; bütün yağ miktarı hesaplandı. Adımlar özgün Türkçe anlatımla yazıldı; kaynağın besin toplamları kopyalanmadı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-08",
+        "description": "Bu tarif için üretilmiş temsili sunum; üçüncü taraf fotoğraf kullanılmadı.",
+        "promptFile": "images/daily-2026-10-08-savory-oats.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-07-roasted-pumpkin-chickpeas",
       "addedOn": "2026-10-07",
       "title": "Yoğurt soslu fırın balkabağı ve nohut",
