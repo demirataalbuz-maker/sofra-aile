@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-import {readCatalog,canRefreshPage,latestRecipeDate,newerVersion} from '../updates.mjs';
+import {readCatalog,canRefreshPage,latestRecipeDate,newerVersion,WEB_VERSION} from '../updates.mjs';
 const base=JSON.parse(fs.readFileSync(new URL('../catalog.json',import.meta.url)));
 const daily=JSON.parse(fs.readFileSync(new URL('../daily-catalog.json',import.meta.url)));
 const response=(data,offline=false)=>new Response(JSON.stringify(data),{headers:offline?{'X-Sofra-Offline':'1'}:{}});
@@ -45,6 +45,6 @@ test('daily nutrition is reproducible from verified sources; dates, allergen tag
 });
 
 test('invalid, missing and older release metadata cannot cause reload loops',()=>{
- for(const data of [{},null,{version:'7'},{version:'8'},{version:'undefined'},{version:9}])assert.equal(newerVersion(data),false);
- assert.equal(newerVersion({version:'9'}),true);
+ for(const data of [{},null,{version:'7'},{version:WEB_VERSION},{version:'undefined'},{version:Number(WEB_VERSION)+1}])assert.equal(newerVersion(data),false);
+ assert.equal(newerVersion({version:String(Number(WEB_VERSION)+1)}),true);
 });
