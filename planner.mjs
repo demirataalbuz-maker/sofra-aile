@@ -1,3 +1,4 @@
+import {planningBlock} from './health.mjs?v=10';
 import {selectedSeason,seasonalAffinity} from './seasons.mjs?v=6';
 export const SLOTS=[
   ['breakfast','Kahvaltı',['Kahvaltı']],
@@ -92,6 +93,7 @@ function score(entries,byId,p,goal){
   return result;
 }
 export function buildPlan(recipes,ingredients,p,random=Math.random,locked={},avoid={},options={}){
+  if(profileError(p)||planningBlock(p))return null;
   const byId=new Map(recipes.map(r=>[r.id,r]));const allergies=Array.isArray(p.allergies)?p.allergies:[];
   const now=options.now??Date.now(),history=rememberRecommendations(options.history,{},now);
   const pools=Object.fromEntries(SLOTS.map(([k,,categories])=>[k,variedPool(recipes.filter(r=>categories.includes(r.category)&&r.id!==avoid[k]&&+r.macros?.kcal>=100&&+r.macros?.kcal<=850&&allowed(r,ingredients,allergies)),history,now)]));
@@ -122,6 +124,7 @@ export function validReplacement(entries,slot,candidate,recipes,ingredients,p){
   return validCandidate(entries,slot,candidate,new Map(recipes.map(r=>[r.id,r])),ingredients,p);
 }
 function validCandidate(entries,slot,candidate,byId,ingredients,p){
+  if(profileError(p)||planningBlock(p))return false;
   if(!SLOTS.some(([key])=>key===slot))return false;
   const items=mealItems(candidate);
   if(items.length<1||items.length>2||new Set(items.map(e=>e.id)).size!==items.length)return false;
@@ -135,6 +138,7 @@ function validCandidate(entries,slot,candidate,byId,ingredients,p){
 // Curated previews, ranked around the remaining DAILY budget. A meal has no
 // compounding ±10% allowance of its own. Selection revalidates the current day.
 export function replacementOptions(recipes,ingredients,p,entries,slot,{kind='single',history={},now=Date.now(),limit=8}={}){
+  if(profileError(p)||planningBlock(p))return [];
   const definition=SLOTS.find(([key])=>key===slot);if(!definition)return [];
   const byId=new Map(recipes.map(r=>[r.id,r])),goal=estimate(p),season=selectedSeason(p.seasonPreference,now);
   const metric=p.mode==='macro'?p.priority:'kcal',target=p.mode==='macro'?+p[metric]:goal.target;

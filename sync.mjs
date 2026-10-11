@@ -1,5 +1,5 @@
 const key='sofra-cloud-link-v1';
-export function localPayload(state){const {reports,cloudSettings,...data}=state;return data}
+export function localPayload(state){const {reports,cloudSettings,family,...data}=state;return data}
 export function syncDecision(local,link,remote){
  if(!remote.state)return 'missing';
  const dirty=JSON.stringify(local)!==link.baseline;

@@ -10,7 +10,7 @@ test('push keeps links within Sofra and displays a generic notification for malf
  await run({json:()=>({title:'Menün hazır',url:'https://example.test/sofra/?page=plan'})});
  assert.equal(shown[0].options.data.url,'https://example.test/sofra/?page=plan');
  await run({json:()=>({url:'https://evil.example/steal'})});assert.equal(shown[1].options.data.url,'https://example.test/sofra/?page=tracking');
- await run({json:()=>{throw Error('bad json')}});assert.equal(shown[2].title,'Sofra');
+ await run({json:()=>{throw Error('bad json')}});assert.equal(shown[2].title,'Porsiva');
  let pending;handlers.notificationclick({notification:{close(){},data:{url:shown[0].options.data.url}},waitUntil:p=>pending=p});await pending;assert.deepEqual(opened,['https://example.test/sofra/?page=plan']);
  handlers.notificationclick({notification:{close(){},data:{url:'https://example.test/other/'}},waitUntil(){}});assert.equal(opened.length,1);
 });

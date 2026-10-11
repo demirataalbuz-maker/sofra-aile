@@ -1,4 +1,24 @@
-# Sofra Aile
+# Porsiva (önceki adı Sofra)
+
+## Aile menüsü — web 10
+
+- Alt menüde **Aile**: bu cihazda 2–6 yetişkin için ayrı profil, katılım seçimi, düzenleme ve kaldırmayı geri alma.
+- Aynı dört öğün tarifi; kişiye göre 0,5–2 porsiyon ve gerektiğinde akşam yan yemeği. Her kişinin kalori hedefi veya öncelikli makrosu ayrı ±%10 kontrol edilir; diğer makrolar üst sınırdır. Ortak mutfakta seçili üyelerin alerjenlerinin birleşimi tüm ana/yan yemeklerden dışlanır. Yalnızca kaynak kontrolü yapılmış malzemeli tarifler kullanılır.
+- Arama sınırlıdır: sonuç bulunmaması matematiksel olarak imkânsızlık kanıtı değildir. Hedefler gevşetilmez; kullanıcı yeniden deneyebilir. Hesap bir Web Worker'da yapılır. Tarih, katılımcılar ve profil değişince önceki plan geçersizleşir.
+- Tarif detayları, toplam aile malzeme listesi ve yalnızca menü içeren JSON dosyası paylaşımı. Dosyada ad/takma ad, yemek, saat ve porsiyon bulunur; profil, hedef, sağlık ve günlük verileri bulunmaz. Paylaşmadan önce açık onay kutusu gerekir. Gelen dosya yalnızca görüntülenir; profil veya günlük menüyü değiştirmez.
+- **Gerçek aile hesapları / telefonlar arasında canlı eşitleme yoktur.** Aile bilgileri mevcut tek-kullanıcı bulut yüküne dahil edilmez. Her kişi için ayrı yemek/su günlüğü henüz eklenmedi; Takip bölümü cihazın kişisel profiline aittir.
+
+## Sağlık sınırları
+
+Profilde hipertansiyon/sodyum kısıtı, diyabet, böbrek hastalığı, diğer klinik beslenme/sıvı kısıtları ve gebelik/emzirme sorulur. Bunlardan biri seçilirse otomatik kişisel ve aile planı oluşturulmaz, gerekçesi açıklanır. Bu hastalığa uygun menü oluşturma özelliği değildir. Mevcut katalogdaki sodyum/potasyum verileri klinik bir değerlendirme için yeterli değildir. Tarif görüntüleme ve manuel günlük takibi açık kalır. Sıvı kısıtında hekim planı esas alınmalıdır.
+
+Sağlık verisi temeli: https://www.who.int/news-room/fact-sheets/detail/sodium-reduction ve https://www.who.int/en/news-room/fact-sheets/detail/healthy-diet . Bu kaynaklardan hasta için bireysel tedavi hedefi türetilmez.
+
+Akıllı tartı/sağlık cihazları eşitlemesi kullanıcı kararıyla ertelendi. Bu sürüm Xiaomi, Apple Health veya Health Connect ile bağlanmaz. Sunucu da kapalı kalır; gelecekte etkinleştirilmeden önce yeni sağlık kısıtları sunucu planlayıcısı ve doğrulamasına taşınmalıdır.
+
+Porsiva görünür adı, manifest ve P simgesi güncellendi; site URL'si, manifest kimliği ve mevcut yerel kayıt anahtarı korundu. Böylece mevcut profil/günlükler marka değişikliği nedeniyle sıfırlanmaz. Mevcut ana ekran simgesinin adını güncellemesi telefonun davranışına bağlıdır.
+
+Doğrulama: `node --test tests/*.test.mjs`. Aile sınırları, makro önceliği, alerjenler, klinik durum engeli, yan yemek, paylaşımda veri azaltma, geçersiz dosya ve gerçek katalogla üç kişi testi eklenmiştir. Yerel tarayıcıda ayrı hedefli profiller, yeniden açmada koruma, tarif detayı, sağlık kısıtı, menü dosyası indirme/açma ve 390 px görünüm kontrol edildi. Fiziksel telefon test edilmedi.
 
 Giriş istemeyen, telefon için bağımsız Sofra web uygulaması. Ana katalog ve günlük eklenen tarifleri fotoğraflı hazırlık adımlarıyla gösterir. Tarif arama, kişi sayısı, pişirme yöntemi, kişisel günlük menü ve alışveriş listesi içerir. Liste ve menü sadece cihazın tarayıcı depolamasında saklanır; sunucuya gönderilmez. İçerik ilk açılıştan sonra çevrimdışı kullanılabilir; henüz açılmamış fotoğraflar çevrimdışı görünmeyebilir. ChatGPT veya başka bir giriş gerekmez.
 

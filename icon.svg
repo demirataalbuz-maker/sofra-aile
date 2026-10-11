@@ -1,4 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108">
   <rect width="108" height="108" rx="24" fill="#c9422b"/>
-  <path fill="#fff" d="M76,30 H32 V58 H64 V68 H32 V78 H76 V48 H44 V40 H76 Z"/>
+  <path fill-rule="evenodd" fill="#fff" d="M32 28 H62 Q80 28 80 47 Q80 66 62 66 H45 V82 H32 Z M45 40 V54 H61 Q67 54 67 47 Q67 40 61 40 Z"/>
 </svg>

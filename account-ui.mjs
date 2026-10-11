@@ -1,5 +1,5 @@
 import {connectCloud,login,logout,cloudCall,enablePush,disablePush} from './cloud.mjs?v=9';
-import {writeLink,clearLink} from './sync.mjs?v=9';
+import {writeLink,clearLink} from './sync.mjs?v=10';
 export function account(host){
  const {state,ui,esc,save,render,toast}=host;
  const settings=state.cloudSettings||{};
@@ -14,7 +14,7 @@ export function account(host){
   connectCloud().then(c=>{if(ui.page!=='account')return;q('#cloudControls').disabled=false;q('#cloudStatus').textContent=c.instance.currentUser?'Giriş yapıldı: '+c.instance.currentUser.email:'Sunucu hazır; hesabına giriş yap.'}).catch(e=>{if(ui.page==='account')q('#cloudStatus').textContent=e.message});
   q('#authForm').onsubmit=run(async e=>{const f=new FormData(e.target),r=await login(f.get('email'),f.get('password'),e.submitter.value==='create');e.target.reset();toast(r.verify?'Doğrulama e-postanı kontrol et.':'Giriş yapıldı.');render()});
   q('#signOut').onclick=run(async()=>{await logout();clearLink();ui.syncUid=null;ui.syncRevision=null;ui.syncEnabled=false;render()});
-  const payload=()=>{const {reports,cloudSettings,...local}=state;return local};
+  const payload=()=>{const {reports,cloudSettings,family,...local}=state;return local};
   q('#uploadState').onclick=run(async()=>{
    if(!q('#syncConsent').checked)throw Error('Eşitleme tercihini önce aç.');
    const c=await connectCloud(),remote=await cloudCall('get');
@@ -25,7 +25,7 @@ export function account(host){
    if(!q('#syncConsent').checked)throw Error('Eşitleme tercihini önce aç.');
    const c=await connectCloud(),remote=await cloudCall('get');if(!remote.state)throw Error('Hesabında henüz kayıt yok. Bu cihazı bağlayabilirsin.');
    localStorage.setItem('sofra-before-cloud',JSON.stringify(state));
-   for(const k of Object.keys(state))delete state[k];Object.assign(state,remote.state,{reports:remote.reports||{},cloudSettings:remote.settings||{sync:true}});
+   const localFamily=state.family;for(const k of Object.keys(state))delete state[k];Object.assign(state,remote.state,{family:localFamily,reports:remote.reports||{},cloudSettings:remote.settings||{sync:true}});
    ui.syncUid=c.instance.currentUser.uid;ui.syncRevision=remote.revision;ui.syncEnabled=true;writeLink(ui.syncUid,ui.syncRevision,state);save();render();toast('Hesabındaki kayıt yüklendi.');
   });
   q('#reminderForm').onsubmit=run(async e=>{
