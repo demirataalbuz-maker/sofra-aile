@@ -1,7 +1,8 @@
-import {SLOTS,profileError,estimate,allowed,mealItems,targetStatus,totals,mealTimes} from './planner.mjs?v=10';
-import {planningBlock} from './health.mjs?v=10';
+import {SLOTS,profileError,estimate,allowed,mealItems,targetStatus,totals,mealTimes} from './planner.mjs?v=11';
+import {planningBlock} from './health.mjs?v=11';
 import {selectedSeason,seasonalAffinity} from './seasons.mjs?v=6';
 import {validDate} from './tracking.mjs?v=9';
+import {cookingAllowed,cookingFits,cookingPreferences} from './cooking.mjs?v=11';
 
 const KEYS=['kcal','protein','carbs','fat'], PORTIONS=[.5,.75,1,1.25,1.5,2];
 export function familyState(value){
@@ -49,26 +50,28 @@ function fitMember(mains,sides,p){
 export function validFamilyPlan(plan,members,recipes,ingredients){
   if(familyError(members)||!plan||plan.hash!==familyHash(members))return false;
   const byId=new Map(recipes.map(r=>[r.id,r])),allergies=[...new Set(members.flatMap(m=>m.profile.allergies||[]))];
+  if(!cookingFits(SLOTS.map(([slot])=>members.flatMap(m=>mealItems(plan.entries?.[m.id]?.[slot]).map(e=>byId.get(e.id)))),plan.cooking))return false;
   return members.every(m=>{
     const entries=plan.entries?.[m.id];
     return SLOTS.every(([slot])=>{const items=mealItems(entries?.[slot]);return items.length>=1&&items.length<=2&&items[0].id===plan.common?.[slot]&&new Set(items.map(x=>x.id)).size===items.length&&items.every(e=>Number.isFinite(e.portion)&&e.portion>=.5&&e.portion<=2&&verified(byId.get(e.id),ingredients,allergies));})&&targetStatus(entries,byId,m.profile).ok;
   });
 }
-export function buildFamilyPlan(recipes,ingredients,members,{random=Math.random,history={},now=Date.now(),attempts=90}={}){
+export function buildFamilyPlan(recipes,ingredients,members,{random=Math.random,history={},now=Date.now(),attempts=90,cooking}={}){
   const error=familyError(members);if(error)return {error};
   const allergies=[...new Set(members.flatMap(m=>m.profile.allergies||[]))];
-  const safe=recipes.filter(r=>verified(r,ingredients,allergies));
+  const safe=recipes.filter(r=>verified(r,ingredients,allergies)&&cookingAllowed(r,cooking));
   const rank=r=>members.reduce((sum,m)=>sum+seasonalAffinity(r,ingredients,selectedSeason(m.profile.seasonPreference,now)),0)*.1-(history[r.id]>now-7*86400000?1:0)+random();
   const ranked=safe.map(r=>({r,rank:rank(r)})).sort((a,b)=>b.rank-a.rank).map(x=>x.r);
   const pools=SLOTS.map(([, ,cats])=>ranked.filter(r=>cats.includes(r.category)));
-  if(pools.some(pool=>!pool.length))return {error:'Seçili kişilerin alerjenlerini dışlayan, besin kaynağı doğrulanmış ortak tarifler yetersiz. Kısıtlar değiştirilmedi.'};
+  if(pools.some(pool=>!pool.length))return {error:'Süre, zorluk, alerjen ve besin kaynağı koşullarını birlikte sağlayan ortak tarifler yetersiz. Kısıtlar değiştirilmedi; süre veya zorluk tercihini değiştirebilirsin.'};
   for(let attempt=0;attempt<attempts;attempt++){
     const mains=pools.map(pool=>pool[Math.floor(random()*Math.min(pool.length,attempt<30?12:pool.length))]);
     if(new Set(mains.map(r=>r.id)).size!==SLOTS.length)continue;
+    if(!cookingFits(mains.map(r=>[r]),cooking))continue;
     const sides=ranked.filter(r=>['Salata','Sebze','Çorba','Ara öğün'].includes(r.category)&&!mains.some(main=>main.id===r.id)).slice(0,35);
     const entries={};let ok=true;
     for(const member of members){const fit=fitMember(mains,sides,member.profile);if(!fit){ok=false;break}entries[member.id]=fit.entries;}
-    if(ok){const plan={hash:familyHash(members),common:Object.fromEntries(SLOTS.map(([slot],i)=>[slot,mains[i].id])),entries};if(validFamilyPlan(plan,members,recipes,ingredients))return {plan};}
+    if(ok){const plan={hash:familyHash(members),common:Object.fromEntries(SLOTS.map(([slot],i)=>[slot,mains[i].id])),entries,...(cooking?{cooking:cookingPreferences(cooking)}:{})};if(validFamilyPlan(plan,members,recipes,ingredients))return {plan};}
   }
   return {error:'Bu aramada herkesin günlük sınırını koruyan ortak menü bulunamadı. Hedefler ve alerjenler değiştirilmedi. Tekrar deneyebilir veya katılımcıları kendin değiştirebilirsin.'};
 }

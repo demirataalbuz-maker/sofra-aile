@@ -1,5 +1,5 @@
 import {connectCloud,login,logout,cloudCall,enablePush,disablePush} from './cloud.mjs?v=9';
-import {writeLink,clearLink} from './sync.mjs?v=10';
+import {writeLink,clearLink} from './sync.mjs?v=11';
 export function account(host){
  const {state,ui,esc,save,render,toast}=host;
  const settings=state.cloudSettings||{};

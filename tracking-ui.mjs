@@ -1,4 +1,4 @@
-import {planningBlock} from './health.mjs?v=10';
+import {planningBlock} from './health.mjs?v=11';
 import {dateKey,newEntry,daySummary,trackingState,dailyExport,nutrients} from './tracking.mjs?v=9';
 export function tracker(host){
  const {state,ui,catalog,esc,fmt,save,render,toast,estimate}=host;

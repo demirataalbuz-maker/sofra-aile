@@ -1,4 +1,5 @@
-import {planningBlock} from './health.mjs?v=10';
+import {planningBlock} from './health.mjs?v=11';
+import {cookingAllowed,cookingFits,cookingInfo} from './cooking.mjs?v=11';
 import {selectedSeason,seasonalAffinity} from './seasons.mjs?v=6';
 export const SLOTS=[
   ['breakfast','Kahvaltı',['Kahvaltı']],
@@ -96,14 +97,16 @@ export function buildPlan(recipes,ingredients,p,random=Math.random,locked={},avo
   if(profileError(p)||planningBlock(p))return null;
   const byId=new Map(recipes.map(r=>[r.id,r]));const allergies=Array.isArray(p.allergies)?p.allergies:[];
   const now=options.now??Date.now(),history=rememberRecommendations(options.history,{},now);
-  const pools=Object.fromEntries(SLOTS.map(([k,,categories])=>[k,variedPool(recipes.filter(r=>categories.includes(r.category)&&r.id!==avoid[k]&&+r.macros?.kcal>=100&&+r.macros?.kcal<=850&&allowed(r,ingredients,allergies)),history,now)]));
+  const pools=Object.fromEntries(SLOTS.map(([k,,categories])=>[k,variedPool(recipes.filter(r=>categories.includes(r.category)&&r.id!==avoid[k]&&+r.macros?.kcal>=100&&+r.macros?.kcal<=850&&allowed(r,ingredients,allergies)&&cookingAllowed(r,options.cooking)),history,now)]));
   if(SLOTS.some(([k])=>locked[k]?mealItems(locked[k]).some(e=>!allowed(byId.get(e.id),ingredients,allergies)):!pools[k].length))return null;
   const portions=[.75,1,1.25,1.5,2];const goal=estimate(p);
   const season=selectedSeason(p.seasonPreference,now);
   const affinity=new Map(recipes.map(r=>[r.id,seasonalAffinity(r,ingredients,season)]));
-  const valueOf=entries=>score(entries,byId,p,goal)-.025*Object.values(entries).flatMap(mealItems).reduce((sum,e)=>sum+affinity.get(e.id),0);
+  const occasionalChallenge=options.cooking?.style==='mixed'&&random()<.25;
+  const effort=r=>!options.cooking||options.cooking.style==='any'?0:cookingInfo(r).difficulty==='hard'?(occasionalChallenge?-.18:.18):cookingInfo(r).difficulty==='medium'?.005:0;
+  const valueOf=entries=>score(entries,byId,p,goal)+Object.values(entries).flatMap(mealItems).reduce((sum,e)=>sum+effort(byId.get(e.id))-.025*affinity.get(e.id),0);
   let best=null,bestScore=Infinity;
-  const consider=entries=>{if(!targetStatus(entries,byId,p).ok)return;const value=valueOf(entries);if(value<bestScore){bestScore=value;best=entries}};
+  const consider=entries=>{if(!targetStatus(entries,byId,p).ok||!cookingFits(SLOTS.map(([slot])=>mealItems(entries[slot]).map(e=>byId.get(e.id))),options.cooking))return;const value=valueOf(entries);if(value<bestScore){bestScore=value;best=entries}};
   const unlocked=SLOTS.filter(([k])=>!locked[k]);
   // A swap checks every eligible recipe/portion against the original daily target.
   // It never changes locked meals or silently expands the target to fit a dish.
@@ -120,10 +123,10 @@ export function buildPlan(recipes,ingredients,p,random=Math.random,locked={},avo
   return best;
 }
 
-export function validReplacement(entries,slot,candidate,recipes,ingredients,p){
-  return validCandidate(entries,slot,candidate,new Map(recipes.map(r=>[r.id,r])),ingredients,p);
+export function validReplacement(entries,slot,candidate,recipes,ingredients,p,cooking){
+  return validCandidate(entries,slot,candidate,new Map(recipes.map(r=>[r.id,r])),ingredients,p,cooking);
 }
-function validCandidate(entries,slot,candidate,byId,ingredients,p){
+function validCandidate(entries,slot,candidate,byId,ingredients,p,cooking){
   if(profileError(p)||planningBlock(p))return false;
   if(!SLOTS.some(([key])=>key===slot))return false;
   const items=mealItems(candidate);
@@ -132,12 +135,13 @@ function validCandidate(entries,slot,candidate,byId,ingredients,p){
     const parts=mealItems(key===slot?candidate:entries?.[key]);
     if(!parts.length||parts.length>2||parts.some(e=>!Number.isFinite(e.portion)||e.portion<=0||e.portion>2||!allowed(byId.get(e.id),ingredients,p.allergies)))return false;
   }
-  return targetStatus({...entries,[slot]:candidate},byId,p).ok;
+  const next={...entries,[slot]:candidate};
+  return targetStatus(next,byId,p).ok&&cookingFits(SLOTS.map(([key])=>mealItems(next[key]).map(e=>byId.get(e.id))),cooking);
 }
 
 // Curated previews, ranked around the remaining DAILY budget. A meal has no
 // compounding ±10% allowance of its own. Selection revalidates the current day.
-export function replacementOptions(recipes,ingredients,p,entries,slot,{kind='single',history={},now=Date.now(),limit=8}={}){
+export function replacementOptions(recipes,ingredients,p,entries,slot,{kind='single',history={},now=Date.now(),limit=8,cooking}={}){
   if(profileError(p)||planningBlock(p))return [];
   const definition=SLOTS.find(([key])=>key===slot);if(!definition)return [];
   const byId=new Map(recipes.map(r=>[r.id,r])),goal=estimate(p),season=selectedSeason(p.seasonPreference,now);
@@ -145,14 +149,14 @@ export function replacementOptions(recipes,ingredients,p,entries,slot,{kind='sin
   const locked={...entries};delete locked[slot];const residual=Math.max(0,target-totals(locked,byId)[metric]);
   const currentIds=new Set(mealItems(entries[slot]).map(e=>e.id));
   const otherIds=new Set(Object.values(locked).flatMap(mealItems).map(e=>e.id));
-  const safe=recipes.filter(r=>!otherIds.has(r.id)&&r.macros?.kcal>=50&&r.macros?.kcal<=850&&allowed(r,ingredients,p.allergies));
+  const safe=recipes.filter(r=>!otherIds.has(r.id)&&r.macros?.kcal>=50&&r.macros?.kcal<=850&&allowed(r,ingredients,p.allergies)&&cookingAllowed(r,cooking));
   const freshness=r=>history[r.id]>now-7*DAY ? .15 : 0;
   const rank=r=>Math.abs((r.macros[metric]||0)-residual)/Math.max(30,residual)+freshness(r)-.03*seasonalAffinity(r,ingredients,season);
   const mains=safe.filter(r=>definition[2].includes(r.category)).sort((a,b)=>rank(a)-rank(b));
   const currentTotal=totals({[slot]:entries[slot]},byId),options=new Map();
   const consider=items=>{
     const candidate=items.length===1?items[0]:{items};
-    if(!validCandidate(entries,slot,candidate,byId,ingredients,p))return;
+    if(!validCandidate(entries,slot,candidate,byId,ingredients,p,cooking))return;
     const key=items.map(e=>e.id).sort().join('|');
     const daily=totals({...entries,[slot]:candidate},byId),meal=totals({[slot]:candidate},byId);
     const value=Math.abs(daily[metric]-target)/Math.max(target,30)+.08*Math.abs(meal[metric]-currentTotal[metric])/Math.max(currentTotal[metric],30)+items.reduce((sum,e)=>sum+freshness(byId.get(e.id))-.025*seasonalAffinity(byId.get(e.id),ingredients,season),0);
