@@ -1,6 +1,129 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-11-minestrone",
+      "addedOn": "2026-10-11",
+      "title": "Sebzeli ve fasulyeli minestrone çorbası",
+      "summary": "Beyaz fasulye, küçük makarna ve sebzelerle 4 kişilik çorba. Good Food’da yayımlanan Esther Clark tarifinin etsiz Sofra uyarlaması; sebze suyu yerine su, konserve domates yerine taze domates kullanılır. Bu uyarlama mutfakta denenmedi. Kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Çorba",
+      "servings": 4,
+      "minutes": 60,
+      "water": 1000,
+      "image": "images/daily-2026-10-11-minestrone.png",
+      "items": [
+        [
+          "whitebean",
+          400
+        ],
+        [
+          "pasta",
+          100
+        ],
+        [
+          "zucchini",
+          200
+        ],
+        [
+          "carrot",
+          150
+        ],
+        [
+          "onion",
+          100
+        ],
+        [
+          "tomato",
+          400
+        ],
+        [
+          "tomatopaste",
+          30
+        ],
+        [
+          "garlic",
+          6
+        ],
+        [
+          "spinach",
+          100
+        ],
+        [
+          "oil",
+          20
+        ],
+        [
+          "parmesan",
+          30
+        ]
+      ],
+      "macros": {
+        "kcal": 371.4,
+        "protein": 18.9,
+        "carbs": 58.2,
+        "fat": 8.2
+      },
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
+      "equipment": [
+        "hob"
+      ],
+      "tools": [
+        "En az 4 litrelik kapaklı tencere",
+        "Mutfak tartısı",
+        "Ölçü kabı",
+        "Kesme tahtası",
+        "Bıçak",
+        "Rende",
+        "Süzgeç",
+        "Kepçe"
+      ],
+      "steps": [
+        "Sebzeleri yıka. Ayıklanmış soğanı ince, havucu ve kabağı yaklaşık 1 cm küpler halinde doğra. Domatesi küçük doğra; sarımsağı kıy. Ispanağı yıkayıp süz ve iri doğra. Fasulyeyi haşlanmış ve süzülmüş olarak tart; kuru fasulyeyi doğrudan ekleme.",
+        "Zeytinyağını tencerede orta-kısık ateşte ısıt. Soğan, havuç ve kabağı ekleyip 8–10 dakika karıştırarak yumuşat; kızartma. Sarımsak ve salçayı ekleyip 1 dakika çevir.",
+        "Domatesi ve dört kişilik tarif için 1 litre sıcak suyu ekle. Kaynayınca ateşi kıs; kapak aralık şekilde 20–25 dakika, havuç kolayca ısırılacak kadar yumuşayana dek pişir. Kişi sayısını değiştirirsen suyu da aynı oranda ayarla.",
+        "Haşlanmış fasulyeyi ve kuru küçük makarnayı ekle. Hafif kaynayarak, makarnanın paketindeki süre boyunca pişir; arada karıştır. Son 3 dakikada ıspanağı ekle. Makarna yumuşamalı, fasulye tamamen ısınmalı.",
+        "Çorba fazla koyulaşırsa azar azar sıcak su ekleyip tekrar kaynat. Tencereyi karıştır, katı malzemeleri ve suyunu dört kaseye eşit paylaştır.",
+        "Parmesanı rendeleyip kaselere eşit böl. Her kase bir porsiyondur. Makarna bekledikçe su çeker; servis kıvamını sıcak suyla ayarlayabilirsin. Ekmek veya ilave yağ bu makrolara dahil değildir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 4. Bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "whitebean": "175203",
+          "pasta": "168927",
+          "zucchini": "169291",
+          "carrot": "170393",
+          "onion": "170000",
+          "tomato": "170457",
+          "tomatopaste": "170459",
+          "garlic": "169230",
+          "spinach": "168462",
+          "oil": "171413",
+          "parmesan": "170848"
+        },
+        "note": "Fasulye haşlanmış ve süzülmüş; makarna kuru; sebzeler ayıklanmış çiğ ağırlıktır. Su enerji içermez. Değerler yaklaşık olup markaya ve porsiyona göre değişir. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Classic minestrone soup",
+        "author": "Esther Clark",
+        "publisher": "Good Food Middle East",
+        "sourceUrl": "https://www.bbcgoodfoodme.com/recipes/classic-minestrone-soup/",
+        "accessedOn": "2026-10-11",
+        "kitchenTested": false,
+        "adaptation": "Dört porsiyon için gramlarla ölçülendirildi. Pancetta, kereviz, kekik, defne ve fesleğen çıkarıldı; yeşillik olarak ıspanak kullanıldı. Sebze suyu yerine su, konserve yerine taze domates; parmesan miktarı hesaba dahil edildi. Adımlar özgün Türkçe anlatımla yazıldı; besin toplamları malzemelerden yeniden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-11",
+        "description": "Tarife uygun temsili sunum; üçüncü taraf fotoğraf kullanılmadı.",
+        "promptFile": "images/daily-2026-10-11-minestrone.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-08-savory-mushroom-oats",
       "addedOn": "2026-10-08",
       "title": "Mantarlı, ıspanaklı ve yumurtalı tuzlu yulaf",
