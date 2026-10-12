@@ -1,6 +1,114 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-12-white-bean-feta-dip",
+      "addedOn": "2026-10-12",
+      "title": "Beyaz fasulye ve peynir ezmesi, sebze çubuklarıyla",
+      "summary": "Haşlanmış fasulye ve beyaz peynirle hazırlanan, havuç ve salatalıkla servis edilen 4 kişilik pratik ara öğün. Good Food tarifinden Porsiva uyarlaması; peynir miktarı azaltıldı, maydanoz ve ölçülü sebzeler kullanıldı. Bu uyarlama mutfakta denenmedi. Kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Ara öğün",
+      "servings": 4,
+      "minutes": 15,
+      "difficulty": "easy",
+      "image": "images/daily-2026-10-12-white-bean-feta-dip.png",
+      "items": [
+        [
+          "whitebean",
+          400
+        ],
+        [
+          "feta",
+          120
+        ],
+        [
+          "lemon",
+          30
+        ],
+        [
+          "garlic",
+          4
+        ],
+        [
+          "parsley",
+          10
+        ],
+        [
+          "cucumber",
+          200
+        ],
+        [
+          "carrot",
+          160
+        ]
+      ],
+      "macros": {
+        "kcal": 246.4,
+        "protein": 14.9,
+        "carbs": 32.9,
+        "fat": 7
+      },
+      "allergens": [
+        "milk"
+      ],
+      "equipment": [
+        "blender"
+      ],
+      "tools": [
+        "Blender veya mutfak robotu",
+        "Mutfak tartısı",
+        "Kesme tahtası",
+        "Bıçak",
+        "Süzgeç",
+        "Spatula",
+        "Servis kaseleri"
+      ],
+      "steps": [
+        "Havuç, salatalık ve maydanozu yıka. Havucu soy; havuç ve salatalığı önce boyuna dilimlere, sonra yaklaşık 1 cm kalınlığında çubuklara ayır. Keserken düz yüzü tahtaya koy ve parmak uçlarını içeri kıvır. Sebzeleri ayıklanmış olarak tart.",
+        "Önceden tamamen haşlanmış fasulyeyi süzüp 400 g tart. Konserve kullanıyorsan durulayıp süzdükten sonra tart. Kuru fasulyeyi doğrudan kullanma; 15 dakikalık süre fasulyenin haşlanmasını içermez. Sarımsağı soy, maydanozu ince kıy.",
+        "Fasulye, ufalanmış beyaz peynir, limon suyu ve sarımsağı blender kabına koy. Kısa aralıklarla çekerek koyu ve sürülebilir bir ezme yap. Kenarları sıyırmadan önce cihazı durdur. Gerekirse dört kişilik karışıma 2–4 yemek kaşığı suyu azar azar ekle; kişi sayısı değişirse suyu da aynı oranda ayarla.",
+        "Maydanozu ezmeye kaşıkla karıştır. Ezmenin tamamını dört küçük kaseye eşit böl. Havuç ve salatalık çubuklarını da dört eşit gruba ayır.",
+        "Bir kase ezme ve yanındaki sebzeler bir porsiyondur. Makrolara sebzeler dahildir; ilave ekmek veya yağ dahil değildir. Hemen servis et veya kapalı kapta buzdolabında sakla."
+      ],
+      "stepPhotos": [
+        {
+          "step": 0,
+          "image": "images/guide-v11-cut-vegetable-sticks-b7fe1b6.webp",
+          "caption": "Havuç ve salatalığı çubuklara ayırma tekniği; miktarlar için tarifteki ölçüleri izle.",
+          "alt": "Kesme tahtasında çubuk şeklinde doğranmış havuç ve salatalık."
+        }
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 4. Bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "whitebean": "175203",
+          "feta": "173420",
+          "lemon": "167747",
+          "garlic": "169230",
+          "parsley": "170416",
+          "cucumber": "168409",
+          "carrot": "170393"
+        },
+        "note": "Fasulye haşlanmış ve süzülmüş; sebzeler ayıklanmış çiğ ağırlıktır. Beyaz peynir için feta referansı kullanılır. Su enerji içermez. Değerler yaklaşık olup peynir markasına ve porsiyona göre değişir. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Bean, feta & herb dip",
+        "author": "Good Food",
+        "publisher": "Good Food Middle East",
+        "sourceUrl": "https://www.bbcgoodfoodme.com/recipes/bean-feta-and-herb-dip/",
+        "accessedOn": "2026-10-12",
+        "kitchenTested": false,
+        "adaptation": "Fasulye 400 g haşlanmış ve süzülmüş olarak ölçüldü; peynir 120 g olarak azaltıldı. Ot karışımı yerine maydanoz kullanıldı. Havuç ve salatalık ölçülendirilip besin hesabına dahil edildi. Dört porsiyon için adımlar özgün Türkçe anlatımla yazıldı; makrolar malzemelerden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-12",
+        "description": "Tarife uygun temsili sunum; üçüncü taraf fotoğraf kullanılmadı.",
+        "promptFile": "images/daily-2026-10-12-white-bean-feta-dip.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-11-minestrone",
       "addedOn": "2026-10-11",
       "title": "Sebzeli ve fasulyeli minestrone çorbası",
@@ -269,7 +377,7 @@
       "macros": {
         "kcal": 421.1,
         "protein": 28.2,
-        "carbs": 60.0,
+        "carbs": 60,
         "fat": 9.6
       },
       "allergens": [
