@@ -1,4 +1,4 @@
-import {waterSettings,resolvedWaterGoal} from './water.mjs?v=12';
+import {waterSettings,resolvedWaterGoal,applyAutomaticWaterTarget} from './water.mjs?v=13';
 export const nutrients=['kcal','protein','carbs','fat'];
 export function dateKey(now=new Date()){return new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Istanbul',year:'numeric',month:'2-digit',day:'2-digit'}).format(now)}
 export function validDate(value){return typeof value==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&!Number.isNaN(Date.parse(value+'T12:00:00Z'))&&new Date(value+'T12:00:00Z').toISOString().slice(0,10)===value}
@@ -25,5 +25,6 @@ export function dailyExport(state,day){const track=trackingState(state.tracking)
 
 export function captureDay(state,day=dateKey()){
  state.tracking=trackingState(state.tracking);
+ applyAutomaticWaterTarget(state);
  state.tracking.snapshots[day]=structuredClone({profile:state.profile||null,plan:state.plan?.date===day?state.plan:null,mealTimes:state.mealTimes,waterGoal:resolvedWaterGoal(state.profile,state.tracking),waterMode:state.tracking.waterMode,otherDrinks:state.tracking.otherDrinks});
 }

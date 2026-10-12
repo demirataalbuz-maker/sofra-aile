@@ -1,14 +1,16 @@
+import {queueWaterPush} from './water-push.mjs?v=13';
+import {applyAutomaticWaterTarget} from './water.mjs?v=13';
 import {recipeInbox} from './recipe-inbox.mjs?v=12';
 import {cookingFields,cookingPreferences,cookingSummary,cookingLabel,cookingFits} from './cooking.mjs?v=11';
 import {familyView} from './family-ui.mjs?v=11';
 import {familyState} from './family.mjs?v=11';
 import {HEALTH_OPTIONS,planningBlock} from './health.mjs?v=11';
 import {localPayload,syncDecision,readLink,writeLink} from './sync.mjs?v=11';
-import {account} from './account-ui.mjs?v=11';
+import {account} from './account-ui.mjs?v=13';
 import {connectCloud,cloudCall} from './cloud.mjs?v=9';
-import {dateKey,newEntry,trackingState,captureDay} from './tracking.mjs?v=12';
-import {tracker} from './tracking-ui.mjs?v=12';
-import {WEB_VERSION,newerVersion,readJson,readCatalog,latestRecipeDate,canRefreshPage} from './updates.mjs?v=12';
+import {dateKey,newEntry,trackingState,captureDay} from './tracking.mjs?v=13';
+import {tracker} from './tracking-ui.mjs?v=13';
+import {WEB_VERSION,newerVersion,readJson,readCatalog,latestRecipeDate,canRefreshPage} from './updates.mjs?v=13';
 import {SEASONS,selectedSeason} from './seasons.mjs?v=6';
 import {mergeCatalog} from './catalog.mjs?v=5';
 /* Local-first Porsiva. Cloud access stays disabled until a verified backend is configured. */
@@ -44,7 +46,7 @@ const portionFmt=n=>new Intl.NumberFormat('tr-TR',{maximumFractionDigits:2}).for
 const img=p=>'./'+String(p||'').replace(/^\//,'');
 const today=()=>dateKey();
 const recipe=id=>catalog.recipes.find(r=>r.id===id);
-function save(){captureDay(state);try{localStorage.setItem(storeKey,JSON.stringify(state));queueCloudSync();return true;}catch{toast('Telefon depolama alanı dolu; değişiklik kaydedilemedi.');return false;}}
+function save(){captureDay(state);try{localStorage.setItem(storeKey,JSON.stringify(state));queueCloudSync();queueWaterPush(state);return true;}catch{toast('Telefon depolama alanı dolu; değişiklik kaydedilemedi.');return false;}}
 function toast(message){let el=$('#toast');if(!el){el=document.createElement('div');el.id='toast';el.style.cssText='position:fixed;z-index:20;bottom:95px;left:50%;transform:translateX(-50%);background:#35251e;color:#fff;border-radius:12px;padding:11px 17px;box-shadow:0 6px 25px #0004;font-size:14px;min-width:180px;text-align:center';document.body.append(el)}el.textContent=message;el.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.hidden=true,2800)}
 function nav(){return `<nav class="nav" aria-label="Alt menü"><button data-page="explore" class="${ui.page==='explore'||(ui.page==='detail'&&ui.returnPage==='explore')?'on':''}"><b>⌕</b>Tarifler</button><button data-page="plan" class="${ui.page==='plan'||ui.page==='cooking'||ui.page==='alternatives'||(ui.page==='detail'&&ui.returnPage==='plan')?'on':''}"><b>▦</b>Bugün</button><button data-page="tracking" class="${ui.page==='tracking'?'on':''}"><b>◉</b>Takip</button><button data-page="family" class="${ui.page==='family'?'on':''}"><b>♧</b>Aile</button><button data-page="profile" class="${ui.page==='profile'?'on':''}"><b>♙</b>Profil</button><button data-page="basket" class="${ui.page==='basket'?'on':''}"><b>☑</b>Liste <span>${state.basket.filter(x=>!x.done).length||''}</span></button></nav>`}
 function header(){return `<header class="top"><div class="brandrow"><div class="brand"><span class="mark">P</span><strong>porsiva.</strong></div><div class="appcontrols"><span class="sub">${catalog.recipes.length} tarif</span><button class="appsettings" data-page="account">Hesap</button><button class="appsettings" data-page="application">Uygulama</button></div></div></header>`}
@@ -131,9 +133,9 @@ async function refreshContent(manual=false){
 }
 window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;if(ui.page==='application')render()});
 window.addEventListener('appinstalled',()=>{installPrompt=null;if(ui.page==='application')render()});
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refreshContent()});
-window.addEventListener('online',()=>refreshContent(true));
-setInterval(()=>{if(document.visibilityState==='visible')refreshContent()},5*60*1000);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){refreshContent();queueWaterPush(state)}});
+window.addEventListener('online',()=>{refreshContent(true);queueWaterPush(state)});
+setInterval(()=>{if(document.visibilityState==='visible'){refreshContent();queueWaterPush(state)}},5*60*1000);
 function basket(){return `<h1 class="heading">Alışveriş listem</h1><p class="lead">Tariften eklediklerini alırken işaretle. Liste sadece bu telefonda kalır.</p>${state.basket.length?`<div class="panel">${state.basket.map((it,i)=>`<div class="basketrow ${it.done?'done':''}"><input type="checkbox" data-check="${i}" ${it.done?'checked':''} aria-label="${esc(catalog.ingredients[it.id]?.name||it.id)} alındı"><span class="itemname">${esc(catalog.ingredients[it.id]?.name||it.id)}</span><strong>${fmt(it.qty)} ${esc(catalog.ingredients[it.id]?.unit||'g')}</strong><button data-remove="${i}" aria-label="Ürünü sil">×</button></div>`).join('')}</div><button class="secondary" id="clearchecked">İşaretlenenleri temizle</button>`:'<div class="empty">Listen boş. Bir tarifi açıp malzemeleri ekleyebilirsin.</div>'}`}
 function inboxPage(){inboxScreen=recipeInbox({esc});return inboxScreen.html}
 function accountPage(){accountView=account({state,ui,esc,save,render,toast});return accountView.html}
@@ -196,7 +198,8 @@ function addItemsSilent(items,servings,base){for(const [id,n] of items){const qt
  catch{const base=await readJson('./catalog.json');catalog=mergeCatalog(base.data);catalogCached=true;toast('Günlük eklemeler alınamadı; ana tarifler gösteriliyor.')}
  try{credits=(await readJson('./photo-credits.json')).data}catch{}
  await restoreCloud();
- booted=true;render();
+ if(applyAutomaticWaterTarget(state))save();
+ booted=true;render();queueWaterPush(state);
  if('serviceWorker'in navigator){
   const hadController=Boolean(navigator.serviceWorker.controller);
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadController)refreshContent(true)});

@@ -1,7 +1,8 @@
-import {waterPanel} from './water-ui.mjs?v=12';
-import {numeric} from './tracking.mjs?v=12';
+import {bindWaterPush} from './water-push.mjs?v=13';
+import {waterPanel} from './water-ui.mjs?v=13';
+import {numeric} from './tracking.mjs?v=13';
 import {planningBlock} from './health.mjs?v=11';
-import {dateKey,newEntry,daySummary,trackingState,dailyExport,nutrients} from './tracking.mjs?v=12';
+import {dateKey,newEntry,daySummary,trackingState,dailyExport,nutrients} from './tracking.mjs?v=13';
 export function tracker(host){
  const {state,ui,catalog,esc,fmt,save,render,toast,estimate}=host;
  const portionFmt=n=>new Intl.NumberFormat('tr-TR',{maximumFractionDigits:2}).format(n);
@@ -18,6 +19,7 @@ export function tracker(host){
  <section class="panel"><h2>Kilo kaydı</h2><form id="weightForm" class="trackform">${number('kg','Ölçtüğüm kilo (kg)',35,300,.1,s.weight||'')}<button class="secondary">Kiloyu kaydet</button></form><p class="hint">Bu ölçüm profilindeki hedefi veya menünü kendiliğinden değiştirmez.</p></section>
  <section class="panel"><h2>Günlük raporum</h2>${report?`<p class="meta">${esc(report.author||'Sofra')} · ${esc(report.createdAt||'')}</p><div class="reporttext">${esc(report.text)}</div>`:'<p>Bu gün için hazırlanmış bir değerlendirme henüz yok. Üstteki rakamlar kayıtlarının hesaplanmış özetidir.</p>'}<button class="secondary" id="exportDay">Günlük dosyamı indir</button><p class="hint">Dosya profilini, günün yemek/su kayıtlarını ve özetini içerir. Otomatik özel depo paylaşımını Hesap bölümünden ayrıca açabilirsin.</p><button class="textlink" data-page="account">Hesap ve bildirimler →</button></section>`;
  const bind=()=>{
+  bindWaterPush(state);
   const q=s=>document.querySelector(s);const act=fn=>{const before=structuredClone(state.tracking);try{fn();if(!save())throw Error('Depolama dolu; bu değişiklik telefonuna kaydedilemedi.');render()}catch(e){state.tracking=before;render();toast(e.message)}};
   const add=(kind,data)=>act(()=>{t.entries.push(newEntry(kind,data,day));t.closedDays[day]=false});
   q('#trackDate').onchange=e=>{if(!e.target.value||e.target.value>dateKey())return;ui.trackDate=e.target.value;render()};
