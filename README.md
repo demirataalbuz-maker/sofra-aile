@@ -58,3 +58,12 @@ Zorluk `cooking.mjs` içinde yazılı adımlar, teknik ve ekipman sayısından t
 Kolay seçimi yalnızca kolay tarifleri kullanır. Karışık seçimde günlük en fazla bir farklı uğraştırıcı tarif bulunabilir; kişisel planda zaman zaman böyle bir tarife sıralama önceliği verilir, bulunması zorunlu değildir. Uğraşabilirim tüm zorlukları açar. Tüm modlarda kalori/makro, alerji, sağlık ve doğrulanmış aile besin verisi kontrolleri korunur. Tekli/ikili öğün değişimleri de kayıtlı menünün tercihine göre doğrulanır. Süre sınırı bir öğünün farklı yemek süreleri toplamına uygulanır; aynı aile yemeğinin farklı porsiyonları süreyi tekrar saydırmaz. Ailede farklı kişilere eklenen farklı yan yemekler toplam süreye dahildir. Büyük miktarların süreyi uzatabileceği kullanıcıya açıklanır; eşzamanlı pişirme varsayılmaz.
 
 Uygun menü bulunamadığında sınırlar kendiliğinden genişletilmez ve önceki menü korunur. Sunucu ertelendiği için bu özellik tarayıcıdaki planlayıcılarda çalışır; gelecekte sunucu planlayıcısına da taşınmalıdır.
+
+
+## Web 12 — su önerisi ve Instagram bağlantı kutusu
+- Takip bölümünde yeni profillerin su hedefi otomatik öneridir. BDA / EFSA yetişkin içecek referansı (kadın 1600 ml, erkek 2000 ml), isteğe bağlı diğer alkolsüz içecek payı düşülerek içme suyu planına çevrilir. Kilo/egzersiz çarpanı kullanılmaz; kişisel tıbbi gereksinim hesabı değildir.
+- 18–85 yaş dışı/eksik profilde veya seçili sağlık kısıtında otomatik öneri yoktur. Geçmiş hedefler günün snapshot kaydından okunur. Eski elle girilmiş hedefler korunur; Otomatik öneriyi kullan düğmesiyle geçilir.
+- Kaynak: https://www.bda.uk.com/static/ae2e9a5c-81b2-4507-81457ba68e72ffbf/BDAFluid-and-hydrationFINAL-0325-003.pdf
+- Uygulama → Instagram’dan tarif gönder: gönderi bağlantısını doğrular, takip parametrelerini kaldırır, mevcut özel GitHub issue formunu önceden dolduran bağlantı hazırlar. Kullanıcı GitHub'da son gönderimi yapar; depo erişimi gerekir. Profil/günlük verisi bu bağlantıya katılmaz.
+- DM alma, webhook, otomatik video analizi, yeni sunucu veya ücretli API kurulmadı. Form başarısı yalnızca bağlantının hazırlandığını belirtir; issue açıldığını varsaymaz.
+- Sunucu kapalı kalır. Açılmadan önce yeni waterMode/otherDrinks ayarları ve çözümlenmiş hedefler sunucu doğrulamasına, zamanlayıcısına ve raporlarına taşınmalıdır.
