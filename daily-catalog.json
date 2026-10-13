@@ -1,6 +1,116 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-13-seabass-chickpea-stew",
+      "addedOn": "2026-10-13",
+      "title": "Nohutlu ve patatesli levrek yemeği",
+      "summary": "Domates sosunda levrek, nohut ve patatesle dört kişilik ana yemek. Good Food tarifinden Sofra uyarlaması; karides ve bulyon kullanılmaz. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Balık",
+      "servings": 4,
+      "minutes": 50,
+      "difficulty": "easy",
+      "water": 250,
+      "image": "images/daily-2026-10-13-seabass-chickpea-stew.png",
+      "items": [
+        [
+          "seabass",
+          600
+        ],
+        [
+          "chickpea",
+          400
+        ],
+        [
+          "potato",
+          400
+        ],
+        [
+          "tomato",
+          500
+        ],
+        [
+          "onion",
+          120
+        ],
+        [
+          "garlic",
+          6
+        ],
+        [
+          "oil",
+          20
+        ],
+        [
+          "lemon",
+          30
+        ],
+        [
+          "parsley",
+          10
+        ]
+      ],
+      "allergens": [
+        "fish"
+      ],
+      "equipment": [
+        "hob"
+      ],
+      "tools": [
+        "Kapaklı geniş tencere",
+        "Mutfak tartısı",
+        "Kesme tahtası",
+        "Bıçak",
+        "Ölçü kabı",
+        "Gıda termometresi"
+      ],
+      "steps": [
+        "Sebzeleri yıka; patatesi 2 cm küplere, soğanı ince dilimlere doğra. Domatesi küçük doğra, sarımsağı kıy. Nohudu haşlanmış ve süzülmüş olarak tart; kuru nohut kullanma. Süre, nohut haşlamayı içermez.",
+        "Zeytinyağında soğanı orta ateşte 5 dakika yumuşat. Sarımsağı ekleyip kısa süre çevir; domates, patates ve dört kişilik tarif için 250 ml su ekle. Kişi sayısıyla suyu da orantıla.",
+        "Kapak altında hafif kaynatarak 20–25 dakika pişir. Patatese çatal kolayca girmeli. Yapışırsa biraz sıcak su ekle.",
+        "Derisiz, kılçıksız levreği ayrı tahtada iri parçalara kes. Nohudu tencereye karıştır; balığı üzerine yerleştir. Kapakla, kısık ateşte 8–12 dakika pişir; parçaları dağıtmadan kontrol et. Balığın merkezi 63 °C'ye ulaşmalı.",
+        "Limon suyunu ve kıyılmış maydanozu ekle. Balık parçalarını dört tabağa eşit böl; nohut, patates ve sosu da eşit paylaştır. Bir tabak bir porsiyondur; ekmek veya ekstra yağ hesaba dahil değildir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 4. Bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "note": "Levrek çiğ, derisiz ve kılçıksız; nohut haşlanmış ve süzülmüş; sebzeler yenebilir çiğ ağırlıktır. Yaklaşık değerlerdir. Su enerji içermez. Şeker verisi eklenmedi.",
+        "sourceIds": {
+          "seabass": "175142",
+          "chickpea": "173757",
+          "potato": "170026",
+          "tomato": "170457",
+          "onion": "170000",
+          "garlic": "169230",
+          "oil": "171413",
+          "lemon": "167747",
+          "parsley": "170416"
+        }
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "One-pan Spanish fish stew",
+        "author": "Barney Desmazery",
+        "publisher": "Good Food Middle East",
+        "sourceUrl": "https://www.bbcgoodfoodme.com/recipes/onepan-spanish-fish-stew/",
+        "accessedOn": "2026-10-13",
+        "kitchenTested": false,
+        "adaptation": "Karides, bulyon ve baharatlar çıkarıldı; levrek ve haşlanmış nohut artırıldı. Taze domates ve su kullanıldı. Ölçüler ve makrolar bu uyarlamaya göre hesaplandı; adımlar özgün Türkçe anlatımla yazıldı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-13",
+        "description": "Tarife uygun temsili sunum; üçüncü taraf fotoğraf kullanılmadı.",
+        "promptFile": "images/daily-2026-10-13-seabass-chickpea-stew.provenance.json"
+      },
+      "macros": {
+        "kcal": 470,
+        "protein": 40.1,
+        "carbs": 53.7,
+        "fat": 11
+      }
+    },
+    {
       "id": "daily-2026-10-12-white-bean-feta-dip",
       "addedOn": "2026-10-12",
       "title": "Beyaz fasulye ve peynir ezmesi, sebze çubuklarıyla",
