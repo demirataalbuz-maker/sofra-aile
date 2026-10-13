@@ -5,12 +5,12 @@ import {cookingFields,cookingPreferences,cookingSummary,cookingLabel,cookingFits
 import {familyView} from './family-ui.mjs?v=11';
 import {familyState} from './family.mjs?v=11';
 import {HEALTH_OPTIONS,planningBlock} from './health.mjs?v=11';
-import {localPayload,syncDecision,readLink,writeLink} from './sync.mjs?v=11';
-import {account} from './account-ui.mjs?v=13';
-import {connectCloud,cloudCall} from './cloud.mjs?v=9';
+import {createSync} from './sync.mjs?v=15';
+import {account} from './account-ui.mjs?v=15';
+import {api,readSession} from './cloud.mjs?v=15';
 import {dateKey,newEntry,trackingState,captureDay} from './tracking.mjs?v=13';
-import {tracker} from './tracking-ui.mjs?v=13';
-import {WEB_VERSION,newerVersion,readJson,readCatalog,latestRecipeDate,canRefreshPage} from './updates.mjs?v=13';
+import {tracker} from './tracking-ui.mjs?v=15';
+import {WEB_VERSION,newerVersion,readJson,readCatalog,latestRecipeDate,canRefreshPage} from './updates.mjs?v=15';
 import {SEASONS,selectedSeason} from './seasons.mjs?v=6';
 import {mergeCatalog} from './catalog.mjs?v=5';
 /* Local-first Porsiva. Cloud access stays disabled until a verified backend is configured. */
@@ -21,23 +21,36 @@ const launchParams=new URLSearchParams(location.search);
 const ui={page:['tracking','plan','account','family','inbox'].includes(launchParams.get('page'))?launchParams.get('page'):'explore',query:'',category:'Tümü',limit:24,recipe:null,servings:2,method:-1,returnPage:'explore'};
 let catalog={recipes:[],ingredients:{}};
 let credits=[],trackingView=null,accountView=null,familyScreen=null,inboxScreen=null;
-let state={basket:[],plan:null,profile:null,history:{},mealTimes:mealTimes() };
-try{
-  const saved=JSON.parse(localStorage.getItem(storeKey)||'{}');
-  if(Array.isArray(saved.basket))state.basket=saved.basket;
-  if(saved.plan&&typeof saved.plan==='object')state.plan=saved.plan;
-  if(saved.profile&&typeof saved.profile==='object')state.profile=saved.profile;
-  state.family=familyState(saved.family);
-  state.mealTimes=mealTimes(saved.mealTimes);
-  state.tracking=trackingState(saved.tracking);
-  state.reports=saved.reports||{};
-  state.cloudSettings=saved.cloudSettings||{};
-  state.history=rememberRecommendations(saved.history);
-  if(!saved.history&&state.plan?.entries){
-    const planTime=Date.parse(state.plan.date+'T12:00:00');
-    state.history=rememberRecommendations({},state.plan.entries,Number.isFinite(planTime)?Math.min(Date.now(),planTime):Date.now());
+// Same sanitising for the saved copy and for a record downloaded from the account.
+function hydrate(saved){
+  const next={basket:[],plan:null,profile:null,history:{},mealTimes:mealTimes() };
+  if(Array.isArray(saved.basket))next.basket=saved.basket;
+  if(saved.plan&&typeof saved.plan==='object')next.plan=saved.plan;
+  if(saved.profile&&typeof saved.profile==='object')next.profile=saved.profile;
+  next.family=familyState(saved.family);
+  next.mealTimes=mealTimes(saved.mealTimes);
+  next.tracking=trackingState(saved.tracking);
+  next.reports=saved.reports||{};
+  next.cloudSettings=saved.cloudSettings||{};
+  next.history=rememberRecommendations(saved.history);
+  if(!saved.history&&next.plan?.entries){
+    const planTime=Date.parse(next.plan.date+'T12:00:00');
+    next.history=rememberRecommendations({},next.plan.entries,Number.isFinite(planTime)?Math.min(Date.now(),planTime):Date.now());
   }
-}catch{}
+  return next;
+}
+let state={basket:[],plan:null,profile:null,history:{},mealTimes:mealTimes() };
+try{state=hydrate(JSON.parse(localStorage.getItem(storeKey)||'{}'))}catch{}
+const cloudSync=createSync({api,session:readSession,getState:()=>state,
+ applyRemote:remote=>{
+  const next=hydrate({...remote,family:state.family,reports:state.reports,cloudSettings:state.cloudSettings});
+  localStorage.setItem(storeKey,JSON.stringify(next));state=next;queueWaterPush(state);
+ }});
+let lastCloudCheck=0;
+function checkCloud(force=false){
+ if(!force&&Date.now()-lastCloudCheck<60000)return;lastCloudCheck=Date.now();
+ cloudSync.restore().then(changed=>{if(!changed||!booted)return;if(canRefreshPage(ui.page)){const y=scrollY;render();scrollTo(0,y)}else toast('Hesabındaki güncel kayıt yüklendi.')}).catch(()=>{});
+}
 const $=s=>document.querySelector(s);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const round=n=>Math.round((Number(n)||0)*10)/10;
@@ -46,11 +59,11 @@ const portionFmt=n=>new Intl.NumberFormat('tr-TR',{maximumFractionDigits:2}).for
 const img=p=>'./'+String(p||'').replace(/^\//,'');
 const today=()=>dateKey();
 const recipe=id=>catalog.recipes.find(r=>r.id===id);
-function save(){captureDay(state);try{localStorage.setItem(storeKey,JSON.stringify(state));queueCloudSync();queueWaterPush(state);return true;}catch{toast('Telefon depolama alanı dolu; değişiklik kaydedilemedi.');return false;}}
+function save(){captureDay(state);try{localStorage.setItem(storeKey,JSON.stringify(state));cloudSync.queue();queueWaterPush(state);return true;}catch{toast('Telefon depolama alanı dolu; değişiklik kaydedilemedi.');return false;}}
 function toast(message){let el=$('#toast');if(!el){el=document.createElement('div');el.id='toast';el.style.cssText='position:fixed;z-index:20;bottom:95px;left:50%;transform:translateX(-50%);background:#35251e;color:#fff;border-radius:12px;padding:11px 17px;box-shadow:0 6px 25px #0004;font-size:14px;min-width:180px;text-align:center';document.body.append(el)}el.textContent=message;el.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.hidden=true,2800)}
 function nav(){return `<nav class="nav" aria-label="Alt menü"><button data-page="explore" class="${ui.page==='explore'||(ui.page==='detail'&&ui.returnPage==='explore')?'on':''}"><b>⌕</b>Tarifler</button><button data-page="plan" class="${ui.page==='plan'||ui.page==='cooking'||ui.page==='alternatives'||(ui.page==='detail'&&ui.returnPage==='plan')?'on':''}"><b>▦</b>Bugün</button><button data-page="tracking" class="${ui.page==='tracking'?'on':''}"><b>◉</b>Takip</button><button data-page="family" class="${ui.page==='family'?'on':''}"><b>♧</b>Aile</button><button data-page="profile" class="${ui.page==='profile'?'on':''}"><b>♙</b>Profil</button><button data-page="basket" class="${ui.page==='basket'?'on':''}"><b>☑</b>Liste <span>${state.basket.filter(x=>!x.done).length||''}</span></button></nav>`}
 function header(){return `<header class="top"><div class="brandrow"><div class="brand"><span class="mark">P</span><strong>porsiva.</strong></div><div class="appcontrols"><span class="sub">${catalog.recipes.length} tarif</span><button class="appsettings" data-page="account">Hesap</button><button class="appsettings" data-page="application">Uygulama</button></div></div></header>`}
-function footer(){return `<p class="foot">Tarif ve makro değerleri yaklaşık bilgi içindir. Fotoğraflar sunum veya teknik örneğidir. ${state.cloudSettings?.sync?'Eşitleme tercihini Hesap bölümünden yönetebilirsin.':'Kayıtların bu cihazda saklanır; tarayıcı verilerini silmek kayıtlarını da siler.'} <a href="./kaynaklar.html">Görsel kaynakları</a></p>`}
+function footer(){return `<p class="foot">Tarif ve makro değerleri yaklaşık bilgi içindir. Fotoğraflar sunum veya teknik örneğidir. ${cloudSync.linked()?'Kayıtların Google hesabınla eşitleniyor; Hesap bölümünden yönetebilirsin.':'Kayıtların bu cihazda saklanır; tarayıcı verilerini silmek kayıtlarını da siler.'} <a href="./kaynaklar.html">Görsel kaynakları</a></p>`}
 function render(){const app=$('#app');app.className='app';app.innerHTML=(ui.page==='detail'?detail():header()+(ui.page==='explore'?explore():ui.page==='plan'?plan():ui.page==='cooking'?cookingSetup():ui.page==='alternatives'?alternatives():ui.page==='family'?familyPage():ui.page==='profile'?profile():ui.page==='inbox'?inboxPage():ui.page==='application'?application():ui.page==='tracking'?trackingPage():ui.page==='account'?accountPage():basket()))+footer()+nav();bind();showUpdateNotice();}
 function explore(){let cats=['Tümü','Kahvaltı','Tavuk','Et','Sebze','Bakliyat','Balık','Tatlı','Ara öğün'];return `<h1 class="heading">Bugün ne pişirelim?</h1><p class="lead">Tarifini seç, adımlara bak, eksikleri listeye ekle.</p>${state.profile?.allergies?.length?'<p class="allergen-legend"><span class="warning-mark" aria-hidden="true">!</span> Seçtiğin alerjenleri içeren tarifler işaretli. İşaret olmaması alerjensiz olduğunu garanti etmez.</p>':''}<input class="search" id="search" type="search" inputmode="search" placeholder="Yemek veya malzeme ara" aria-label="Tarif ara" value="${esc(ui.query)}"><div class="chips" aria-label="Kategoriler">${cats.map(c=>`<button class="chip ${ui.category===c?'on':''}" data-category="${esc(c)}">${esc(c)}</button>`).join('')}</div><div id="results"></div>`}
 function visibleRecipes(){const q=ui.query.trim().toLocaleLowerCase('tr-TR');return catalog.recipes.filter(r=>(ui.category==='Tümü'||r.category===ui.category)&&(!q||(r.title+' '+r.summary+' '+(r.items||[]).map(([id])=>catalog.ingredients[id]?.name||'').join(' ')).toLocaleLowerCase('tr-TR').includes(q)))}
@@ -133,12 +146,12 @@ async function refreshContent(manual=false){
 }
 window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;if(ui.page==='application')render()});
 window.addEventListener('appinstalled',()=>{installPrompt=null;if(ui.page==='application')render()});
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){refreshContent();queueWaterPush(state)}});
-window.addEventListener('online',()=>{refreshContent(true);queueWaterPush(state)});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){refreshContent();queueWaterPush(state);checkCloud()}else cloudSync.flush().catch(()=>{})});
+window.addEventListener('online',()=>{refreshContent(true);queueWaterPush(state);checkCloud(true)});
 setInterval(()=>{if(document.visibilityState==='visible'){refreshContent();queueWaterPush(state)}},5*60*1000);
 function basket(){return `<h1 class="heading">Alışveriş listem</h1><p class="lead">Tariften eklediklerini alırken işaretle. Liste sadece bu telefonda kalır.</p>${state.basket.length?`<div class="panel">${state.basket.map((it,i)=>`<div class="basketrow ${it.done?'done':''}"><input type="checkbox" data-check="${i}" ${it.done?'checked':''} aria-label="${esc(catalog.ingredients[it.id]?.name||it.id)} alındı"><span class="itemname">${esc(catalog.ingredients[it.id]?.name||it.id)}</span><strong>${fmt(it.qty)} ${esc(catalog.ingredients[it.id]?.unit||'g')}</strong><button data-remove="${i}" aria-label="Ürünü sil">×</button></div>`).join('')}</div><button class="secondary" id="clearchecked">İşaretlenenleri temizle</button>`:'<div class="empty">Listen boş. Bir tarifi açıp malzemeleri ekleyebilirsin.</div>'}`}
 function inboxPage(){inboxScreen=recipeInbox({esc});return inboxScreen.html}
-function accountPage(){accountView=account({state,ui,esc,save,render,toast});return accountView.html}
+function accountPage(){accountView=account({state,ui,esc,save,render,toast,cloudSync});return accountView.html}
 function bindAccount(){accountView.bind()}
 function familyPage(){familyScreen=familyView({state,ui,catalog,esc,fmt,save,render,toast,openDetail});return familyScreen.html}
 function trackingPage(){trackingView=tracker({state,ui,catalog,esc,fmt,save,render,toast,estimate});return trackingView.html}
@@ -197,9 +210,8 @@ function addItemsSilent(items,servings,base){for(const [id,n] of items){const qt
  try{const snapshot=await readCatalog();catalog=snapshot.catalog;catalogCached=snapshot.cached;if(!snapshot.cached)lastCheck=new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})}
  catch{const base=await readJson('./catalog.json');catalog=mergeCatalog(base.data);catalogCached=true;toast('Günlük eklemeler alınamadı; ana tarifler gösteriliyor.')}
  try{credits=(await readJson('./photo-credits.json')).data}catch{}
- await restoreCloud();
  if(applyAutomaticWaterTarget(state))save();
- booted=true;render();queueWaterPush(state);
+ booted=true;render();queueWaterPush(state);checkCloud(true);
  if('serviceWorker'in navigator){
   const hadController=Boolean(navigator.serviceWorker.controller);
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadController)refreshContent(true)});
@@ -214,35 +226,4 @@ function renderMealLog(){
  document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{ui.page=b.dataset.page;render()});
  $('#cancelMealLog').onclick=()=>{ui.page='plan';render()};
  $('#mealLogForm').onsubmit=e=>{e.preventDefault();try{const f=new FormData(e.target);const entries=parts.map((x,i)=>({x,portion:Number(f.get('p'+i))})).filter(e=>e.portion>0).map(({x,portion})=>newEntry('food',{title:recipe(x.id).title,recipeId:x.id,macros:recipe(x.id).macros,portion}));if(!entries.length)throw Error('En az bir yemek için yediğin porsiyonu gir.');state.tracking=trackingState(state.tracking);const before=structuredClone(state.tracking);state.tracking.entries.push(...entries);state.tracking.closedDays[today()]=false;if(!save()){state.tracking=before;return;}ui.trackDate=today();ui.page='tracking';render();toast('Yediğin porsiyonlar kaydedildi.')}catch(err){toast(err.message)}};
-}
-
-let syncTimer=null,syncRunning=false;
-function queueCloudSync(){
- if(!ui.syncEnabled||!state.cloudSettings?.sync)return;
- clearTimeout(syncTimer);syncTimer=setTimeout(syncCloudState,1200);
-}
-async function syncCloudState(){
- if(syncRunning||!ui.syncEnabled)return;syncRunning=true;
- const local=structuredClone(localPayload(state));const snapshot=JSON.stringify(local);
- try{const c=await connectCloud();if(c.instance.currentUser?.uid!==ui.syncUid)throw Error('Hesap değişti; eşitlemeyi yeniden bağla.');
- const result=await cloudCall('sync',{revision:ui.syncRevision,state:local});ui.syncRevision=result.revision;writeLink(ui.syncUid,result.revision,local);
- }catch(e){ui.syncEnabled=false;toast('Eşitleme durdu: '+e.message)}finally{syncRunning=false;
- const current=localPayload(state);if(JSON.stringify(current)!==snapshot)queueCloudSync();}
-}
-
-async function restoreCloud(){
- const link=readLink();if(!link||!state.cloudSettings?.sync)return;
- try{
-  const c=await connectCloud();if(c.instance.currentUser?.uid!==link.uid)return;
-  const remote=await cloudCall('get'),decision=syncDecision(localPayload(state),link,remote);
-  if(decision==='conflict'||decision==='missing')throw Error('Hesaptaki kayıt değişmiş. Yerel kayıtların korundu; Hesap bölümünden güncel kaydı yükleyebilirsin.');
-  if(decision==='download'){
-   localStorage.setItem('sofra-before-cloud',JSON.stringify(state));
-   state={...remote.state,family:state.family,reports:remote.reports||{},cloudSettings:remote.settings};
-  }else {state.reports=remote.reports||{};state.cloudSettings=remote.settings}
-  ui.syncUid=link.uid;ui.syncRevision=remote.revision;ui.syncEnabled=remote.settings.sync===true;
-  if(decision!=='upload')writeLink(link.uid,remote.revision,state);
-  localStorage.setItem(storeKey,JSON.stringify(state));
-  if(decision==='upload')queueCloudSync();
- }catch(e){ui.syncEnabled=false;toast('Eşitleme bekliyor: '+e.message)}
 }

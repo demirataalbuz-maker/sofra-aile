@@ -1,45 +1,86 @@
-import {DEFAULT_WATER_TIMES} from './water-reminders.mjs?v=13';
-import {connectCloud,login,logout,cloudCall,enablePush,disablePush} from './cloud.mjs?v=9';
-import {writeLink,clearLink} from './sync.mjs?v=11';
+import {accountConfig,accountReady,readSession,renderGoogleButton,signOut,deleteAccount,api} from './cloud.mjs?v=15';
+import {readLink,statusText} from './sync.mjs?v=15';
+let detach=null;
 export function account(host){
- const {state,ui,esc,save,render,toast}=host;
- const settings=state.cloudSettings||{};
- const html=`<h1 class="heading">Hesap ve bildirimler</h1><p class="lead">Kayıtlarını cihazların arasında eşitle, günlük menü ve hatırlatmaları yönet.</p><section class="panel"><h2>Su hatırlatmaları</h2><p>Saatlik su bildirimlerini hesap açmadan Takip bölümünden bağlayabilirsin. Aşağıdaki hesap eşitleme ve menü bildirimleri ayrı bir hizmettir; henüz bağlı değil.</p><button class="primary" data-page="tracking">Su bildirimlerine git →</button></section><p id="cloudStatus" role="status">Sunucu durumu kontrol ediliyor…</p>
- <fieldset id="cloudControls" disabled class="cloudcontrols"><section class="panel"><h2>Hesabım</h2><form id="authForm" class="trackform"><label>E-posta<input name="email" type="email" autocomplete="username" required></label><label>Şifre<input name="password" type="password" minlength="8" autocomplete="current-password" required></label><div class="buttonrow"><button class="primary" name="action" value="login">Giriş yap</button><button class="secondary" name="action" value="create">Hesap oluştur</button></div></form><p class="hint">Yeni hesapta e-posta adresini doğruladıktan sonra giriş yap.</p><button class="textlink" id="signOut">Çıkış yap</button></section>
- <section class="panel"><h2>Eşitleme ve paylaşım</h2><p>Kayıtlarını eşitlemek profilini, menünü, yemek/su günlüğünü ve kilo kayıtlarını Sofra sunucusunda saklar. İlk bağlantıda hangi kaydı kullanacağını sen seçersin.</p><label class="checklabel"><input id="syncConsent" type="checkbox" ${settings.sync?'checked':''}>Kayıtlarımı hesabımla eşitlemek istiyorum</label><div class="buttonrow"><button class="secondary" id="uploadState">Bu cihazı hesaba bağla</button><button class="secondary" id="downloadState">Hesabımdaki kaydı yükle</button></div><p class="hint">Hesaptaki kaydı yüklemek bu cihazdaki Sofra kaydını değiştirir; önce otomatik yerel yedek alınır. Yeni değişiklik varsa üzerine yazılmaz.</p>
- <label class="checklabel"><input id="reportConsent" type="checkbox" ${settings.reports?'checked':''}>Günlük kayıtlarımı özel GitHub deposuna gönder ve yapay zekâ değerlendirmesi için paylaş</label><p class="hint">Profil, kilo, yemek ve su kayıtlarının günlük özeti uygulama sahibinin özel deposuna gönderilir; yetkili rapor otomasyonu okur. E-posta dosyaya eklenmez. Git geçmişi eski sürümleri saklayabilir; kapatmak yeni gönderimleri durdurur, önceki kayıtları silmez.</p>
- <label class="checklabel"><input id="autoMenu" type="checkbox" ${settings.autoMenu?'checked':''}>Her gün menümü otomatik hazırla</label><form id="reminderForm" class="trackform"><label>Günaydın bildirimi<input name="morning" type="time" value="${esc(settings.morning||'07:30')}" required></label><label>Su hatırlatma saatleri<input name="waterTimes" value="${esc((settings.waterTimes||DEFAULT_WATER_TIMES).join(', '))}" placeholder="09:00, 10:00, 11:00"></label><button class="secondary" type="button" id="hourlyWater">09.00–21.00 her saat</button><p class="hint">Saatler Türkiye saatidir. Gece için saat ekleme; hedef tamamlandığında su hatırlatmaları durur. Öğün saatlerini Bugün ekranında düzenleyebilirsin.</p><button class="primary">Tercihlerimi kaydet</button></form></section>
- <section class="panel"><h2>Telefon bildirimleri</h2><p>iPhone’da ana ekrandaki Sofra simgesinden aç. Bildirim iznini aşağıdaki düğmeyle ver; ardından uygulamayı kapatıp test bildirimini kontrol et.</p><div class="buttonrow"><button class="primary" id="pushOn">Bildirimleri aç</button><button class="secondary" id="pushTest">Test bildirimi gönder</button></div><button class="textlink" id="pushOff">Bu cihazda bildirimleri kapat</button><p class="hint">İnternet, telefonun izinleri ve odak modu teslimatı etkiler; dakikası dakikasına teslim garantisi yoktur.</p></section></fieldset><p class="formerror" id="accountError" role="alert"></p>`;
+ const {state,esc,render,toast,cloudSync}=host;
+ const html=`<h1 class="heading">Hesap ve eşitleme</h1><p class="lead">Sofra hesapsız çalışır. İstersen Google ile giriş yapıp kayıtlarını kendi cihazların arasında eşitleyebilirsin.</p>
+ <section class="panel"><h2>Su hatırlatmaları</h2><p>Saatlik su bildirimleri hesaptan bağımsızdır; Takip bölümünden açıp kapatabilirsin.</p><button class="primary" data-page="tracking">Su bildirimlerine git →</button></section>
+ <section class="panel"><h2>Google hesabı</h2><p>Deneme sürümüne ilk giriş için sana özel davet bağlantısını açıp kendi Google hesabını kullan. Davet, kişisel kayıtlarını aile üyelerine açmaz. Sonraki girişlerinde yeniden davet gerekmez.</p><p id="accountStatus" role="status">Kontrol ediliyor…</p><div id="googleButton" class="googlebutton"></div>
+ <div class="buttonrow" id="signedInActions" hidden><button class="secondary" id="signOut">Çıkış yap</button><button class="textlink" id="signOutAll">Tüm cihazlarda çıkış yap</button></div>
+ <p class="hint">Giriş yapmak tek başına hiçbir kaydı yüklemez. Google’dan yalnızca hesap kimliğin ve e-posta adresin alınır; Google şifren ve Google erişim anahtarların Sofra’ya gelmez. Oturum 30 gün sürer.</p></section>
+ <section class="panel" id="syncPanel" hidden><h2>Cihazlar arası eşitleme</h2><p id="syncStatus" role="status"></p>
+ <details class="syncdata"><summary>Eşitlemeyi açarsan Cloudflare’a neler gider?</summary><ul><li>Profilin: yaş, boy, kilo, cinsiyet, hareket düzeyi, hedeflerin, alerjilerin ve seçtiğin sağlık durumları</li><li>Kişisel menün, öğün saatlerin, alışveriş listen ve öneri geçmişin</li><li>Yemek, su ve kilo günlüğün ile günlük hedef özetlerin</li></ul><p>Bunlar Sofra’nın Cloudflare D1 veritabanında, Google hesabına bağlı Sofra hesabında saklanır. <strong>Gitmeyenler:</strong> aile profilleri, su bildirimi aboneliğin, tarif kutusu ve bu cihazdaki yedekler. Eşitlemeyi kapatmak yeni gönderimleri durdurur; sunucudaki kaydı silmek için aşağıdaki silme düğmesini kullan.</p></details>
+ <div id="syncSetup" hidden><p id="remoteInfo"></p><label class="checklabel"><input id="syncConsent" type="checkbox">Yukarıdaki kayıtlarımın Cloudflare’da hesabımla saklanmasına ve cihazlarım arasında eşitlenmesine izin veriyorum</label><div class="buttonrow"><button class="secondary" id="uploadState">Bu cihazdaki kayıtları hesaba yükle</button><button class="secondary" id="downloadState">Hesabımdaki kayıtları bu cihaza indir</button></div><p class="hint">İndirmeden önce bu cihazdaki kayıtların yedeklenir. Hesabında kayıt varsa üzerine yazmadan önce sorarız.</p></div>
+ <div id="syncLinked" hidden class="buttonrow"><button class="secondary" id="syncNow">Şimdi eşitle</button><button class="textlink" id="syncOff">Bu hesapta eşitlemeyi kapat</button></div>
+ <div id="syncConflict" hidden class="buttonrow"><button class="secondary" id="takeRemote">Hesabımdakini kullan</button><button class="secondary" id="takeLocal">Bu cihazdakini hesaba yaz</button></div>
+ <button class="textlink" id="restoreBackup" hidden>Eşitleme öncesi yerel yedeği geri yükle</button>
+ <button class="textlink dangerlink" id="deleteAccount">Sunucudaki Sofra hesabımı ve kayıtlarımı sil</button></section>
+ <section class="panel"><h2>Henüz gelmeyenler</h2><p>Otomatik günlük menü, öğün bildirimleri, aile paylaşımı ve günlük raporlar bu sürümde yok. Açıldıklarında ayrıca izin isteyeceğiz.</p></section>
+ <p class="formerror" id="accountError" role="alert"></p>`;
  const bind=()=>{
-  const q=s=>document.querySelector(s),run=fn=>async e=>{e?.preventDefault();try{q('#accountError').textContent='';await fn(e)}catch(err){q('#accountError').textContent=err.message}};
-  connectCloud().then(c=>{if(ui.page!=='account')return;q('#cloudControls').disabled=false;q('#cloudStatus').textContent=c.instance.currentUser?'Giriş yapıldı: '+c.instance.currentUser.email:'Sunucu hazır; hesabına giriş yap.'}).catch(e=>{if(ui.page==='account')q('#cloudStatus').textContent=e.message});
-  q('#authForm').onsubmit=run(async e=>{const f=new FormData(e.target),r=await login(f.get('email'),f.get('password'),e.submitter.value==='create');e.target.reset();toast(r.verify?'Doğrulama e-postanı kontrol et.':'Giriş yapıldı.');render()});
-  q('#signOut').onclick=run(async()=>{await logout();clearLink();ui.syncUid=null;ui.syncRevision=null;ui.syncEnabled=false;render()});
-  const payload=()=>{const {reports,cloudSettings,family,...local}=state;return local};
+  const q=s=>document.querySelector(s),show=(s,on)=>{const el=q(s);if(el)el.hidden=!on};
+  const error=msg=>{const el=q('#accountError');if(el)el.textContent=msg||''};
+  const run=fn=>async e=>{e?.preventDefault();const b=e?.currentTarget;error('');if(b)b.disabled=true;try{await fn(e)}catch(err){error(err.message)}finally{if(b?.isConnected)b.disabled=false}};
+  let meta=null;
+  const paint=status=>{
+   if(!q('#syncStatus'))return;
+   const s=readSession(),link=readLink(),mine=Boolean(s&&link?.uid===s.accountId);
+   q('#syncStatus').textContent=statusText(status)||(mine?'Eşitleme açık.':'');
+   const conflict=mine&&['conflict','missing'].includes(status.kind);
+   show('#syncConflict',conflict);if(q('#takeRemote'))q('#takeRemote').hidden=status.kind==='missing';
+   show('#syncLinked',mine&&!conflict&&meta?.sync.enabled!==false);
+   show('#syncSetup',!mine||meta?.sync.enabled===false);
+   show('#restoreBackup',cloudSync.hasBackup());
+   if(meta&&q('#remoteInfo'))q('#remoteInfo').textContent=(link&&!mine?'Bu cihazdaki kayıtlar daha önce başka bir Google hesabıyla eşitlendi; bu hesaba ancak sen seçersen yüklenir. ':'')+(meta.sync.hasState?'Hesabında kayıt var'+(meta.sync.updatedAt?' (son değişiklik '+new Date(meta.sync.updatedAt).toLocaleString('tr-TR',{dateStyle:'short',timeStyle:'short'})+')':'')+'.':'Hesabında henüz kayıt yok.');
+  };
+  detach?.();detach=cloudSync.onStatus(paint);
+  const refresh=async()=>{
+   const config=await accountConfig().catch(()=>null);
+   if(!q('#accountStatus'))return;
+   if(!accountReady(config)){q('#accountStatus').textContent='Hesap sunucusu henüz yayında değil. Kayıtların bu cihazda saklanmaya devam ediyor.';return}
+   const s=readSession();
+   if(!s){
+    q('#accountStatus').textContent='Giriş yapılmadı.';show('#signedInActions',false);show('#syncPanel',false);
+    renderGoogleButton(q('#googleButton'),{
+     onSignedIn:acc=>{cloudSync.reset();toast('Giriş yapıldı: '+acc.email);cloudSync.restore().catch(()=>{});render()},
+     onError:e=>{error(e.message);refresh()}
+    }).catch(e=>{if(q('#accountStatus'))q('#accountStatus').textContent=e.message});
+    return;
+   }
+   q('#googleButton').replaceChildren();
+   q('#accountStatus').textContent='Giriş yapıldı: '+s.email;show('#signedInActions',true);show('#syncPanel',true);
+   paint(cloudSync.describe());
+   try{meta=await api('/account')}catch(e){if(e.status===401){render();return}error(e.message)}
+   paint(cloudSync.status());
+  };
+  refresh();
+  const consent=()=>{if(!q('#syncConsent').checked)throw Error('Önce Cloudflare’da saklama iznini işaretle.')};
+  const hasLocal=()=>Boolean(state.profile||state.plan||state.tracking?.entries?.length||state.basket?.length);
+  q('#signOut').onclick=run(async()=>{const r=await signOut();cloudSync.reset();toast(r.revoked?'Çıkış yapıldı. Kayıtların bu cihazda duruyor.':'Bu cihazda çıkış yapıldı. Sunucuya ulaşılamadığı için oturum anahtarı en geç 30 gün içinde kendiliğinden geçersiz olacak.');render()});
+  q('#signOutAll').onclick=run(async()=>{
+   const r=await signOut({everywhere:true});
+   if(r.revoked){cloudSync.reset();toast('Tüm cihazlarda oturum kapatıldı.');render();return}
+   // Never report success without the server's confirmation: other devices may still be signed in.
+   if(r.reason==='session'){cloudSync.reset();render();throw Error('Bu cihazdaki oturum zaten geçersizdi; diğer cihazlar kapatılamadı. Yeniden giriş yapıp “Tüm cihazlarda çıkış yap”ı tekrar dene.')}
+   throw Error(r.reason==='offline'?'İnternete bağlı değilsin; diğer cihazlardaki oturumlar kapatılamadı. Bu cihazda oturumun açık kaldı, bağlanınca tekrar dene.':'Sunucu diğer cihazlardaki oturumları kapatamadı. Bu cihazda oturumun açık kaldı; biraz sonra tekrar dene.');
+  });
   q('#uploadState').onclick=run(async()=>{
-   if(!q('#syncConsent').checked)throw Error('Eşitleme tercihini önce aç.');
-   const c=await connectCloud(),remote=await cloudCall('get');
-   if(remote.state)throw Error('Hesabında kayıt var. Üzerine yazmamak için önce hesaptaki kaydı yükle.');
-   const result=await cloudCall('sync',{revision:remote.revision,state:payload()});ui.syncRevision=result.revision;ui.syncUid=c.instance.currentUser.uid;ui.syncEnabled=true;state.cloudSettings={...settings,sync:true};writeLink(ui.syncUid,ui.syncRevision,state);save();toast('Cihaz hesabına bağlandı.');render();
+   consent();const s=readSession(),link=readLink();
+   if(link&&link.uid!==s?.accountId&&!confirm('Bu cihazdaki kayıtlar daha önce başka bir Google hesabıyla eşitlendi. Yine de bu hesaba yüklensin mi?'))return;
+   try{await cloudSync.connect('upload')}
+   catch(e){if(e.code!=='remote-exists')throw e;if(!confirm('Hesabında zaten kayıt var. Hesaptaki kayıt bu cihazdakiyle değiştirilsin mi? (Hesaptakini korumak için “indir” seçeneğini kullan.)'))return;await cloudSync.connect('upload',{replaceRemote:true})}
+   toast('Bu cihaz hesabınla eşitleniyor.');render();
   });
   q('#downloadState').onclick=run(async()=>{
-   if(!q('#syncConsent').checked)throw Error('Eşitleme tercihini önce aç.');
-   const c=await connectCloud(),remote=await cloudCall('get');if(!remote.state)throw Error('Hesabında henüz kayıt yok. Bu cihazı bağlayabilirsin.');
-   localStorage.setItem('sofra-before-cloud',JSON.stringify(state));
-   const localFamily=state.family;for(const k of Object.keys(state))delete state[k];Object.assign(state,remote.state,{family:localFamily,reports:remote.reports||{},cloudSettings:remote.settings||{sync:true}});
-   ui.syncUid=c.instance.currentUser.uid;ui.syncRevision=remote.revision;ui.syncEnabled=true;writeLink(ui.syncUid,ui.syncRevision,state);save();render();toast('Hesabındaki kayıt yüklendi.');
+   consent();if(hasLocal()&&!confirm('Bu cihazdaki Sofra kayıtları hesabındakiyle değiştirilecek. Önce yerel yedek alınır. Devam edilsin mi?'))return;
+   await cloudSync.connect('download');toast('Hesabındaki kayıtlar yüklendi.');render();
   });
-  q('#hourlyWater').onclick=()=>q('[name=waterTimes]').value=DEFAULT_WATER_TIMES.join(', ');
-  q('#reminderForm').onsubmit=run(async e=>{
-   const f=new FormData(e.target),waterTimes=String(f.get('waterTimes')).split(',').map(s=>s.trim()).filter(Boolean);
-   if(waterTimes.length>24||waterTimes.some(t=>!/^([01]\d|2[0-3]):[0-5]\d$/.test(t)))throw Error('En fazla 24 saat gir: 10:00, 14:00 gibi.');
-   const next={sync:q('#syncConsent').checked,reports:q('#reportConsent').checked,autoMenu:q('#autoMenu').checked,morning:f.get('morning'),waterTimes:[...new Set(waterTimes)]};
-   if(next.reports&&!next.sync)throw Error('Rapor paylaşımı için eşitleme açık olmalı.');
-   await cloudCall('settings',{settings:next});state.cloudSettings=next;if(!next.sync)ui.syncEnabled=false;save();toast('Tercihler sunucuya kaydedildi.');render();
-  });
-  q('#pushOn').onclick=run(async()=>{await enablePush();toast('Bildirim aboneliğin sunucuya kaydedildi. Test gönderebilirsin.')});
-  q('#pushOff').onclick=run(async()=>{await disablePush();toast('Bu cihazın aboneliği kapatıldı.')});
-  q('#pushTest').onclick=run(async()=>{await cloudCall('testPush');toast('Test gönderme isteği işlendi; telefonunu kontrol et.')});
+  q('#syncNow').onclick=run(async()=>{await cloudSync.restore()});
+  q('#syncOff').onclick=run(async()=>{await cloudSync.disable();toast('Eşitleme kapatıldı. Kayıtların bu cihazda kalır.');render()});
+  q('#takeRemote').onclick=run(async()=>{if(!confirm('Bu cihazdaki eşitlenmemiş değişiklikler yerine hesabındaki kayıt kullanılacak. Önce yerel yedek alınır. Devam edilsin mi?'))return;await cloudSync.connect('download');render()});
+  q('#takeLocal').onclick=run(async()=>{if(!confirm('Hesabındaki kayıt bu cihazdakiyle değiştirilecek. Diğer cihazın son değişiklikleri hesaptan kalkar. Devam edilsin mi?'))return;await cloudSync.connect('upload',{replaceRemote:true});render()});
+  q('#restoreBackup').onclick=run(async()=>{if(!confirm('Eşitleme öncesi yedek bu cihaza geri yüklenecek ve bu cihazda eşitleme duracak. Devam edilsin mi?'))return;await cloudSync.restoreBackup();toast('Yerel yedek geri yüklendi.');render()});
+  q('#deleteAccount').onclick=run(async()=>{if(!confirm('Sunucudaki Sofra hesabın, oturumların ve eşitlenen kayıtların kalıcı olarak silinecek. Bu cihazdaki kayıtlar kalır. Devam edilsin mi?'))return;cloudSync.reset();await deleteAccount();cloudSync.forget();toast('Sunucudaki hesabın silindi.');render()});
  };
  return {html,bind};
 }
