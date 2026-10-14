@@ -1,5 +1,5 @@
 import {accountConfig,accountReady,readSession,renderGoogleButton,signOut,deleteAccount,api} from './cloud.mjs?v=16';
-import {readLink,statusText} from './sync.mjs?v=16';
+import {readLink,statusText} from './sync.mjs?v=21';
 import {readFamilyInvitation} from './invitation.mjs';
 let detach=null;
 export function account(host){

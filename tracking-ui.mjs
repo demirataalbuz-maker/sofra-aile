@@ -1,4 +1,4 @@
-import {bindWaterPush} from './water-push.mjs?v=19';
+import {bindWaterPush} from './water-push.mjs?v=21';
 import {waterPanel} from './water-ui.mjs?v=13';
 import {numeric} from './tracking.mjs?v=13';
 import {planningBlock} from './health.mjs?v=11';

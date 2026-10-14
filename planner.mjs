@@ -67,6 +67,7 @@ export function matchingAllergens(r,ingredients,allergies=[]){
 }
 export function allowed(r,ingredients,allergies=[]){
   if(!r||!r.macros||!Number.isFinite(+r.macros.kcal))return false;
+  if((r.items||[]).some(([id])=>ingredients[id]?.nutrition?.verification==='unverified'))return false;
   return matchingAllergens(r,ingredients,allergies).length===0;
 }
 export function totals(entries,byId){
@@ -156,6 +157,15 @@ export function buildPlan(recipes,ingredients,p,random=Math.random,locked={},avo
       const subset=buildPlan(recipes,ingredients,p,random,locked,avoid,{...options,subsetSearch:true,cooking:{...options.cooking,maxMinutes:minutes}});
       if(subset){consider(subset);if(best)break;}
     }
+  }
+  if(!best&&!options.subsetSearch&&options.cooking?.style!=='easy'){
+    const simpler=buildPlan(recipes,ingredients,p,random,locked,avoid,{...options,subsetSearch:true,cooking:{...options.cooking,style:'easy'}});
+    if(simpler)consider(simpler);
+  }
+  // Variety is a preference, not a reason to reject all feasible meals.
+  if(!best&&!options.historyRetry&&Object.keys(history).length){
+    const repeated=buildPlan(recipes,ingredients,p,random,locked,avoid,{...options,history:{},historyRetry:true});
+    if(repeated)consider(repeated);
   }
   return best;
 }

@@ -3,8 +3,8 @@
 // Lunch and dinner: every participant gets the same main dish and, if any, the same side dish; only portions differ.
 // Breakfast and snack: personal. Each participant's own day is checked against their own targets; targets are never
 // averaged or loosened. If no plan fits, the search reports failure and nothing is changed.
-import {SLOTS,mealItems,mealTimes} from './planner.mjs?v=20';
-import {requirementsError,requirementsStatus} from './family-requirements.mjs?v=19';
+import {SLOTS,mealItems,mealTimes} from './planner.mjs?v=21';
+import {requirementsError,requirementsStatus} from './family-requirements.mjs?v=21';
 import {cookingInfo,cookingAllowed,cookingFits,cookingPreferences} from './cooking.mjs?v=11';
 import {selectedSeason,seasonalAffinity} from './seasons.mjs?v=6';
 

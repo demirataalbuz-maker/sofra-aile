@@ -1,7 +1,7 @@
 import {compactState,expandState} from './snapshots.mjs?v=16';
 const key='sofra-cloud-link-v1',backupKey='sofra-before-cloud';
 // Family profiles, reports and device settings never leave the device through account sync.
-export function localPayload(state){const {reports,cloudSettings,family,...data}=state;return data}
+export function localPayload(state){const {reports,cloudSettings,family,weekly,...data}=state;return data}
 export function syncDecision(local,link,remote){
  if(!remote.state)return 'missing';
  const dirty=JSON.stringify(local)!==link.baseline;
