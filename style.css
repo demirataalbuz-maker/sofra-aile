@@ -20,3 +20,4 @@
 
 .waterreminder{margin:18px 0;padding:14px;border:1px solid #dfded1;background:#fffaf0;border-radius:12px;font-size:14px}.waterreminder p{line-height:1.5}
 .googlebutton{min-height:44px;margin:12px 0}.syncdata{margin:12px 0;font-size:14px;line-height:1.5}.syncdata summary{cursor:pointer;font-weight:800}.syncdata ul{padding-left:20px}.dangerlink{display:block;margin-top:16px;color:#8a1f12}#syncStatus{font-weight:700}.buttonrow[hidden]{display:none}
+.inboxnotice{padding:12px 14px;border-radius:12px;background:#fdf1e4;border:1px solid #e7cdb2;font-size:14px;line-height:1.5}.inboxcheck ul{padding-left:18px;margin:6px 0;font-size:14px}.inboxdraft{margin-top:14px;padding:14px;border:1px solid #e8ddd1;border-radius:14px;background:#fffaf4}.inboxdraft h3{margin:0 0 4px}.inboxdraft .buttonrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
