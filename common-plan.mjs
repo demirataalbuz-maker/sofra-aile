@@ -4,7 +4,7 @@
 // Breakfast and snack: personal. Each participant's own day is checked against their own targets; targets are never
 // averaged or loosened. If no plan fits, the search reports failure and nothing is changed.
 import {SLOTS,mealItems,mealTimes} from './planner.mjs?v=11';
-import {requirementsError,requirementsStatus} from './family-requirements.mjs?v=17';
+import {requirementsError,requirementsStatus} from './family-requirements.mjs?v=18';
 import {cookingInfo,cookingAllowed,cookingFits,cookingPreferences} from './cooking.mjs?v=11';
 import {selectedSeason,seasonalAffinity} from './seasons.mjs?v=6';
 

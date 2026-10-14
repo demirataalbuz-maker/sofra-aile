@@ -4,7 +4,7 @@ import {selectedSeason,seasonalAffinity} from './seasons.mjs?v=6';
 import {validDate} from './tracking.mjs?v=9';
 import {cookingAllowed,cookingFits,cookingPreferences} from './cooking.mjs?v=11';
 
-import {memberRequirements,requirementsError,requirementsStatus} from './family-requirements.mjs?v=17';
+import {memberRequirements,requirementsError,requirementsStatus} from './family-requirements.mjs?v=18';
 const KEYS=['kcal','protein','carbs','fat'], PORTIONS=[.5,.75,1,1.25,1.5,2];
 export function familyState(value){
   return {members:Array.isArray(value?.members)?value.members.filter(m=>typeof m?.id==='string'&&typeof m.name==='string'&&m.profile).slice(0,6):[],plan:value?.plan||null,history:value?.history||{}};

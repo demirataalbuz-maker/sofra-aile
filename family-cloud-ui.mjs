@@ -3,10 +3,10 @@ import {readFamilyInvitation,clearFamilyInvitation} from './invitation.mjs';
 import {mealItems,orderedSlots,totals,rememberRecommendations} from './planner.mjs?v=11';
 import {dateKey} from './tracking.mjs?v=13';
 import {cookingFields,cookingPreferences,cookingSummary} from './cooking.mjs?v=11';
-import {planningRequirements} from './family-requirements.mjs?v=17';
-import {SHARED_SLOTS,preparedPortions} from './common-plan.mjs?v=17';
-import {personalFromCommon} from './family-cloud.mjs?v=17';
-import {familyIngredients} from './family.mjs?v=17';
+import {planningRequirements} from './family-requirements.mjs?v=18';
+import {SHARED_SLOTS,preparedPortions} from './common-plan.mjs?v=18';
+import {personalFromCommon} from './family-cloud.mjs?v=18';
+import {familyIngredients} from './family.mjs?v=18';
 const ALLERGEN_LABELS={milk:'süt',egg:'yumurta',gluten:'gluten',nuts:'kuruyemiş',peanut:'yer fıstığı',soy:'soya',sesame:'susam',fish:'balık',mustard:'hardal'};
 const COMMON_TIMEOUT=25000;
 async function loadFamilyCatalog(){
@@ -45,7 +45,7 @@ export function bindFamilyCloud(host){
     const shared=SHARED_SLOTS.includes(slot),ids=Object.keys(plan.entries);
     return `<div class="cloudmeal"><h4>${esc(plan.times[slot])} · ${label}${shared?' · ortak':''}</h4>${shared?prep[slot].map((e,i)=>dish(e,`${i?'Yan yemek · ':''}Toplam hazırlanacak: ${portion(e.portion)} porsiyon · Yapılışını gör →`)).join('')+`<ul class="commonparts">${ids.map(id=>`<li><strong>${esc(names.get(id)||'Ayrılmış üye')}</strong>: ${mealItems(plan.entries[id][slot]).map(e=>portion(e.portion)+' porsiyon '+esc(byId.get(e.id)?.title||'')).join(' + ')}</li>`).join('')}</ul>`:ids.map(id=>{const e=mealItems(plan.entries[id][slot])[0];return dish(e,`${esc(names.get(id)||'Ayrılmış üye')} · ${portion(e.portion)} porsiyon · Yapılışını gör →`)}).join('')}</div>`;
    }).join('')}<ul class="commonparts">${Object.keys(plan.entries).map(id=>`<li><strong>${esc(names.get(id)||'Ayrılmış üye')}</strong> günlük toplam: ${Object.values(plan.entries[id]).flatMap(mealItems).every(e=>byId.has(e.id))?line(totals(plan.entries[id],byId)):'tarif verisi eksik'}</li>`).join('')}</ul>
-   <div class="buttonrow">${mine?`<button class="primary" id="commonApply" ${busy||profileIssue?'disabled':'}>Bugün menüme uygula</button>`:''}<button class="secondary" id="commonBasket" ${busy}>Ortak alışveriş listesini ekle</button></div>
+   <div class="buttonrow">${mine?`<button class="primary" id="commonApply" ${busy||profileIssue?'disabled':''}>Bugün menüme uygula</button>`:''}<button class="secondary" id="commonBasket" ${busy}>Ortak alışveriş listesini ekle</button></div>
    <p class="hint">Uygulayınca yalnızca senin porsiyonların, güncel profilin ve alerjenlerinle yeniden kontrol edilerek Bugün menüne yazılır. Öğle ve akşamı orada değiştirmek ortak menüden ayrılmanı gerektirir.</p>`:''}
   </section>`;
  }
@@ -106,7 +106,7 @@ export function bindFamilyCloud(host){
    pending=false;if(!active())return;
    computing=true;message='Herkesin günlük hedefi ayrı kontrol ediliyor…';paint();
    let job;
-   try{job=worker=new Worker(new URL('./family-worker.mjs?v=17',import.meta.url),{type:'module'})}catch{stopWorker();message='Bu tarayıcıda hesaplama başlatılamadı.';paint();return}
+   try{job=worker=new Worker(new URL('./family-worker.mjs?v=18',import.meta.url),{type:'module'})}catch{stopWorker();message='Bu tarayıcıda hesaplama başlatılamadı.';paint();return}
    timer=setTimeout(()=>{if(worker!==job)return;stopWorker();message='Hesaplama süre sınırını aştı; mevcut menü korundu. Tekrar dene veya süre/zorluk tercihini değiştir.';if(active())paint()},COMMON_TIMEOUT);
    job.onerror=()=>{if(worker!==job)return;stopWorker();message='Hesaplama başlatılamadı. Sayfayı yenileyip tekrar dene.';if(active())paint()};
    job.onmessage=async({data})=>{

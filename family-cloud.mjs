@@ -1,8 +1,8 @@
 import {SLOTS,mealItems,mealTimes,profileError,allowed,targetStatus} from './planner.mjs?v=11';
 import {planningBlock} from './health.mjs?v=11';
 import {validDate} from './tracking.mjs?v=13';
-import {planningRequirements} from './family-requirements.mjs?v=17';
-import {SHARED_SLOTS} from './common-plan.mjs?v=17';
+import {planningRequirements} from './family-requirements.mjs?v=18';
+import {SHARED_SLOTS} from './common-plan.mjs?v=18';
 export function menuForSharing(state){
  if(!validDate(state?.plan?.date)||!state.plan.entries)return null;
  const entries={};

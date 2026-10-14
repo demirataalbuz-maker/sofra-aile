@@ -1,9 +1,9 @@
 import {cookingFields,cookingPreferences,cookingSummary,cookingLabel} from './cooking.mjs?v=11';
-import {familyState,participating,familyError,familyHash,validFamilyPlan,menuExport,readSharedMenu,familyIngredients} from './family.mjs?v=17';
+import {familyState,participating,familyError,familyHash,validFamilyPlan,menuExport,readSharedMenu,familyIngredients} from './family.mjs?v=18';
 import {mealItems,orderedSlots,totals,estimate,rememberRecommendations} from './planner.mjs?v=11';
 import {planningBlock} from './health.mjs?v=11';
 import {dateKey} from './tracking.mjs?v=9';
-import {bindFamilyCloud} from './family-cloud-ui.mjs?v=17';
+import {bindFamilyCloud} from './family-cloud-ui.mjs?v=18';
 
 export function familyView(host){
  const {state,ui,catalog,esc,fmt,save,render,toast,openDetail}=host;
@@ -42,7 +42,7 @@ export function familyView(host){
    e.preventDefault();const values=new FormData(e.target),cooking=cookingPreferences({style:values.get('cookingStyle'),maxMinutes:values.get('cookingMinutes')});ui.familyCookingDraft=cooking;
    if(ui.familyBusy||error)return;const snapshot=familyHash(members),day=dateKey();ui.familyBusy=true;ui.familyMessage='Herkesin hedefini ayrı kontrol ediyoruz.';
    try{
-    const worker=ui.familyWorker=new Worker(new URL('./family-worker.mjs?v=17',import.meta.url),{type:'module'});
+    const worker=ui.familyWorker=new Worker(new URL('./family-worker.mjs?v=18',import.meta.url),{type:'module'});
     worker.onmessage=({data})=>{if(ui.familyWorker!==worker)return;cancel();const active=participating(state.family);
      if(snapshot!==familyHash(active)||day!==dateKey()){ui.familyMessage='Profiller veya gün değişti. Yeniden menü oluştur.';}
      else if(data.plan&&validFamilyPlan(data.plan,active,catalog.recipes,catalog.ingredients)){
