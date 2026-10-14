@@ -1,6 +1,6 @@
 import {readSession,accountConfig,accountReady} from './cloud.mjs?v=16';
 import {readFamilyInvitation,clearFamilyInvitation} from './invitation.mjs';
-import {mealItems,orderedSlots,totals,rememberRecommendations} from './planner.mjs?v=19';
+import {mealItems,orderedSlots,totals,rememberRecommendations} from './planner.mjs?v=20';
 import {dateKey} from './tracking.mjs?v=13';
 import {cookingFields,cookingPreferences,cookingSummary} from './cooking.mjs?v=11';
 import {planningRequirements} from './family-requirements.mjs?v=19';
