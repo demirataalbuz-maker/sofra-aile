@@ -1,21 +1,22 @@
-import {SLOTS,profileError,estimate,allowed,mealItems,targetStatus,totals,mealTimes} from './planner.mjs?v=11';
+import {SLOTS,profileError,allowed,mealItems,mealTimes} from './planner.mjs?v=11';
 import {planningBlock} from './health.mjs?v=11';
 import {selectedSeason,seasonalAffinity} from './seasons.mjs?v=6';
 import {validDate} from './tracking.mjs?v=9';
 import {cookingAllowed,cookingFits,cookingPreferences} from './cooking.mjs?v=11';
 
+import {memberRequirements,requirementsError,requirementsStatus} from './family-requirements.mjs?v=17';
 const KEYS=['kcal','protein','carbs','fat'], PORTIONS=[.5,.75,1,1.25,1.5,2];
 export function familyState(value){
   return {members:Array.isArray(value?.members)?value.members.filter(m=>typeof m?.id==='string'&&typeof m.name==='string'&&m.profile).slice(0,6):[],plan:value?.plan||null,history:value?.history||{}};
 }
 export const participating=family=>family.members.filter(m=>m.included!==false);
-export const familyHash=members=>JSON.stringify(members.map(({id,name,profile})=>({id,name,profile})));
+export const familyHash=members=>JSON.stringify(members.map(({id,name,profile,requirements})=>requirements?{id,name,requirements}:{id,name,profile}));
 export function familyError(members){
   if(members.length<2||members.length>6)return 'Ortak menü için 2–6 yetişkin seç.';
   if(new Set(members.map(m=>m.id)).size!==members.length)return 'Aile profilleri tekrar ediyor.';
   for(const m of members){
     if(!m.name?.trim())return 'Her aile üyesine bir ad veya takma ad ver.';
-    const error=profileError(m.profile)||planningBlock(m.profile);if(error)return m.name+': '+error;
+    const error=m.requirements?requirementsError(m.requirements):profileError(m.profile)||planningBlock(m.profile);if(error)return m.name+': '+error;
   }
   return '';
 }
@@ -24,8 +25,8 @@ function verified(r,ingredients,allergies){
     &&r.items?.length>0&&r.items.every(([id])=>ingredients[id]?.nutrition?.verification==='source-checked');
 }
 const vector=r=>KEYS.map(k=>r.macros[k]);
-function bounds(p){return p.mode==='macro'?[1,2,3].map(i=>({i,min:KEYS[i]===p.priority?p[KEYS[i]]*.9:0,max:p[KEYS[i]]*1.1})): [{i:0,min:estimate(p).target*.9,max:estimate(p).target*1.1}];}
-function distance(v,p){const i=p.mode==='macro'?KEYS.indexOf(p.priority):0,t=p.mode==='macro'?+p[p.priority]:estimate(p).target;return Math.abs(v[i]-t)/Math.max(t,1);}
+function bounds(p){return p.mode==='macro'?[1,2,3].map(i=>({i,min:KEYS[i]===p.priority?p[KEYS[i]]*.9:0,max:p[KEYS[i]]*1.1})): [{i:0,min:p.target*.9,max:p.target*1.1}];}
+function distance(v,p){const i=p.mode==='macro'?KEYS.indexOf(p.priority):0,t=p.mode==='macro'?+p[p.priority]:p.target;return Math.abs(v[i]-t)/Math.max(t,1);}
 function fitMember(mains,sides,p){
   const vs=mains.map(vector),checks=bounds(p),valid=v=>checks.every(c=>v[c.i]>=c.min-1e-6&&v[c.i]<=c.max+1e-6);
   let best=null,bestScore=Infinity;const near=[];
@@ -49,18 +50,20 @@ function fitMember(mains,sides,p){
 }
 export function validFamilyPlan(plan,members,recipes,ingredients){
   if(familyError(members)||!plan||plan.hash!==familyHash(members))return false;
-  const byId=new Map(recipes.map(r=>[r.id,r])),allergies=[...new Set(members.flatMap(m=>m.profile.allergies||[]))];
-  if(!cookingFits(SLOTS.map(([slot])=>members.flatMap(m=>mealItems(plan.entries?.[m.id]?.[slot]).map(e=>byId.get(e.id)))),plan.cooking))return false;
+  const byId=new Map(recipes.map(r=>[r.id,r])),allergies=[...new Set(members.flatMap(m=>memberRequirements(m).allergies))];
+  const shared=plan.sharedSlots||SLOTS.map(([slot])=>slot);
+  if(!Array.isArray(shared)||!shared.includes('lunch')||!shared.includes('dinner')||shared.some(s=>!SLOTS.some(([slot])=>slot===s)))return false;
+  if(!cookingFits(SLOTS.flatMap(([slot])=>shared.includes(slot)?[members.flatMap(m=>mealItems(plan.entries?.[m.id]?.[slot]).map(e=>byId.get(e.id)))]:members.map(m=>mealItems(plan.entries?.[m.id]?.[slot]).map(e=>byId.get(e.id)))),plan.cooking))return false;
   return members.every(m=>{
     const entries=plan.entries?.[m.id];
-    return SLOTS.every(([slot])=>{const items=mealItems(entries?.[slot]);return items.length>=1&&items.length<=2&&items[0].id===plan.common?.[slot]&&new Set(items.map(x=>x.id)).size===items.length&&items.every(e=>Number.isFinite(e.portion)&&e.portion>=.5&&e.portion<=2&&verified(byId.get(e.id),ingredients,allergies));})&&targetStatus(entries,byId,m.profile).ok;
+    return SLOTS.every(([slot])=>{const items=mealItems(entries?.[slot]);return items.length>=1&&items.length<=2&&(!shared.includes(slot)||items[0].id===plan.common?.[slot])&&(!plan.commonOnly||items.length===1)&&new Set(items.map(x=>x.id)).size===items.length&&items.every(e=>Number.isFinite(e.portion)&&e.portion>=.5&&e.portion<=2&&verified(byId.get(e.id),ingredients,allergies));})&&requirementsStatus(entries,byId,memberRequirements(m)).ok;
   });
 }
-export function buildFamilyPlan(recipes,ingredients,members,{random=Math.random,history={},now=Date.now(),attempts=90,cooking}={}){
+export function buildFamilyPlan(recipes,ingredients,members,{random=Math.random,history={},now=Date.now(),attempts=90,cooking,sharedSlots=SLOTS.map(([slot])=>slot),commonOnly=false}={}){
   const error=familyError(members);if(error)return {error};
-  const allergies=[...new Set(members.flatMap(m=>m.profile.allergies||[]))];
+  const allergies=[...new Set(members.flatMap(m=>memberRequirements(m).allergies))];
   const safe=recipes.filter(r=>verified(r,ingredients,allergies)&&cookingAllowed(r,cooking));
-  const rank=r=>members.reduce((sum,m)=>sum+seasonalAffinity(r,ingredients,selectedSeason(m.profile.seasonPreference,now)),0)*.1-(history[r.id]>now-7*86400000?1:0)+random();
+  const rank=r=>members.reduce((sum,m)=>sum+seasonalAffinity(r,ingredients,selectedSeason(memberRequirements(m).seasonPreference,now)),0)*.1-(history[r.id]>now-7*86400000?1:0)+random();
   const ranked=safe.map(r=>({r,rank:rank(r)})).sort((a,b)=>b.rank-a.rank).map(x=>x.r);
   const pools=SLOTS.map(([, ,cats])=>ranked.filter(r=>cats.includes(r.category)));
   if(pools.some(pool=>!pool.length))return {error:'Süre, zorluk, alerjen ve besin kaynağı koşullarını birlikte sağlayan ortak tarifler yetersiz. Kısıtlar değiştirilmedi; süre veya zorluk tercihini değiştirebilirsin.'};
@@ -70,8 +73,16 @@ export function buildFamilyPlan(recipes,ingredients,members,{random=Math.random,
     if(!cookingFits(mains.map(r=>[r]),cooking))continue;
     const sides=ranked.filter(r=>['Salata','Sebze','Çorba','Ara öğün'].includes(r.category)&&!mains.some(main=>main.id===r.id)).slice(0,35);
     const entries={};let ok=true;
-    for(const member of members){const fit=fitMember(mains,sides,member.profile);if(!fit){ok=false;break}entries[member.id]=fit.entries;}
-    if(ok){const plan={hash:familyHash(members),common:Object.fromEntries(SLOTS.map(([slot],i)=>[slot,mains[i].id])),entries,...(cooking?{cooking:cookingPreferences(cooking)}:{})};if(validFamilyPlan(plan,members,recipes,ingredients))return {plan};}
+    for(const member of members){
+      let fit=null;
+      for(let trial=0;trial<(sharedSlots.length===4?1:16)&&!fit;trial++){
+        const personal=mains.map((r,i)=>sharedSlots.includes(SLOTS[i][0])?r:pools[i][Math.floor(random()*Math.min(pools[i].length,24))]);
+        if(new Set(personal.map(r=>r.id)).size!==4)continue;
+        fit=fitMember(personal,commonOnly?[]:sides,memberRequirements(member));
+      }
+      if(!fit){ok=false;break}entries[member.id]=fit.entries;
+    }
+    if(ok){const plan={hash:familyHash(members),common:Object.fromEntries(SLOTS.filter(([slot])=>sharedSlots.includes(slot)).map(([slot])=>[slot,mains[SLOTS.findIndex(([s])=>s===slot)].id])),entries,sharedSlots,commonOnly,...(cooking?{cooking:cookingPreferences(cooking)}:{})};if(validFamilyPlan(plan,members,recipes,ingredients))return {plan};}
   }
   return {error:'Bu aramada herkesin günlük sınırını koruyan ortak menü bulunamadı. Hedefler ve alerjenler değiştirilmedi. Tekrar deneyebilir veya katılımcıları kendin değiştirebilirsin.'};
 }

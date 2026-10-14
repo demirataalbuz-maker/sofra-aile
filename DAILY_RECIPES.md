@@ -10,6 +10,8 @@ Tarif; benzersiz `daily-` önekli kimlik, Türkçe başlık ve açıklama, mevcu
 
 Kapak için tarifi doğru temsil eden özgün ya da açık lisansı doğrulanmış görsel kullan. Mevcut görsel ancak yemeği doğru temsil ediyorsa kullanılabilir. Fotoğrafın gerektiğinde temsili olduğu açık olmalı. Lisanslı görsellerin atıflarını `photo-credits.json` ve gerekiyorsa `kaynaklar.html` içinde tamamla. Hazırlık görsellerini yalnızca ilgili işlemi doğru gösteriyorsa eşleştir; ilgisiz görsel yerleştirme.
 
+Tarif ekledikten veya değiştirdikten sonra `node scripts/build_family_catalog.mjs` çalıştır ve oluşan `family-catalog.json` dosyasını tarifle birlikte commit et. Hesap sunucusu ailenin ortak menüsünü yalnızca bu dosyadaki doğrulanmış makrolarla kontrol eder; dosya güncel değilse yeni tarif ortak menüde kullanılamaz ve testler bunu yakalar. Günlük tarifleri silme; ana ve günlük katalog ayrımını koru.
+
 Değişiklikten önce Git durumunu kontrol et, başkasının tamamlanmamış çalışmasını dahil etme. `node --test tests/*.test.mjs` çalıştır. Malzeme birimlerini, porsiyon hesabını, alerjenleri, görsel dosyalarını, tarif adımlarını ve yeni tarifin açılmasını kontrol et. Yalnızca ilgili dosyaları commit edip mevcut `origin/main` üzerinden GitHub Pages'a yayımla. Gerekmedikçe uygulama kodunu değiştirme ve APK oluşturma. Yayın işinin başarısını ve canlı `daily-catalog.json` dosyasında tarifin bulunduğunu doğrula; yayın başarısızsa yeni bir tarif üretmek yerine mevcut eklemeyi kurtar.
 
 Canlı web sürümü: https://demirataalbuz-maker.github.io/sofra-aile/

@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {menuForSharing,createFamilyCloud} from '../family-cloud.mjs';
+import {planningRequirements} from '../family-requirements.mjs';
 import {captureInvitation,clearInvitation,readFamilyInvitation,clearFamilyInvitation} from '../invitation.mjs';
 const state=()=>({profile:{weight:90,allergies:['milk']},tracking:{entries:[{kind:'weight',kg:90}]},plan:{date:'2026-10-14',hash:'sensitive-profile',entries:Object.fromEntries(['breakfast','lunch','snack','dinner'].map(k=>[k,{id:'recipe-'+k,portion:1}]))},mealTimes:{breakfast:'08:00',lunch:'13:00',snack:'16:00',dinner:'19:00'}});
 const wait=()=>new Promise(r=>setTimeout(r,15));
@@ -15,8 +16,9 @@ function setup(){
    Object.assign(m,{revision:m.revision+1,shareMenu:payload.shareMenu,menu:payload.menu});return {revision:m.revision,shareMenu:m.shareMenu};
   }
  };
- const engine=createFamilyCloud({api,session:()=>current,getState:()=>data,delay:1,notify:x=>notices.push(x)});
- return {engine,calls,members,notices,api,session:()=>current,setSession:s=>current=s,getState:()=>data,setState:s=>data=s};
+ const values=new Map(),storage={getItem:k=>values.get(k),setItem:(k,v)=>values.set(k,v)};
+ const engine=createFamilyCloud({api,session:()=>current,getState:()=>data,delay:1,storage,notify:x=>notices.push(x)});
+ return {engine,calls,members,notices,api,storage,session:()=>current,setSession:s=>current=s,getState:()=>data,setState:s=>data=s};
 }
 test('only menu/time/portions are shared; family invitation remains after Google login for explicit acceptance',()=>{
  const menu=menuForSharing(state());assert.deepEqual(Object.keys(menu).sort(),['date','entries','times']);assert.ok(!JSON.stringify(menu).includes('sensitive'));assert.ok(!JSON.stringify(menu).includes('milk'));
@@ -41,7 +43,7 @@ test('queued and in-flight A work never sends to B or changes B context',async()
  assert.equal(s.calls.filter(c=>c.path==='/family/share'&&c.account==='B').length,0);
  assert.equal(s.members.A.menu.entries.lunch.items[0].portion,1);
  const held=gate(),requested=gate();s.setSession({accountId:'A',token:'token-a'});
- const engine=createFamilyCloud({api:async(...args)=>{if(args[0]==='/family/share'){requested.resolve();await held.promise}return s.api(...args)},session:s.session,getState:s.getState,delay:1});
+ const engine=createFamilyCloud({api:async(...args)=>{if(args[0]==='/family/share'){requested.resolve();await held.promise}return s.api(...args)},session:s.session,getState:s.getState,delay:1,storage:s.storage});
  await engine.read();s.getState().plan.entries.lunch.portion=1.75;engine.queue();await requested.promise;s.setSession({accountId:'B',token:'token-b'});await engine.read();held.resolve();await wait();await engine.settled();
  s.getState().plan.entries.lunch.portion=2;engine.queue();await wait();assert.equal(s.calls.filter(c=>c.path==='/family/share'&&c.account==='B').length,0);
 });
@@ -55,4 +57,41 @@ test('old group read cannot overwrite newer group read',async()=>{
  const s=setup(),hold=gate();let calls=0;
  const engine=createFamilyCloud({api:async()=>{calls++;if(calls===1){await hold.promise;return {group:{members:[{id:'old',isSelf:true,shareMenu:true,revision:0}]}}}return {group:null}},session:s.session,getState:s.getState});
  const old=engine.read();await engine.read();hold.resolve();await assert.rejects(()=>old,/değişti/);
+});
+
+test('B server consent cannot automatically upload A local menu on the shared device',async()=>{
+ const s=setup();await s.engine.read();await s.engine.setSharing(true);
+ s.members.B.shareMenu=true;s.members.B.menu={date:'2026-10-14',entries:{}};
+ s.setSession({accountId:'B',token:'token-b'});await s.engine.read();
+ s.getState().plan.entries.lunch.portion=1.5;s.engine.queue();await wait();await s.engine.settled();
+ assert.equal(s.calls.filter(c=>c.path==='/family/share'&&c.account==='B').length,0);
+});
+
+test('existing B participation cannot copy A local calorie/allergen targets into B group',async()=>{
+ const s=setup();s.setState({...s.getState(),profile:{age:30,height:175,weight:80,sex:'male',activity:'light',goal:'maintain',mode:'calorie',calorieTarget:1800,allergies:['milk']}});
+ s.members.A.planning=null;s.members.A.planningRevision=0;
+ s.members.B.planning=planningRequirements({...s.getState().profile,calorieTarget:2500,allergies:[]});s.members.B.planningRevision=3;
+ const engine=createFamilyCloud({session:s.session,getState:s.getState,delay:1,storage:s.storage,api:async(path,data,options)=>{
+  if(path!=='/family/planning')return s.api(path,data,options);
+  s.calls.push({path,account:options.session.accountId,payload:data});const m=s.members[options.session.accountId];m.planning=data.requirements;m.planningRevision++;return {planning:m.planning,planningRevision:m.planningRevision};
+ }});
+ await engine.read();await engine.setParticipation(true);s.setSession({accountId:'B',token:'token-b'});await engine.read();
+ s.getState().profile.calorieTarget=2000;engine.queue();await wait();await engine.settled();
+ assert.equal(s.calls.filter(c=>c.path==='/family/planning'&&c.account==='B').length,0);
+ assert.equal(s.members.B.planning.target,2500);assert.deepEqual(s.members.B.planning.allergies,[]);
+});
+
+test('saving water with old local profile does not undo a goal updated on another device',async()=>{
+ const s=setup();s.setState({...s.getState(),profile:{age:30,height:175,weight:80,sex:'male',activity:'light',goal:'maintain',mode:'calorie',calorieTarget:1800,allergies:[]}});
+ s.members.A.planning=null;s.members.A.planningRevision=0;
+ const engine=createFamilyCloud({session:s.session,getState:s.getState,delay:1,storage:s.storage,api:async(path,data,options)=>{
+  if(path!=='/family/planning')return s.api(path,data,options);
+  s.calls.push({path,account:options.session.accountId,payload:data});const m=s.members[options.session.accountId];m.planning=data.requirements;m.planningRevision++;return {planning:m.planning,planningRevision:m.planningRevision};
+ }});
+ await engine.read();await engine.setParticipation(true);
+ s.members.A.planning=planningRequirements({...s.getState().profile,calorieTarget:2600});s.members.A.planningRevision++;
+ await engine.read();engine.queue();await wait();await engine.settled();
+ assert.equal(s.members.A.planning.target,2600);assert.equal(s.calls.filter(c=>c.path==='/family/planning').length,1);
+ s.getState().profile.calorieTarget=2000;engine.queue();await wait();await engine.settled();
+ assert.equal(s.members.A.planning.target,2000);assert.equal(s.calls.filter(c=>c.path==='/family/planning').length,2);
 });

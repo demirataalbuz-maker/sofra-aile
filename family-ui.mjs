@@ -1,21 +1,21 @@
 import {cookingFields,cookingPreferences,cookingSummary,cookingLabel} from './cooking.mjs?v=11';
-import {familyState,participating,familyError,familyHash,validFamilyPlan,menuExport,readSharedMenu,familyIngredients} from './family.mjs?v=11';
+import {familyState,participating,familyError,familyHash,validFamilyPlan,menuExport,readSharedMenu,familyIngredients} from './family.mjs?v=17';
 import {mealItems,orderedSlots,totals,estimate,rememberRecommendations} from './planner.mjs?v=11';
 import {planningBlock} from './health.mjs?v=11';
 import {dateKey} from './tracking.mjs?v=9';
-import {bindFamilyCloud} from './family-cloud-ui.mjs?v=16';
+import {bindFamilyCloud} from './family-cloud-ui.mjs?v=17';
 
 export function familyView(host){
  const {state,ui,catalog,esc,fmt,save,render,toast,openDetail}=host;
  const f=state.family=familyState(state.family),members=participating(f),byId=new Map(catalog.recipes.map(r=>[r.id,r]));
- const current=f.plan?.date===dateKey()&&validFamilyPlan(f.plan,members,catalog.recipes,catalog.ingredients),error=familyError(members);
+ const current=false,error=familyError(members);
  const portionFmt=n=>new Intl.NumberFormat('tr-TR',{maximumFractionDigits:2}).format(n);
  const line=t=>`${fmt(t.kcal)} kcal · ${fmt(t.protein)} g protein · ${fmt(t.carbs)} g karb. · ${fmt(t.fat)} g yağ`;
  const dish=(e,extra='')=>{const r=byId.get(e.id);return r?`<button class="familydish" data-family-recipe="${esc(e.id)}" data-portion="${e.portion}"><img src="./${esc(r.image)}" loading="lazy" alt=""><span><strong>${esc(r.title)}</strong><small>${extra}${portionFmt(e.portion)} porsiyon · Yapılışını gör →</small><small>${esc(cookingLabel(r))} · ${r.minutes} dk</small></span></button>`:`<p>${esc(e.title||e.id)} · ${portionFmt(e.portion)} porsiyon (tarif bu katalogda yok)</p>`;};
  const shared=ui.sharedFamilyMenu;
  const html=`<h1 class="heading">Aile grubum</h1><p class="lead">Aynı aile, ayrı hedefler. Herkes kendi telefonundan katılsın; paylaşılan menüleri burada görün.</p>
  <section class="panel" id="familyCloudRoot"></section>
- <details class="panel"><summary>Bu cihazda ortak yemek ve porsiyon planla</summary><div class="familyintro"><strong>Ortak yemek için bu cihazdaki profiller</strong><p>Buradaki profilleri bu cihazı kullanan herkes görebilir. Bu yerel profiller aile grubuna gönderilmez. Aşağıdaki araç ortak tarif için ayrı porsiyonlar hesaplar.</p></div>
+ <details class="panel" hidden><summary>Bu cihazdaki eski aile kayıtları</summary><div class="familyintro"><strong>Bu cihazdaki eski profiller</strong><p>Ortak yemek için yukarıdaki aile grubunu kullan. Önceki yerel kayıtların bu cihazda korunur.</p></div>
  <section class="panel"><div class="familyheading"><h2>Aile üyeleri</h2><span class="meta">${f.members.length}/6 yetişkin</span></div><p class="hint">Bilgilerini girmeden önce kişinin iznini al. Takma ad kullanabilirsin. Otomatik hesap 18–85 yaş içindir.</p>
  ${f.members.map(m=>`<article class="familymember"><label class="checklabel"><input type="checkbox" data-family-include="${esc(m.id)}" ${m.included!==false?'checked':''}><span><strong>${esc(m.name)}</strong><small>${planningBlock(m.profile)?'Otomatik hedef hesabı kapalı':m.profile.mode==='macro'?`${fmt(m.profile.protein)} g protein · ${fmt(m.profile.carbs)} g karb. · ${fmt(m.profile.fat)} g yağ`:`${fmt(estimate(m.profile).target)} kcal/gün`}</small>${planningBlock(m.profile)?'<small class="formerror">Sağlık kısıtı: otomatik menü desteklenmiyor.</small>':''}</span></label><div class="familyactions"><button class="textlink" data-family-edit="${esc(m.id)}">Düzenle</button><button class="textlink" data-family-delete="${esc(m.id)}">Kaldır</button></div></article>`).join('')||'<p>İlk aile üyesini ekleyerek başlayalım.</p>'}
  <div class="buttonrow"><button class="secondary" id="familyAdd" ${f.members.length>=6?'disabled':''}>+ Aile üyesi</button>${state.profile&&!f.members.some(m=>m.id==='self')?'<button class="secondary" id="familySelf">Profilimden ekle</button>':''}</div>
@@ -42,7 +42,7 @@ export function familyView(host){
    e.preventDefault();const values=new FormData(e.target),cooking=cookingPreferences({style:values.get('cookingStyle'),maxMinutes:values.get('cookingMinutes')});ui.familyCookingDraft=cooking;
    if(ui.familyBusy||error)return;const snapshot=familyHash(members),day=dateKey();ui.familyBusy=true;ui.familyMessage='Herkesin hedefini ayrı kontrol ediyoruz.';
    try{
-    const worker=ui.familyWorker=new Worker(new URL('./family-worker.mjs?v=11',import.meta.url),{type:'module'});
+    const worker=ui.familyWorker=new Worker(new URL('./family-worker.mjs?v=17',import.meta.url),{type:'module'});
     worker.onmessage=({data})=>{if(ui.familyWorker!==worker)return;cancel();const active=participating(state.family);
      if(snapshot!==familyHash(active)||day!==dateKey()){ui.familyMessage='Profiller veya gün değişti. Yeniden menü oluştur.';}
      else if(data.plan&&validFamilyPlan(data.plan,active,catalog.recipes,catalog.ingredients)){

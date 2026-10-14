@@ -3,7 +3,7 @@ import {readLink,statusText} from './sync.mjs?v=16';
 import {readFamilyInvitation} from './invitation.mjs';
 let detach=null;
 export function account(host){
- const {state,esc,render,toast,cloudSync}=host;
+ const {state,esc,render,toast,cloudSync,cloudFamily}=host;
  const html=`<h1 class="heading">Hesap ve eşitleme</h1><p class="lead">Sofra hesapsız çalışır. İstersen Google ile giriş yapıp kayıtlarını kendi cihazların arasında eşitleyebilirsin.</p>
  <section class="panel"><h2>Su hatırlatmaları</h2><p>Saatlik su bildirimleri hesaptan bağımsızdır; Takip bölümünden açıp kapatabilirsin.</p><button class="primary" data-page="tracking">Su bildirimlerine git →</button></section>
  <section class="panel"><h2>Google hesabı</h2><p>Deneme sürümüne ilk giriş için sana özel davet bağlantısını açıp kendi Google hesabını kullan. Davet, kişisel kayıtlarını aile üyelerine açmaz. Sonraki girişlerinde yeniden davet gerekmez.</p><p id="accountStatus" role="status">Kontrol ediliyor…</p><div id="googleButton" class="googlebutton"></div>
@@ -44,7 +44,7 @@ export function account(host){
    if(!s){
     q('#accountStatus').textContent='Giriş yapılmadı.';show('#signedInActions',false);show('#syncPanel',false);
     renderGoogleButton(q('#googleButton'),{
-     onSignedIn:acc=>{cloudSync.reset();toast('Giriş yapıldı: '+acc.email);cloudSync.restore().catch(()=>{});render()},
+     onSignedIn:acc=>{cloudSync.reset();cloudFamily?.reset();toast('Giriş yapıldı: '+acc.email);cloudSync.restore().catch(()=>{});render()},
      onError:e=>{error(e.message);refresh()}
     }).catch(e=>{if(q('#accountStatus'))q('#accountStatus').textContent=e.message});
     return;
@@ -58,12 +58,12 @@ export function account(host){
   refresh();
   const consent=()=>{if(!q('#syncConsent').checked)throw Error('Önce Cloudflare’da saklama iznini işaretle.')};
   const hasLocal=()=>Boolean(state.profile||state.plan||state.tracking?.entries?.length||state.basket?.length);
-  q('#signOut').onclick=run(async()=>{const r=await signOut();cloudSync.reset();toast(r.revoked?'Çıkış yapıldı. Kayıtların bu cihazda duruyor.':'Bu cihazda çıkış yapıldı. Sunucuya ulaşılamadığı için oturum anahtarı en geç 30 gün içinde kendiliğinden geçersiz olacak.');render()});
+  q('#signOut').onclick=run(async()=>{const r=await signOut();cloudSync.reset();cloudFamily?.reset();toast(r.revoked?'Çıkış yapıldı. Kayıtların bu cihazda duruyor.':'Bu cihazda çıkış yapıldı. Sunucuya ulaşılamadığı için oturum anahtarı en geç 30 gün içinde kendiliğinden geçersiz olacak.');render()});
   q('#signOutAll').onclick=run(async()=>{
    const r=await signOut({everywhere:true});
-   if(r.revoked){cloudSync.reset();toast('Tüm cihazlarda oturum kapatıldı.');render();return}
+   if(r.revoked){cloudSync.reset();cloudFamily?.reset();toast('Tüm cihazlarda oturum kapatıldı.');render();return}
    // Never report success without the server's confirmation: other devices may still be signed in.
-   if(r.reason==='session'){cloudSync.reset();render();throw Error('Bu cihazdaki oturum zaten geçersizdi; diğer cihazlar kapatılamadı. Yeniden giriş yapıp “Tüm cihazlarda çıkış yap”ı tekrar dene.')}
+   if(r.reason==='session'){cloudSync.reset();cloudFamily?.reset();render();throw Error('Bu cihazdaki oturum zaten geçersizdi; diğer cihazlar kapatılamadı. Yeniden giriş yapıp “Tüm cihazlarda çıkış yap”ı tekrar dene.')}
    throw Error(r.reason==='offline'?'İnternete bağlı değilsin; diğer cihazlardaki oturumlar kapatılamadı. Bu cihazda oturumun açık kaldı, bağlanınca tekrar dene.':'Sunucu diğer cihazlardaki oturumları kapatamadı. Bu cihazda oturumun açık kaldı; biraz sonra tekrar dene.');
   });
   q('#uploadState').onclick=run(async()=>{
@@ -82,7 +82,7 @@ export function account(host){
   q('#takeRemote').onclick=run(async()=>{if(!confirm('Bu cihazdaki eşitlenmemiş değişiklikler yerine hesabındaki kayıt kullanılacak. Önce yerel yedek alınır. Devam edilsin mi?'))return;await cloudSync.connect('download');render()});
   q('#takeLocal').onclick=run(async()=>{if(!confirm('Hesabındaki kayıt bu cihazdakiyle değiştirilecek. Diğer cihazın son değişiklikleri hesaptan kalkar. Devam edilsin mi?'))return;await cloudSync.connect('upload',{replaceRemote:true});render()});
   q('#restoreBackup').onclick=run(async()=>{if(!confirm('Eşitleme öncesi yedek bu cihaza geri yüklenecek ve bu cihazda eşitleme duracak. Devam edilsin mi?'))return;await cloudSync.restoreBackup();toast('Yerel yedek geri yüklendi.');render()});
-  q('#deleteAccount').onclick=run(async()=>{if(!confirm('Sunucudaki Sofra hesabın, oturumların ve eşitlenen kayıtların kalıcı olarak silinecek. Bu cihazdaki kayıtlar kalır. Devam edilsin mi?'))return;cloudSync.reset();await deleteAccount();cloudSync.forget();toast('Sunucudaki hesabın silindi.');render()});
+  q('#deleteAccount').onclick=run(async()=>{if(!confirm('Sunucudaki Sofra hesabın, oturumların ve eşitlenen kayıtların kalıcı olarak silinecek. Bu cihazdaki kayıtlar kalır. Devam edilsin mi?'))return;cloudSync.reset();cloudFamily?.reset();await deleteAccount();cloudSync.forget();toast('Sunucudaki hesabın silindi.');render()});
  };
  return {html,bind};
 }
