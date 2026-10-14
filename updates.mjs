@@ -1,5 +1,5 @@
 import {mergeCatalog} from './catalog.mjs?v=5';
-export const WEB_VERSION='19';
+export const WEB_VERSION='20';
 export function newerVersion(metadata,current=WEB_VERSION){
   return typeof metadata?.version==='string'&&/^\d+$/.test(metadata.version)&&Number.isSafeInteger(+metadata.version)&&+metadata.version>+current;
 }

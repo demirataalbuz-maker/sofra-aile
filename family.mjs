@@ -1,4 +1,4 @@
-import {SLOTS,profileError,allowed,mealItems,mealTimes} from './planner.mjs?v=19';
+import {SLOTS,profileError,allowed,mealItems,mealTimes} from './planner.mjs?v=20';
 import {planningBlock} from './health.mjs?v=11';
 import {selectedSeason,seasonalAffinity} from './seasons.mjs?v=6';
 import {validDate} from './tracking.mjs?v=9';

@@ -6,6 +6,22 @@ import {SLOTS,buildPlan,replacementOptions,validReplacement,targetStatus,mealIte
 import {buildFamilyPlan,validFamilyPlan} from '../family.mjs';
 const profile={age:35,height:170,weight:70,sex:'female',activity:'light',goal:'maintain',mode:'calorie',calorieTarget:1600,allergies:[]};
 const ingredients={food:{allergens:[],nutrition:{verification:'source-checked'}}};
+test('removing the duration limit retains a feasible quick menu even when fresh slow recipes dominate history',()=>{
+ const now=Date.now(),history={},p={...profile,mode:'macro',priority:'protein',protein:120,carbs:100,fat:50};
+ const pool=SLOTS.flatMap(([slot,,categories])=>{
+  history[slot+'-quick']=now-60000;
+  return [
+   {id:slot+'-quick',category:categories[0],difficulty:'easy',minutes:15,steps:[],items:[],macros:{kcal:300,protein:30,carbs:20,fat:8}},
+   {id:slot+'-slow',category:categories[0],difficulty:'easy',minutes:45,steps:[],items:[],macros:{kcal:300,protein:1,carbs:80,fat:20}}
+  ];
+ });
+ const unlimited={style:'easy',maxMinutes:0},map=new Map(pool.map(r=>[r.id,r]));
+ const quick=buildPlan(pool,{},p,()=>0,{},{},{history,now,cooking:{style:'easy',maxMinutes:20}});
+ const broad=buildPlan(pool,{},p,()=>0,{},{},{history,now,cooking:unlimited});
+ assert.ok(quick);assert.ok(broad);assert.ok(targetStatus(broad,map,p).ok);
+ assert.ok(cookingFits(Object.values(broad).map(e=>mealItems(e).map(x=>map.get(x.id))),unlimited));
+ assert.deepEqual(unlimited,{style:'easy',maxMinutes:0});
+});
 const recipes=SLOTS.flatMap(([slot,,categories])=>['easy','medium','hard'].map(difficulty=>({id:slot+'-'+difficulty,title:slot,category:categories[0],difficulty,minutes:difficulty==='easy'?15:difficulty==='medium'?25:40,steps:['Karıştır.'],equipment:['hob'],servings:1,items:[['food',100]],macros:{kcal:400,protein:30,carbs:40,fat:12}})));
 const byId=new Map(recipes.map(r=>[r.id,r]));
 const random=(seed=42)=>()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296};

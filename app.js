@@ -12,11 +12,11 @@ import {account} from './account-ui.mjs?v=19';
 import {api,readSession} from './cloud.mjs?v=16';
 import {dateKey,newEntry,trackingState,captureDay} from './tracking.mjs?v=13';
 import {tracker} from './tracking-ui.mjs?v=16';
-import {WEB_VERSION,newerVersion,readJson,readCatalog,latestRecipeDate,canRefreshPage} from './updates.mjs?v=19';
+import {WEB_VERSION,newerVersion,readJson,readCatalog,latestRecipeDate,canRefreshPage} from './updates.mjs?v=20';
 import {SEASONS,selectedSeason} from './seasons.mjs?v=6';
 import {mergeCatalog} from './catalog.mjs?v=5';
 /* Local-first Sofra. Cloud access stays disabled until a verified backend is configured. */
-import {SLOTS,profileError,estimate,allowed,totals,buildPlan,rememberRecommendations,matchingAllergens,targetStatus,mealItems,mealTimes,orderedSlots,replacementOptions,validReplacement} from './planner.mjs?v=19';
+import {SLOTS,profileError,estimate,allowed,totals,buildPlan,rememberRecommendations,matchingAllergens,targetStatus,mealItems,mealTimes,orderedSlots,replacementOptions,validReplacement} from './planner.mjs?v=20';
 const storeKey='sofra-aile-v1';
 let installPrompt=null,registration=null,refreshing=false,lastAttempt=0,lastCheck='',catalogCached=false,updateReady=false,contentPending=false,booted=false;
 const launchParams=new URLSearchParams(location.search);

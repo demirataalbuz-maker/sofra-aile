@@ -147,6 +147,16 @@ export function buildPlan(recipes,ingredients,p,random=Math.random,locked={},avo
       beam=[...candidates.values()].sort((a,b)=>a.rank-b.rank).slice(0,160);
     }
   }
+  // A broader pool must not lose a valid quick menu merely because bounded
+  // search spends its budget on other recipes. These are subsets of the
+  // original choices; the saved cooking preference and targets stay unchanged.
+  if(!best&&!options.subsetSearch&&(!options.cooking?.maxMinutes||+options.cooking.maxMinutes>20)){
+    for(const minutes of [20,30,45,60]){
+      if(options.cooking?.maxMinutes&&minutes>=+options.cooking.maxMinutes)continue;
+      const subset=buildPlan(recipes,ingredients,p,random,locked,avoid,{...options,subsetSearch:true,cooking:{...options.cooking,maxMinutes:minutes}});
+      if(subset){consider(subset);if(best)break;}
+    }
+  }
   return best;
 }
 

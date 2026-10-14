@@ -1,6 +1,6 @@
 import {cookingFields,cookingPreferences,cookingSummary,cookingLabel} from './cooking.mjs?v=11';
 import {familyState,participating,familyError,familyHash,validFamilyPlan,menuExport,readSharedMenu,familyIngredients} from './family.mjs?v=19';
-import {mealItems,orderedSlots,totals,estimate,rememberRecommendations} from './planner.mjs?v=19';
+import {mealItems,orderedSlots,totals,estimate,rememberRecommendations} from './planner.mjs?v=20';
 import {planningBlock} from './health.mjs?v=11';
 import {dateKey} from './tracking.mjs?v=9';
 import {bindFamilyCloud} from './family-cloud-ui.mjs?v=19';
