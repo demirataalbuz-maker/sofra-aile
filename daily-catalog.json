@@ -1,6 +1,94 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-14-apple-blueberry-bircher",
+      "addedOn": "2026-10-14",
+      "title": "Elmalı ve yaban mersinli Bircher müsli",
+      "summary": "Rendelenmiş elma ve yoğurtla buzdolabında yumuşayan yulaf kahvaltısı. Good Food tarifinden uyarlama; meyve suyu yerine yağsız süzme yoğurt ve su kullanılır. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Kahvaltı",
+      "servings": 2,
+      "minutes": 10,
+      "difficulty": "easy",
+      "water": 100,
+      "image": "images/daily-2026-10-14-apple-blueberry-bircher.png",
+      "items": [
+        [
+          "oats",
+          80
+        ],
+        [
+          "greekyogurt",
+          300
+        ],
+        [
+          "apple",
+          200
+        ],
+        [
+          "blueberry",
+          100
+        ],
+        [
+          "cinnamon",
+          1
+        ]
+      ],
+      "macros": {
+        "kcal": 321.8,
+        "protein": 21.2,
+        "carbs": 53.9,
+        "fat": 3.5
+      },
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
+      "equipment": [],
+      "tools": [
+        "Mutfak tartısı",
+        "Rende",
+        "Karıştırma kabı",
+        "Kaşık",
+        "Kapaklı iki saklama kabı",
+        "Buzdolabı"
+      ],
+      "steps": [
+        "80 g kuru yulafı ve 1 g tarçını bir kaba koy. 300 g yağsız süzme yoğurt ve iki kişilik tarif için 100 ml su ekleyip karıştır. Kişi sayısı değişirse suyu da aynı oranda değiştir.",
+        "Elmaları yıka, çekirdek ve saplarını çıkar. Yenebilir kabuklu kısmından 200 g tart. Rendenin iri tarafıyla rendele; parmaklarını keskin yüzeyden uzak tut. Rendelenmiş elmayı karışıma hemen ekle.",
+        "100 g yaban mersinini yıka ve süz. Yarısını karışıma nazikçe katla; kalanını iki kabın üstüne eşit dağıt. Karışımı tartarak iki yaklaşık eşit porsiyona böl.",
+        "Kapakları kapatıp hemen buzdolabına koy. En az 4 saat veya gece boyunca soğukta beklet; bu süre 10 dakikalık hazırlık süresine dahil değildir. Yulaf yumuşamalı; pişirme gerekmez.",
+        "Bir kap bir porsiyondur. Sabah karıştırıp soğuk servis et; buzdolabında sakla ve ertesi gün tüket. Farklı yağ oranında yoğurt, ilave bal veya kuruyemiş kullanırsan makrolar değişir; bunlar bu hesaba dahil değildir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "oats": "173904",
+          "greekyogurt": "170894",
+          "apple": "171688",
+          "blueberry": "171711",
+          "cinnamon": "171320"
+        },
+        "note": "Yulaf kuru, elma çekirdeksiz kabuklu, yoğurt yağsızdır. Yaklaşık değerlerdir; şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Apple & blueberry Bircher",
+        "publisher": "Good Food Middle East",
+        "sourceUrl": "https://www.bbcgoodfoodme.com/recipes/apple-and-blueberry-bircher/",
+        "accessedOn": "2026-10-14",
+        "kitchenTested": false,
+        "adaptation": "Meyve suyu yerine yağsız süzme yoğurt ve su kullanıldı; ölçüler iki kişiye uyarlandı. Anlatım özgün Türkçe yazıldı, makrolar uyarlamanın malzemelerinden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-14",
+        "description": "Tarife uygun temsili sunum; harici fotoğraf kullanılmadı.",
+        "promptFile": "images/daily-2026-10-14-apple-blueberry-bircher.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-13-seabass-chickpea-stew",
       "addedOn": "2026-10-13",
       "title": "Nohutlu ve patatesli levrek yemeği",
