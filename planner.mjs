@@ -120,6 +120,33 @@ export function buildPlan(recipes,ingredients,p,random=Math.random,locked={},avo
     for(const [k] of SLOTS){if(locked[k]){entries[k]=locked[k];continue}const r=pools[k][Math.floor(random()*pools[k].length)];entries[k]={id:r.id,portion:portions[Math.floor(random()*portions.length)]}}
     consider(entries);
   }
+  // Random sampling can miss a narrow macro corridor even when a valid menu
+  // exists. Search bounded, distinct partial menus before reporting failure.
+  if(!best){
+    const checks=targetStatus({},byId,p).checks;
+    const axis=p.mode==='macro'?p.priority:'kcal';
+    const choices=unlocked.map(([slot])=>pools[slot].flatMap(r=>portions.map(portion=>({entry:{id:r.id,portion},r,macros:Object.fromEntries(keys.map(k=>[k,r.macros[k]*portion]))}))));
+    const bounds=choices.map(pool=>Object.fromEntries(keys.map(k=>[k,{min:Math.min(...pool.map(x=>x.macros[k])),max:Math.max(...pool.map(x=>x.macros[k]))}])));
+    let beam=[{entries:{...locked},sum:totals(locked,byId),rank:0}];
+    for(let i=0;i<unlocked.length&&beam.length;i++){
+      const slot=unlocked[i][0],remaining=bounds.slice(i+1),left=Object.fromEntries(keys.map(k=>[k,{min:remaining.reduce((s,b)=>s+b[k].min,0),max:remaining.reduce((s,b)=>s+b[k].max,0)}]));
+      const candidates=new Map();
+      for(const b of beam)for(const choice of choices[i]){
+        const sum=Object.fromEntries(keys.map(k=>[k,b.sum[k]+choice.macros[k]]));
+        if(checks.some(c=>sum[c.key]+left[c.key].min>c.max+1e-6||sum[c.key]+left[c.key].max<c.min-1e-6))continue;
+        const entries={...b.entries,[slot]:choice.entry};
+        if(!cookingFits(Object.values(entries).map(e=>mealItems(e).map(x=>byId.get(x.id))),options.cooking))continue;
+        if(i===unlocked.length-1){consider(entries);continue;}
+        const target=p.mode==='macro'?+p[axis]:goal.target;
+        const expected=target*sum[axis]/Math.max(sum[axis]+left[axis].max,1);
+        let rank=Math.abs(sum[axis]-expected)/Math.max(target,1);
+        if(p.mode==='macro')for(const k of ['protein','carbs','fat'])if(k!==axis)rank+=sum[k]/Math.max(+p[k],1)*.35;
+        const signature=checks.map(c=>Math.round(sum[c.key]/2)).join(':')+':'+Object.values(entries).flatMap(mealItems).map(x=>cookingInfo(byId.get(x.id)).difficulty==='hard'?x.id:'').filter(Boolean).join(',');
+        if(!candidates.has(signature)||candidates.get(signature).rank>rank)candidates.set(signature,{entries,sum,rank});
+      }
+      beam=[...candidates.values()].sort((a,b)=>a.rank-b.rank).slice(0,160);
+    }
+  }
   return best;
 }
 

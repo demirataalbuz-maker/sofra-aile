@@ -1,4 +1,4 @@
-import {profileError,estimate,totals} from './planner.mjs?v=11';
+import {profileError,estimate,totals} from './planner.mjs?v=19';
 import {planningBlock} from './health.mjs?v=11';
 const allergyIds=['milk','egg','gluten','nuts','peanut','soy','sesame','fish','mustard'];
 export function requirementsError(r){

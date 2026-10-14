@@ -9,6 +9,16 @@ const base={age:42,height:165,weight:75,sex:'female',activity:'light',goal:'lose
 const byId=new Map(catalog.recipes.map(r=>[r.id,r]));
 const DAY=86400000;
 const now=Date.UTC(2026,9,1,12);
+test('bounded search finds a feasible macro menu when random trials repeatedly miss it',()=>{
+ const p={...base,allergies:[],mode:'macro',priority:'protein',protein:120,carbs:100,fat:50};
+ const recipes=SLOTS.flatMap(([slot,,cats])=>[
+  {id:slot+'-miss',category:cats[0],items:[],macros:{kcal:300,protein:1,carbs:80,fat:20},steps:[],minutes:10},
+  {id:slot+'-fit',category:cats[0],items:[],macros:{kcal:300,protein:30,carbs:20,fat:8},steps:[],minutes:10}
+ ]);
+ const plan=buildPlan(recipes,{},p,()=>0,{},{},{cooking:{style:'easy',maxMinutes:20}});
+ assert.ok(plan);assert.ok(targetStatus(plan,new Map(recipes.map(r=>[r.id,r])),p).ok);
+ assert.ok(Object.values(plan).every(e=>e.id.endsWith('-fit')));
+});
 function seeded(seed=17){return ()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296}}
 
 test('energy estimate changes with profile and goal',()=>{

@@ -1,12 +1,12 @@
 import {readSession,accountConfig,accountReady} from './cloud.mjs?v=16';
 import {readFamilyInvitation,clearFamilyInvitation} from './invitation.mjs';
-import {mealItems,orderedSlots,totals,rememberRecommendations} from './planner.mjs?v=11';
+import {mealItems,orderedSlots,totals,rememberRecommendations} from './planner.mjs?v=19';
 import {dateKey} from './tracking.mjs?v=13';
 import {cookingFields,cookingPreferences,cookingSummary} from './cooking.mjs?v=11';
-import {planningRequirements} from './family-requirements.mjs?v=18';
-import {SHARED_SLOTS,preparedPortions} from './common-plan.mjs?v=18';
-import {personalFromCommon} from './family-cloud.mjs?v=18';
-import {familyIngredients} from './family.mjs?v=18';
+import {planningRequirements} from './family-requirements.mjs?v=19';
+import {SHARED_SLOTS,preparedPortions} from './common-plan.mjs?v=19';
+import {personalFromCommon} from './family-cloud.mjs?v=19';
+import {familyIngredients} from './family.mjs?v=19';
 const ALLERGEN_LABELS={milk:'süt',egg:'yumurta',gluten:'gluten',nuts:'kuruyemiş',peanut:'yer fıstığı',soy:'soya',sesame:'susam',fish:'balık',mustard:'hardal'};
 const COMMON_TIMEOUT=25000;
 async function loadFamilyCatalog(){
@@ -106,7 +106,7 @@ export function bindFamilyCloud(host){
    pending=false;if(!active())return;
    computing=true;message='Herkesin günlük hedefi ayrı kontrol ediliyor…';paint();
    let job;
-   try{job=worker=new Worker(new URL('./family-worker.mjs?v=18',import.meta.url),{type:'module'})}catch{stopWorker();message='Bu tarayıcıda hesaplama başlatılamadı.';paint();return}
+   try{job=worker=new Worker(new URL('./family-worker.mjs?v=19',import.meta.url),{type:'module'})}catch{stopWorker();message='Bu tarayıcıda hesaplama başlatılamadı.';paint();return}
    timer=setTimeout(()=>{if(worker!==job)return;stopWorker();message='Hesaplama süre sınırını aştı; mevcut menü korundu. Tekrar dene veya süre/zorluk tercihini değiştir.';if(active())paint()},COMMON_TIMEOUT);
    job.onerror=()=>{if(worker!==job)return;stopWorker();message='Hesaplama başlatılamadı. Sayfayı yenileyip tekrar dene.';if(active())paint()};
    job.onmessage=async({data})=>{

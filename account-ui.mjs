@@ -6,7 +6,7 @@ export function account(host){
  const {state,esc,render,toast,cloudSync,cloudFamily}=host;
  const html=`<h1 class="heading">Hesap ve eşitleme</h1><p class="lead">Sofra hesapsız çalışır. İstersen Google ile giriş yapıp kayıtlarını kendi cihazların arasında eşitleyebilirsin.</p>
  <section class="panel"><h2>Su hatırlatmaları</h2><p>Saatlik su bildirimleri hesaptan bağımsızdır; Takip bölümünden açıp kapatabilirsin.</p><button class="primary" data-page="tracking">Su bildirimlerine git →</button></section>
- <section class="panel"><h2>Google hesabı</h2><p>Deneme sürümüne ilk giriş için sana özel davet bağlantısını açıp kendi Google hesabını kullan. Davet, kişisel kayıtlarını aile üyelerine açmaz. Sonraki girişlerinde yeniden davet gerekmez.</p><p id="accountStatus" role="status">Kontrol ediliyor…</p><div id="googleButton" class="googlebutton"></div>
+ <section class="panel"><h2>Google hesabı</h2><p>Deneme sürümüne ilk giriş için sana özel davet bağlantısını açıp kendi Google hesabını kullan. Davet, kişisel kayıtlarını aile üyelerine açmaz. Sonraki girişlerinde yeniden davet gerekmez.</p><p id="accountStatus" role="status">Kontrol ediliyor…</p><p class="formerror" id="accountError" role="alert"></p><div id="googleButton" class="googlebutton"></div>
  <div class="buttonrow" id="signedInActions" hidden><button class="secondary" id="signOut">Çıkış yap</button><button class="textlink" id="signOutAll">Tüm cihazlarda çıkış yap</button></div>
  <p class="hint">Giriş yapmak tek başına hiçbir kaydı yüklemez. Google’dan yalnızca hesap kimliğin ve e-posta adresin alınır; Google şifren ve Google erişim anahtarların Sofra’ya gelmez. Oturum 30 gün sürer.</p></section>
  <section class="panel" id="syncPanel" hidden><h2>Cihazlar arası eşitleme</h2><p id="syncStatus" role="status"></p>
@@ -18,7 +18,7 @@ export function account(host){
  <button class="textlink dangerlink" id="deleteAccount">Sunucudaki Sofra hesabımı ve kayıtlarımı sil</button></section>
  <section class="panel"><h2>Aile grubum</h2><p>${readFamilyInvitation()?'Bu sekmede bir aile davetin var. Google girişinden sonra Aile bölümünde adını yazıp daveti kabul edebilirsin.':'Kendi Google hesabınla aile grubu oluşturabilir veya sana gönderilen davetle katılabilirsin. Menü paylaşımını ayrıca sen açarsın.'}</p><button class="secondary" data-page="family">Aile grubuna git →</button></section>
  <section class="panel"><h2>Henüz gelmeyenler</h2><p>Uygulama kapalıyken otomatik günlük menü, öğün bildirimleri ve günlük raporlar bu sürümde yok.</p></section>
- <p class="formerror" id="accountError" role="alert"></p>`;
+ `;
  const bind=()=>{
   const q=s=>document.querySelector(s),show=(s,on)=>{const el=q(s);if(el)el.hidden=!on};
   const error=msg=>{const el=q('#accountError');if(el)el.textContent=msg||''};
@@ -45,7 +45,7 @@ export function account(host){
     q('#accountStatus').textContent='Giriş yapılmadı.';show('#signedInActions',false);show('#syncPanel',false);
     renderGoogleButton(q('#googleButton'),{
      onSignedIn:acc=>{cloudSync.reset();cloudFamily?.reset();toast('Giriş yapıldı: '+acc.email);cloudSync.restore().catch(()=>{});render()},
-     onError:e=>{error(e.message);refresh()}
+     onError:e=>{error(e.message);q('#accountError')?.scrollIntoView({block:'center'});refresh()}
     }).catch(e=>{if(q('#accountStatus'))q('#accountStatus').textContent=e.message});
     return;
    }
