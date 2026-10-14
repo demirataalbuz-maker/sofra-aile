@@ -1,5 +1,6 @@
-import {accountConfig,accountReady,readSession,renderGoogleButton,signOut,deleteAccount,api} from './cloud.mjs?v=15';
-import {readLink,statusText} from './sync.mjs?v=15';
+import {accountConfig,accountReady,readSession,renderGoogleButton,signOut,deleteAccount,api} from './cloud.mjs?v=16';
+import {readLink,statusText} from './sync.mjs?v=16';
+import {readFamilyInvitation} from './invitation.mjs';
 let detach=null;
 export function account(host){
  const {state,esc,render,toast,cloudSync}=host;
@@ -15,7 +16,8 @@ export function account(host){
  <div id="syncConflict" hidden class="buttonrow"><button class="secondary" id="takeRemote">Hesabımdakini kullan</button><button class="secondary" id="takeLocal">Bu cihazdakini hesaba yaz</button></div>
  <button class="textlink" id="restoreBackup" hidden>Eşitleme öncesi yerel yedeği geri yükle</button>
  <button class="textlink dangerlink" id="deleteAccount">Sunucudaki Sofra hesabımı ve kayıtlarımı sil</button></section>
- <section class="panel"><h2>Henüz gelmeyenler</h2><p>Otomatik günlük menü, öğün bildirimleri, aile paylaşımı ve günlük raporlar bu sürümde yok. Açıldıklarında ayrıca izin isteyeceğiz.</p></section>
+ <section class="panel"><h2>Aile grubum</h2><p>${readFamilyInvitation()?'Bu sekmede bir aile davetin var. Google girişinden sonra Aile bölümünde adını yazıp daveti kabul edebilirsin.':'Kendi Google hesabınla aile grubu oluşturabilir veya sana gönderilen davetle katılabilirsin. Menü paylaşımını ayrıca sen açarsın.'}</p><button class="secondary" data-page="family">Aile grubuna git →</button></section>
+ <section class="panel"><h2>Henüz gelmeyenler</h2><p>Uygulama kapalıyken otomatik günlük menü, öğün bildirimleri ve günlük raporlar bu sürümde yok.</p></section>
  <p class="formerror" id="accountError" role="alert"></p>`;
  const bind=()=>{
   const q=s=>document.querySelector(s),show=(s,on)=>{const el=q(s);if(el)el.hidden=!on};

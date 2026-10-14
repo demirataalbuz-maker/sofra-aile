@@ -2,15 +2,17 @@ import {queueWaterPush} from './water-push.mjs?v=13';
 import {applyAutomaticWaterTarget} from './water.mjs?v=13';
 import {recipeInbox} from './recipe-inbox.mjs?v=12';
 import {cookingFields,cookingPreferences,cookingSummary,cookingLabel,cookingFits} from './cooking.mjs?v=11';
-import {familyView} from './family-ui.mjs?v=11';
+import {familyView} from './family-ui.mjs?v=16';
+import {createFamilyCloud} from './family-cloud.mjs?v=16';
+import {captureInvitation} from './invitation.mjs';
 import {familyState} from './family.mjs?v=11';
 import {HEALTH_OPTIONS,planningBlock} from './health.mjs?v=11';
-import {createSync} from './sync.mjs?v=15';
-import {account} from './account-ui.mjs?v=15';
-import {api,readSession} from './cloud.mjs?v=15';
+import {createSync} from './sync.mjs?v=16';
+import {account} from './account-ui.mjs?v=16';
+import {api,readSession} from './cloud.mjs?v=16';
 import {dateKey,newEntry,trackingState,captureDay} from './tracking.mjs?v=13';
-import {tracker} from './tracking-ui.mjs?v=15';
-import {WEB_VERSION,newerVersion,readJson,readCatalog,latestRecipeDate,canRefreshPage} from './updates.mjs?v=15';
+import {tracker} from './tracking-ui.mjs?v=16';
+import {WEB_VERSION,newerVersion,readJson,readCatalog,latestRecipeDate,canRefreshPage} from './updates.mjs?v=16';
 import {SEASONS,selectedSeason} from './seasons.mjs?v=6';
 import {mergeCatalog} from './catalog.mjs?v=5';
 /* Local-first Porsiva. Cloud access stays disabled until a verified backend is configured. */
@@ -18,6 +20,7 @@ import {SLOTS,profileError,estimate,allowed,totals,buildPlan,rememberRecommendat
 const storeKey='sofra-aile-v1';
 let installPrompt=null,registration=null,refreshing=false,lastAttempt=0,lastCheck='',catalogCached=false,updateReady=false,contentPending=false,booted=false;
 const launchParams=new URLSearchParams(location.search);
+captureInvitation();
 const ui={page:['tracking','plan','account','family','inbox'].includes(launchParams.get('page'))?launchParams.get('page'):'explore',query:'',category:'Tümü',limit:24,recipe:null,servings:2,method:-1,returnPage:'explore'};
 let catalog={recipes:[],ingredients:{}};
 let credits=[],trackingView=null,accountView=null,familyScreen=null,inboxScreen=null;
@@ -46,6 +49,7 @@ const cloudSync=createSync({api,session:readSession,getState:()=>state,
   const next=hydrate({...remote,family:state.family,reports:state.reports,cloudSettings:state.cloudSettings});
   localStorage.setItem(storeKey,JSON.stringify(next));state=next;queueWaterPush(state);
  }});
+const cloudFamily=createFamilyCloud({api,session:readSession,getState:()=>state,notify:message=>toast(message)});
 let lastCloudCheck=0;
 function checkCloud(force=false){
  if(!force&&Date.now()-lastCloudCheck<60000)return;lastCloudCheck=Date.now();
@@ -59,7 +63,7 @@ const portionFmt=n=>new Intl.NumberFormat('tr-TR',{maximumFractionDigits:2}).for
 const img=p=>'./'+String(p||'').replace(/^\//,'');
 const today=()=>dateKey();
 const recipe=id=>catalog.recipes.find(r=>r.id===id);
-function save(){captureDay(state);try{localStorage.setItem(storeKey,JSON.stringify(state));cloudSync.queue();queueWaterPush(state);return true;}catch{toast('Telefon depolama alanı dolu; değişiklik kaydedilemedi.');return false;}}
+function save(){captureDay(state);try{localStorage.setItem(storeKey,JSON.stringify(state));cloudSync.queue();cloudFamily.queue();queueWaterPush(state);return true;}catch{toast('Telefon depolama alanı dolu; değişiklik kaydedilemedi.');return false;}}
 function toast(message){let el=$('#toast');if(!el){el=document.createElement('div');el.id='toast';el.style.cssText='position:fixed;z-index:20;bottom:95px;left:50%;transform:translateX(-50%);background:#35251e;color:#fff;border-radius:12px;padding:11px 17px;box-shadow:0 6px 25px #0004;font-size:14px;min-width:180px;text-align:center';document.body.append(el)}el.textContent=message;el.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.hidden=true,2800)}
 function nav(){return `<nav class="nav" aria-label="Alt menü"><button data-page="explore" class="${ui.page==='explore'||(ui.page==='detail'&&ui.returnPage==='explore')?'on':''}"><b>⌕</b>Tarifler</button><button data-page="plan" class="${ui.page==='plan'||ui.page==='cooking'||ui.page==='alternatives'||(ui.page==='detail'&&ui.returnPage==='plan')?'on':''}"><b>▦</b>Bugün</button><button data-page="tracking" class="${ui.page==='tracking'?'on':''}"><b>◉</b>Takip</button><button data-page="family" class="${ui.page==='family'?'on':''}"><b>♧</b>Aile</button><button data-page="profile" class="${ui.page==='profile'?'on':''}"><b>♙</b>Profil</button><button data-page="basket" class="${ui.page==='basket'?'on':''}"><b>☑</b>Liste <span>${state.basket.filter(x=>!x.done).length||''}</span></button></nav>`}
 function header(){return `<header class="top"><div class="brandrow"><div class="brand"><span class="mark">P</span><strong>porsiva.</strong></div><div class="appcontrols"><span class="sub">${catalog.recipes.length} tarif</span><button class="appsettings" data-page="account">Hesap</button><button class="appsettings" data-page="application">Uygulama</button></div></div></header>`}
@@ -153,7 +157,7 @@ function basket(){return `<h1 class="heading">Alışveriş listem</h1><p class="
 function inboxPage(){inboxScreen=recipeInbox({esc});return inboxScreen.html}
 function accountPage(){accountView=account({state,ui,esc,save,render,toast,cloudSync});return accountView.html}
 function bindAccount(){accountView.bind()}
-function familyPage(){familyScreen=familyView({state,ui,catalog,esc,fmt,save,render,toast,openDetail});return familyScreen.html}
+function familyPage(){familyScreen=familyView({state,ui,catalog,esc,fmt,save,render,toast,openDetail,cloudFamily});return familyScreen.html}
 function trackingPage(){trackingView=tracker({state,ui,catalog,esc,fmt,save,render,toast,estimate});return trackingView.html}
 function bind(){
   $('#cookingForm')?.addEventListener('submit',e=>{
@@ -212,6 +216,7 @@ function addItemsSilent(items,servings,base){for(const [id,n] of items){const qt
  try{credits=(await readJson('./photo-credits.json')).data}catch{}
  if(applyAutomaticWaterTarget(state))save();
  booted=true;render();queueWaterPush(state);checkCloud(true);
+ if(readSession()&&ui.page!=='family')cloudFamily.read().catch(()=>{});
  if('serviceWorker'in navigator){
   const hadController=Boolean(navigator.serviceWorker.controller);
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadController)refreshContent(true)});
