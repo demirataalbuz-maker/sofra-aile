@@ -1,6 +1,103 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-15-roasted-beet-lentil-salad",
+      "addedOn": "2026-10-15",
+      "title": "Fırın pancarlı, mercimekli ve peynirli salata",
+      "summary": "Yeşil mercimek, fırında pancar, ıspanak ve beyaz peynirle iki kişilik salata. Samuel Goldsmith’in Good Food tarifinden Sofra uyarlaması; ceviz ve hardal içermez. Bu uyarlama mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Salata",
+      "servings": 2,
+      "minutes": 55,
+      "difficulty": "easy",
+      "image": "images/daily-2026-10-15-roasted-beet-lentil-salad.png",
+      "items": [
+        [
+          "beet",
+          400
+        ],
+        [
+          "lentilCooked",
+          400
+        ],
+        [
+          "feta",
+          100
+        ],
+        [
+          "spinach",
+          80
+        ],
+        [
+          "oil",
+          15
+        ],
+        [
+          "lemon",
+          30
+        ]
+      ],
+      "macros": {
+        "kcal": 529.3,
+        "protein": 29.6,
+        "carbs": 63.7,
+        "fat": 19.5
+      },
+      "allergens": [
+        "milk"
+      ],
+      "equipment": [
+        "oven"
+      ],
+      "tools": [
+        "Fırın tepsisi",
+        "Yağlı kâğıt",
+        "Kesme tahtası",
+        "Bıçak",
+        "Soyacak",
+        "Mutfak tartısı",
+        "Süzgeç",
+        "Karıştırma kabı",
+        "Kaşık"
+      ],
+      "steps": [
+        "Fırını alt-üst ayarda 200 °C’ye ısıt. Pancarları yıka, soy ve yenebilir çiğ kısmından 400 g tart. Yaklaşık 2 cm küplere kes. Ellerini ve tezgâhı boyayabilir; istersen mutfak eldiveni kullan.",
+        "Pancarları yağlı kâğıt kaplı tepside 10 g zeytinyağıyla karıştırıp tek kat yay. Orta rafta 35–45 dakika pişir; yarısında çevir. Çatal kolayca giriyorsa hazırdır; sertse birkaç dakika daha pişir. Fırından eldivenle çıkarıp ılımaya bırak.",
+        "Yeşil mercimeği önceden haşlanmış, soğutulmuş ve süzülmüş olarak 400 g tart. Bu ölçü kuru mercimek değildir; süre mercimek haşlamayı içermez. Ispanağı ayıkla, bol suyla yıka ve süzüp kurula; iri yaprakları doğra.",
+        "Kalan 5 g zeytinyağı ile 30 g limon suyunu karıştır. Mercimeği ve ılık pancarı sosla harmanla. Ispanağı en son ekleyip nazikçe çevir; pancar çok sıcak olmamalı.",
+        "Beyaz peyniri ufalayıp üzerine dağıt. Mercimek, pancar ve peyniri iki tabağa eşit paylaştır; bir tabak bir porsiyondur. İlave tuz, ekmek veya sos hesaba dahil değildir. Artanı kapalı kapta buzdolabına kaldırıp ertesi gün tüket."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "beet": "169145",
+          "lentilCooked": "172421",
+          "feta": "173420",
+          "spinach": "168462",
+          "oil": "171413",
+          "lemon": "167747"
+        },
+        "note": "Pancar soyulmuş çiğ, mercimek haşlanmış süzülmüş ağırlık; peynir feta referansıdır. Tüm tarif malzemeleri iki porsiyona bölünür. Yaklaşık değerler; şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Roasted beetroot & feta salad",
+        "author": "Samuel Goldsmith",
+        "publisher": "Good Food Middle East",
+        "sourceUrl": "https://www.bbcgoodfoodme.com/recipes/roasted-beetroot-feta-salad/",
+        "accessedOn": "2026-10-15",
+        "kitchenTested": false,
+        "adaptation": "Roka yerine ıspanak kullanıldı; ceviz, hardal, bal ve frenk soğanı çıkarıldı. Mercimek miktarı artırıldı, yağ azaltıldı. Uzun marinasyon yerine ılık harmanlama seçildi. Anlatım özgün Türkçe yazıldı; besin değerleri bu uyarlamanın ölçülerinden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-15",
+        "description": "Özgün yapay zekâ görseli; tarife uygun temsili sunumdur, üçüncü taraf fotoğraf kullanılmadı.",
+        "promptFile": "images/daily-2026-10-15-roasted-beet-lentil-salad.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-14-apple-blueberry-bircher",
       "addedOn": "2026-10-14",
       "title": "Elmalı ve yaban mersinli Bircher müsli",
