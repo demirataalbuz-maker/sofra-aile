@@ -1,6 +1,94 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-16-cocoa-banana-tofu-cream",
+      "addedOn": "2026-10-16",
+      "title": "Muzlu kakaolu tofu kreması",
+      "summary": "Muz ve balla tatlandırılan, blenderda hazırlanan iki kişilik soğuk tatlı. Whole Foods Market’in tofu pudinginden Sofra uyarlaması; protein tozu içermez. Bal içerdiği için vegan değildir. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Tatlı",
+      "servings": 2,
+      "minutes": 130,
+      "difficulty": "easy",
+      "water": 80,
+      "image": "images/daily-2026-10-16-cocoa-banana-tofu-cream.png",
+      "items": [
+        [
+          "tofu",
+          300
+        ],
+        [
+          "banana",
+          200
+        ],
+        [
+          "cocoa",
+          20
+        ],
+        [
+          "honey",
+          20
+        ]
+      ],
+      "macros": {
+        "kcal": 358.2,
+        "protein": 29,
+        "carbs": 41,
+        "fat": 14.8
+      },
+      "allergens": [
+        "soy"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "blender"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Blender veya mutfak robotu",
+        "Spatula",
+        "İki kapaklı tatlı kâsesi",
+        "Bıçak",
+        "Kesme tahtası",
+        "Buzdolabı"
+      ],
+      "steps": [
+        "Doğrudan tüketime uygun, sade sert tofu kullan; paketi pişirme gerektiriyorsa bu pişirmesiz yöntemi uygulama. Suyunu süzüp 300 g tart ve küçük parçalara ayır. Uzun süre bastırarak kurutma.",
+        "Olgun muzları soyup kabuksuz kısmından 200 g tart. Üst süsü için toplam dört ince dilim ayır; kalanını blendera koy. Tofuyu, 20 g şekersiz kakaoyu ve 20 g balı ekle.",
+        "İki kişilik tarif için toplam 80 ml içme suyunu iki seferde ekleyerek çek. Kişi sayısını değiştirirsen suyu da orantıla. Cihazı aralıklarla çalıştır; durdurup bıçaklar tamamen durduğunda spatulayla kenarları sıyır. Yaklaşık 2–3 dakika, belirgin tofu parçaları kalmayana kadar karıştır.",
+        "Karışımı iki kâseye eşit paylaştır. Üzerlerini kapatıp buzdolabında en az 2 saat beklet. Toplam 130 dakika, yaklaşık 10 dakika hazırlık ve 120 dakika soğutmadır. Kıvam koyu krema olur; çırpılmış mus gibi kabarmaz.",
+        "Serviste her kâseye ayırdığın iki muz dilimini koy. Bir kâse bir porsiyondur; muz süsü tarifteki 200 g miktara dahildir. Artanı kapalı olarak buzdolabında sakla, ertesi gün tüket. Farklı tofu veya ilave malzeme besin değerlerini değiştirir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "tofu": "172475",
+          "banana": "173944",
+          "cocoa": "169593",
+          "honey": "169640"
+        },
+        "note": "Tofu sert ve süzülmüş; muz kabuksuz ağırlıktır. Su enerji içermez. Marka ve kıvama göre yaklaşık değerler değişebilir. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Vegan Chocolate Banana Pudding",
+        "publisher": "Whole Foods Market",
+        "sourceUrl": "https://www.wholefoodsmarket.com/recipes/vegan-chocolate-banana-pudding",
+        "accessedOn": "2026-10-16",
+        "kitchenTested": false,
+        "adaptation": "Tofu, muz ve kakao karıştırma yöntemi temel alındı. Hurma yerine bal kullanıldı; vanilya ve tarçın çıkarıldı. Tofu/muz oranı ve iki kişilik ölçüler değiştirildi; kıvam için su eklendi. Bal nedeniyle vegan olarak etiketlenmedi. Adımlar özgün Türkçe yazıldı ve makrolar bu ölçülerden yeniden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-16",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-10-16-cocoa-banana-tofu-cream.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-15-roasted-beet-lentil-salad",
       "addedOn": "2026-10-15",
       "title": "Fırın pancarlı, mercimekli ve peynirli salata",
