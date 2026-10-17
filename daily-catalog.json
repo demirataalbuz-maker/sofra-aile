@@ -1,6 +1,115 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-17-chickpea-vegetable-egg-skillet",
+      "addedOn": "2026-10-17",
+      "title": "Nohutlu sebze yatağında yumurta",
+      "summary": "Domates, kabak ve ıspanakla tek tavada hazırlanan iki kişilik vejetaryen ana yemek. Good Food tarifinden Sofra uyarlaması; ölçüler ve makrolar yeniden hesaplandı. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Ana yemek",
+      "servings": 2,
+      "minutes": 40,
+      "difficulty": "easy",
+      "water": 100,
+      "image": "images/daily-2026-10-17-chickpea-vegetable-egg-skillet.png",
+      "items": [
+        [
+          "chickpea",
+          300
+        ],
+        [
+          "egg",
+          4
+        ],
+        [
+          "tomato",
+          400
+        ],
+        [
+          "zucchini",
+          200
+        ],
+        [
+          "spinach",
+          100
+        ],
+        [
+          "onion",
+          100
+        ],
+        [
+          "garlic",
+          6
+        ],
+        [
+          "oil",
+          10
+        ]
+      ],
+      "macros": {
+        "kcal": 522.2,
+        "protein": 31,
+        "carbs": 60.2,
+        "fat": 19.4
+      },
+      "allergens": [
+        "egg"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Geniş kapaklı derin tava",
+        "Bıçak",
+        "Kesme tahtası",
+        "Süzgeç",
+        "Kaşık",
+        "Küçük kâse"
+      ],
+      "steps": [
+        "300 g önceden haşlanmış, süzülmüş nohut tart. Konserve kullanıyorsan süzüp durula; kuru nohut bu sürede pişmez. Soğanı soyup 100 g tart, ince doğra. Sarımsağı soyup 6 g tart ve kıy. Sebzeleri yıka; 400 g domatesi doğra, 200 g kabağı yaklaşık 1 cm küpler halinde kes, 100 g ıspanağı iri doğra.",
+        "Geniş kapaklı tavada 10 g zeytinyağını orta ateşte ısıt. Soğanı ekleyip yaklaşık 6–8 dakika, yakmadan yumuşat. Sarımsağı ekleyip 1 dakika daha karıştır.",
+        "Nohudu ve iki kişilik tarif için 100 ml içme suyunu ekle; kapağı kapalı olarak 5 dakika hafifçe kaynat. Nohudun birkaç kaşığını kaşığın tersiyle ezerek sosu koyulaştır. Kişi sayısını değiştirirsen suyu da orantıla.",
+        "Domatesi ve kabağı tavaya ekle. Kapağı kapalı, kısık-orta ateşte 10–12 dakika pişir; ara sıra karıştır. Kabak çatalla kolay delinebilmeli. Ispanağı ekleyip 2–3 dakika sönene kadar karıştır. Sos çok suluysa kapağı açıp birkaç dakika koyulaştır.",
+        "Sebzelerin arasında dört küçük çukur aç. Dört yumurtayı sırayla küçük bir kâseye kırıp çukurlara aktar. Kapağı kapat; kısık ateşte yaklaşık 8–10 dakika, yumurta beyazları ve sarıları tamamen katılaşana kadar pişir. Süre ocağa göre değişir; yalnızca dakikaya güvenme.",
+        "Sebze ve nohudu iki tabağa eşit paylaştır, her tabağa iki yumurta koy. Bir tabak bir porsiyondur. Ekmek veya başka yan yemek bu tarifin besin hesabına dahil değildir. Bekletmeden servis et."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "chickpea": "173757",
+          "egg": "171287",
+          "tomato": "170457",
+          "zucchini": "169291",
+          "spinach": "168462",
+          "onion": "170000",
+          "garlic": "169230",
+          "oil": "171413"
+        },
+        "note": "Nohut haşlanmış ve süzülmüş; sebzeler çiğ yenilebilir ağırlıktır. Dört yumurta kabuksuz yaklaşık 200 g kabul edildi. Su enerji içermez. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Spicy Moroccan eggs",
+        "publisher": "Good Food / Sara Buenfeld",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/spicy-moroccan-eggs",
+        "accessedOn": "2026-10-17",
+        "kitchenTested": false,
+        "adaptation": "Nohut, domates, kabak ve ıspanak sosunda yumurta pişirme yöntemi temel alındı. Harissa ve kişniş çıkarıldı; sebze suyu yerine su, kolza yağı yerine zeytinyağı, konserve domates yerine taze domates kullanıldı. İki kişilik miktarlar değiştirildi; yumurta tam pişecek şekilde adımlar özgün Türkçe yazıldı. Kaynak tarifin makroları kopyalanmadı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-17",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-10-17-chickpea-vegetable-egg-skillet.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-16-cocoa-banana-tofu-cream",
       "addedOn": "2026-10-16",
       "title": "Muzlu kakaolu tofu kreması",
