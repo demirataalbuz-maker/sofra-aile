@@ -1,6 +1,100 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-18-creamy-carrot-lentil-soup",
+      "addedOn": "2026-10-18",
+      "title": "Sütlü havuç ve mercimek çorbası",
+      "summary": "Havucun ağırlıkta olduğu, sütle yumuşatılan ve yoğurtla sunulan dört kişilik çorba. Good Food tarifinden baharatsız uyarlama. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Çorba",
+      "servings": 4,
+      "minutes": 35,
+      "difficulty": "easy",
+      "water": 1000,
+      "image": "images/daily-2026-10-18-creamy-carrot-lentil-soup.png",
+      "items": [
+        [
+          "carrot",
+          600
+        ],
+        [
+          "lentil",
+          140
+        ],
+        [
+          "milk",
+          125
+        ],
+        [
+          "oil",
+          15
+        ],
+        [
+          "yogurt",
+          80
+        ]
+      ],
+      "macros": {
+        "kcal": 249.1,
+        "protein": 11.7,
+        "carbs": 39,
+        "fat": 6.2
+      },
+      "allergens": [
+        "milk"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "hob",
+        "blender"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Rende",
+        "Süzgeç",
+        "Derin tencere",
+        "El blenderı",
+        "Kepçe",
+        "Dört çorba kâsesi"
+      ],
+      "steps": [
+        "Havuçları yıka, uçlarını temizle ve yenilebilir kısmından 600 g tartıp iri rendele. 140 g kuru kırmızı mercimeği ayıkla ve süzgeçte yıka. Sütü 125 g, zeytinyağını 15 g tart.",
+        "Derin tencereye havuç, mercimek ve zeytinyağını koy. Dört kişilik tarif için 1 litre sıcak içme suyu ekle. Kaynayınca ateşi kıs; taşmayı önleyerek yaklaşık 20–25 dakika, havuç ve mercimek tamamen yumuşayana kadar pişir. Kişi sayısını değiştirirsen suyu da orantıla.",
+        "Tencereyi ocaktan al, kaynamanın durmasını bekle. El blenderının başını sıvının içinde tutarak pürüzsüzleştir; sıçratma. Kapalı sürahi blenderına kaynar çorba doldurma.",
+        "Sütü karıştırarak ekle. Kısık ateşte yeniden ısıt; dibinin tutmaması için karıştır. Gerekirse az miktarda sıcak suyla kıvamı aç. Süt dışında krema veya tereyağı ekleme.",
+        "Çorbayı dört kâseye eşit böl. Toplam 80 g sade yoğurdu her kâseye 20 g olacak şekilde koy. Bir kâse bir porsiyondur; yoğurt hesaba dahildir, ekmek dahil değildir. Artanı soğutup buzdolabına kaldır."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 4; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "carrot": "170393",
+          "lentil": "172420",
+          "milk": "172217",
+          "oil": "171413",
+          "yogurt": "171284"
+        },
+        "note": "Mercimek kuru tartılır; katalogdaki genel kuru mercimek verisi kırmızı mercimek için yaklaşık değer olarak kullanıldı. Havuç temizlenmiş çiğ ağırlıktır; süt ve yoğurt gramla tartılır. Su enerji içermez. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Spiced carrot & lentil soup",
+        "publisher": "Good Food / Jane Hornby",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/spiced-carrot-lentil-soup",
+        "accessedOn": "2026-10-18",
+        "kitchenTested": false,
+        "adaptation": "Havuç, kuru mercimek ve süt birleşimi temel alındı; baharat ve bulyon çıkarıldı. Yağ ve yoğurt tartılarak belirlendi; süt pişirme sonunda eklendi. Özgün Türkçe adımlar ve bu ölçülere göre makrolar hazırlandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-18",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-10-18-creamy-carrot-lentil-soup.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-17-chickpea-vegetable-egg-skillet",
       "addedOn": "2026-10-17",
       "title": "Nohutlu sebze yatağında yumurta",
