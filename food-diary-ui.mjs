@@ -1,0 +1,22 @@
+import {diaryFoods,searchFoods,parseFoodQuery,foodAmount,frequentFoods} from './food-diary.mjs?v=23';
+export function foodDiary({catalog,entries,esc,fmt,add}){
+ const foods=diaryFoods(catalog),frequent=frequentFoods(entries);
+ const html=`<section class="panel"><h2>Ne yedin?</h2><p>Menü seçmek zorunda değilsin. Yediğini bul, miktarını kontrol et ve kaydet.</p><label>Yiyecek veya yemek ara<input id="diarySearch" type="search" placeholder="Örn. 4 yumurta yedim, 150 g yoğurt" autocomplete="off"></label><p class="hint">${foods.length} kaynaklı besin ve tarif. Çiğ, kuru ve pişmiş ağırlıklar farklıdır. Sonuç seçilmeden hiçbir şey kaydedilmez.</p><div id="diaryResults" class="diaryresults"></div><div id="diaryChoice"></div>${frequent.length?`<h3>Sık yediklerim / önceki kayıtlarım</h3><p class="hint">Kayıtlı aynı miktarı tekrar ekler; porsiyonu onaylayabilirsin. Elle eklediğin besinler de burada görünür.</p><div class="diaryresults">${frequent.map((e,i)=>`<button type="button" class="secondary" data-repeat-food="${i}">${esc(e.title)} · ${fmt(e.macros.kcal*e.portion)} kcal</button>`).join('')}</div>`:''}<p class="hint">Bulamadığın yiyeceği aşağıdaki elle kayıt bölümünden ekleyebilirsin. Kaydettiğinde sonraki kullanımda tekrar seçebilirsin. Sınırsız restoran/marka veritabanı ve barkod araması henüz bağlı değil.</p></section>`;
+ function bind(){
+  const search=document.querySelector('#diarySearch'),results=document.querySelector('#diaryResults'),choice=document.querySelector('#diaryChoice');
+  function select(food,parsed={}){
+   results.innerHTML='';
+   const unit=food.unit==='porsiyon'?'porsiyon':parsed.unit==='g'?'g':food.piece?'adet':'g';
+   const amount=parsed.amount||(unit==='g'?100:1);
+   choice.innerHTML=`<form id="diaryAmount"><h3>${esc(food.title)}</h3><p class="hint">${esc(food.note)}</p><div class="formgrid"><label>Miktar<input name="amount" type="number" min="0.01" max="10000" step="0.01" required value="${amount}"></label><label>Birim<select name="unit">${(food.unit==='porsiyon'?['porsiyon']:food.piece?['adet','g']:['g']).map(u=>`<option ${u===unit?'selected':''}>${u}</option>`).join('')}</select></label></div><p id="diaryPreview" role="status"></p><p class="hint">Kaynak: ${esc(food.source||'Önceki kaydın')} · Değerler yaklaşık. Yağ, sos ve yan yemekler ayrıca eklenir.</p><button class="primary">Yedim, bu miktarı kaydet</button></form>`;
+   const form=document.querySelector('#diaryAmount');
+   const preview=()=>{try{const m=foodAmount(food,form.elements.amount.value,form.elements.unit.value);document.querySelector('#diaryPreview').textContent=`${fmt(m.kcal)} kcal · ${fmt(m.protein)} g protein · ${fmt(m.carbs)} g karb. · ${fmt(m.fat)} g yağ`;}catch(e){document.querySelector('#diaryPreview').textContent=e.message}};
+   form.oninput=preview;preview();
+   form.onsubmit=e=>{e.preventDefault();try{const amount=form.elements.amount.value,unit=form.elements.unit.value;add('food',{title:`${food.title} · ${amount} ${unit}`,portion:1,macros:foodAmount(food,amount,unit)})}catch(err){document.querySelector('#diaryPreview').textContent=err.message}};
+  }
+  const update=()=>{const parsed=parseFoodQuery(search.value),list=search.value.trim()?searchFoods(foods,search.value):[];choice.innerHTML='';results.innerHTML=list.map((f,i)=>`<button class="secondary" type="button" data-food-result="${i}">${esc(f.title)}<small>${fmt(f.macros.kcal)} kcal / ${f.basis} ${f.unit}</small></button>`).join('')|| (search.value.trim()?'<p>Uygun besin bulunamadı. Daha kısa ara veya elle kayıt ekle.</p>':'');results.querySelectorAll('[data-food-result]').forEach(b=>b.onclick=()=>select(list[+b.dataset.foodResult],parsed));};
+  search.oninput=update;
+  document.querySelectorAll('[data-repeat-food]').forEach(b=>b.onclick=()=>{const e=frequent[+b.dataset.repeatFood];select({title:e.title,unit:'porsiyon',basis:1,macros:Object.fromEntries(Object.entries(e.macros).map(([k,v])=>[k,v*e.portion])),note:'Bir porsiyon, önceki kaydındaki miktarın tamamıdır. Aynısını yediysen 1 bırak; yarısını yediysen 0,5 seç.',source:'Önceki tüketim kaydın'})});
+ }
+ return {html,bind};
+}

@@ -1,6 +1,7 @@
 import {bindWaterPush} from './water-push.mjs?v=21';
 import {waterPanel} from './water-ui.mjs?v=13';
 import {numeric} from './tracking.mjs?v=13';
+import {foodDiary} from './food-diary-ui.mjs?v=23';
 import {planningBlock} from './health.mjs?v=11';
 import {dateKey,newEntry,daySummary,trackingState,dailyExport,nutrients} from './tracking.mjs?v=13';
 export function tracker(host){
@@ -10,9 +11,13 @@ export function tracker(host){
  const entries=t.entries.filter(e=>e.day===day&&!e.deleted),p=day===dateKey()?state.profile:t.snapshots[day]?.profile,target=p&&!planningBlock(p)?estimate(p).target:null;
 
  const report=state.reports?.[day];const consumed=t.entries.some(e=>e.day===day&&e.kind==='food'&&!e.deleted);
+ let diaryAdd;
+ const diary=foodDiary({catalog,entries:t.entries,esc,fmt,add:(...args)=>diaryAdd(...args)});
  const number=(name,label,min,max,step='1',value='')=>`<label>${label}<input name="${name}" type="number" min="${min}" max="${max}" step="${step}" required value="${value}" inputmode="decimal"></label>`;
  const html=`<h1 class="heading">Günlük takibim</h1><p class="lead">Önerilen menü ayrı, gerçekten yediklerin ayrı. Yalnızca kaydettiğin miktarlar sayılır.</p><label class="trackdate">Gün <input id="trackDate" type="date" max="${dateKey()}" value="${day}"></label>
  ${waterPanel({profile:p,t,current:day===dateKey(),snapshot:t.snapshots[day],consumed:s.water,fmt,esc})}
+ ${diary.html}
+ ${target?`<section class="panel"><h2>Bugün kalan payın</h2><p class="hint">Yalnızca kaydettiğin ve besin değeri bilinen yiyeceklere göre. ${s.unknownCount?'Besin değeri bilinmeyen kayıt var; bu hesap eksik.':''} Önerilmiş menü tüketilmiş sayılmaz.</p><div class="nutrients">${[['Kalori','kcal',target],...(p.mode==='macro'?[['Protein','protein',+p.protein],['Karbonhidrat','carbs',+p.carbs],['Yağ','fat',+p.fat]]:[])].map(([label,k,goal])=>{const delta=goal-s.totals[k];return `<div class="nutrient"><strong>${fmt(Math.abs(delta))}</strong>${label} ${k==='kcal'?'kcal':'g'} ${delta<0?'hedefin üzerinde':'kaldı'}</div>`}).join('')}</div></section>`:''}
  <section class="panel"><h2>Kaydettiğin beslenme</h2><div class="nutrients">${nutrients.map((k,i)=>`<div class="nutrient"><strong>${fmt(s.totals[k])}</strong>${['kcal','Protein g','Karb. g','Yağ g'][i]}</div>`).join('')}</div><p class="hint">${target?`Kalori hedefin ${fmt(target)} kcal. `:''}${s.unknownCount?`${s.unknownCount} yemeğin besin değeri bilinmiyor; toplam eksik.`:consumed?'Toplam, kaydettiğin yemeklerden hesaplandı.':'Henüz yemek kaydı yok; sıfır gösterimi hiçbir şey yemediğin anlamına gelmez.'} ${t.closedDays[day]?'Bu günü tamamlandı olarak işaretledin.':'Gün henüz tamamlanmadı; kaydedilmeyen yemekler hesaba katılmaz.'}</p>
  <details id="foodDetails"><summary>Yemek ekle / dışarıda yedim</summary><form id="foodForm" class="trackform"><label>Kaynak<select name="recipeId" id="foodRecipe"><option value="">Dışarıda yedim / elle kayıt</option>${catalog.recipes.map(r=>`<option value="${esc(r.id)}">${esc(r.title)}</option>`).join('')}</select></label><div id="manualFood"><label>Yemek ve porsiyon açıklaması<input name="title" maxlength="160" placeholder="Örn. 1 orta kase mercimek çorbası"></label><label class="checklabel"><input type="checkbox" name="unknown" id="unknownFood" checked>Besin değerlerini bilmiyorum</label><div id="foodMacros" class="formgrid" hidden>${nutrients.map((k,i)=>number(k,['Bir porsiyon kcal','Protein (g)','Karbonhidrat (g)','Yağ (g)'][i],0,k==='kcal'?10000:2000,.1)).join('')}</div><p class="hint">Biliyorsan etiket veya restoranın açıkladığı bir porsiyon değerlerini gir. Bilinmeyen değerler sıfır sayılmaz.</p></div>${number('portion','Yediğim porsiyon',.01,20,.01,1)}<button class="primary">Yedim, kaydet</button></form></details>
  <div class="journal">${entries.map(e=>`<article class="journalrow"><div><strong>${e.kind==='water'?fmt(e.ml)+' ml su':e.kind==='weight'?fmt(e.kg)+' kg':esc(e.title)}</strong><span class="meta">${e.kind==='food'?`${portionFmt(e.portion)} porsiyon · ${e.macros?fmt(e.macros.kcal*e.portion)+' kcal':'Besin değeri bilinmiyor'}`:new Date(e.at).toLocaleTimeString('tr-TR',{timeZone:'Europe/Istanbul',hour:'2-digit',minute:'2-digit'})}</span></div><button class="textlink" data-undo="${esc(e.id)}" aria-label="${esc(e.kind==='food'?e.title:e.kind==='water'?e.ml+' ml su':e.kg+' kg')} kaydını geri al">Geri al</button></article>`).join('')||'<p class="hint">Bu güne henüz kayıt eklemedin.</p>'}</div><label class="checklabel"><input type="checkbox" id="dayComplete" ${t.closedDays[day]?'checked':''}>Bu gün yediklerimin tamamını kaydettim</label></section>
@@ -22,6 +27,7 @@ export function tracker(host){
   bindWaterPush(state);
   const q=s=>document.querySelector(s);const act=fn=>{const before=structuredClone(state.tracking);try{fn();if(!save())throw Error('Depolama dolu; bu değişiklik telefonuna kaydedilemedi.');render()}catch(e){state.tracking=before;render();toast(e.message)}};
   const add=(kind,data)=>act(()=>{t.entries.push(newEntry(kind,data,day));t.closedDays[day]=false});
+  diaryAdd=add;diary.bind();
   q('#trackDate').onchange=e=>{if(!e.target.value||e.target.value>dateKey())return;ui.trackDate=e.target.value;render()};
   document.querySelectorAll('[data-water]').forEach(b=>b.onclick=()=>add('water',{ml:+b.dataset.water}));
   q('#waterForm').onsubmit=e=>{e.preventDefault();add('water',{ml:new FormData(e.target).get('ml')})};
