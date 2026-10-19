@@ -34,7 +34,12 @@ test('service worker never returns HTML for missing JSON or images and marks cac
  const error=await worker({fetcher:async()=>new Response('error',{status:500}),saved:response({recipes:['saved']})})('https://example.test/daily-catalog.json');assert.deepEqual(await error.json(),{recipes:['saved']});
 });
 test('daily nutrition is reproducible from verified sources; dates, allergen tags and cover provenance are complete',()=>{
- assert.equal(new Set(daily.recipes.map(r=>r.addedOn)).size,daily.recipes.length);
+ // Scheduled additions stay one per day; an explicitly requested recipe pack can contain several.
+ const scheduled=daily.recipes.filter(r=>!r.requestedBatch);
+ assert.equal(new Set(scheduled.map(r=>r.addedOn)).size,scheduled.length);
+ for(const r of daily.recipes)assert.match(r.addedOn,/^\d{4}-\d{2}-\d{2}$/);
+ const packs=daily.recipes.filter(r=>r.requestedBatch);
+ for(const r of packs){assert.equal(r.requestedBatch,'cream-of-rice-user-request');assert.match(r.id,/^requested-cream-of-rice-/)}
  for(const r of daily.recipes){
   const allergens=new Set();
   for(const [id]of r.items){const i=base.ingredients[id]||daily.ingredients[id];assert.equal(i.nutrition.verification,'source-checked');assert.ok(i.nutrition.sourceId);for(const a of i.allergens)allergens.add(a)}

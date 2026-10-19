@@ -1,6 +1,262 @@
 {
   "recipes": [
     {
+      "id": "requested-cream-of-rice-pudding",
+      "addedOn": "2026-10-19",
+      "requestedBatch": "cream-of-rice-user-request",
+      "title": "Kakaolu fıstık ezmeli Cookie & Cream puding",
+      "summary": "Cream of rice / Oreolu aroma sevenler için kaynaklardan uyarlanmış tek kişilik tarif. Hesap Proteinocean Cookie & Cream için; başka marka/aroma, tam yağlı süzme yoğurt veya ek bisküvi değerleri değiştirir. Ambalajdaki alerjen ve iz uyarılarını kontrol et. Mutfakta denenmedi; kapak özgün yapay zekâ görselidir.",
+      "category": "Ara öğün",
+      "servings": 1,
+      "minutes": 135,
+      "difficulty": "easy",
+      "water": 0,
+      "image": "images/requested-cream-of-rice-pudding.png",
+      "items": [
+        [
+          "creamofrice-cookie-proteinocean",
+          40
+        ],
+        [
+          "milk",
+          160
+        ],
+        [
+          "cocoa",
+          5
+        ],
+        [
+          "peanutbutter",
+          15
+        ]
+      ],
+      "macros": {
+        "kcal": 337.1,
+        "protein": 13.1,
+        "carbs": 43.9,
+        "fat": 13.9
+      },
+      "allergens": [
+        "milk",
+        "peanut"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "hob"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Küçük tencere",
+        "Çırpıcı",
+        "Sığ tatlı kâsesi",
+        "Buzdolabı"
+      ],
+      "steps": [
+        "Kuru ürünü tart; çiğ toz olarak tüketme. Bu tarif Proteinocean Cookie & Cream için hazırlanmıştır; başka ürün kullanıyorsan ambalajındaki pişirme talimatını uygula. Gerçek Oreo bisküvisi eklenmez.",
+        "40 g tozu, 5 g şekersiz kakaoyu ve 160 g sütü küçük tencerede topaksız çırp. Kısık ateşte karıştırarak ambalajdaki kıvama gelene kadar pişir; koyulaşınca ocaktan al.",
+        "15 g sade, şekersiz ve tuzsuz pürüzsüz yer fıstığı ezmesini sıcak karışıma yedir. Çok koyuysa az içme suyu ekle; yağ veya krema ekleme.",
+        "Sığ tatlı kâsesine aktar. Buharı azalınca kapatıp buzdolabında yaklaşık 2 saat soğut. Oda sıcaklığında iki saatten fazla bırakma.",
+        "Bir kâse bir porsiyondur. Soğuk tüket; üstüne bisküvi, çikolata veya fıstık ekleme. Bunlar besin hesabında yoktur."
+      ],
+      "nutritionCalculation": {
+        "basis": "Miktar × gramsPerUnit × 100 g besin değeri / 100; bir porsiyon, bir ondalık.",
+        "source": "Cream of Rice için satıcının markalı ürün tablosu; diğer malzemeler USDA FoodData Central source-checked kayıtları",
+        "sourceIds": {
+          "creamofrice-cookie-proteinocean": "proteinocean-cookie-cream-50g-label",
+          "milk": "172217",
+          "cocoa": "169593",
+          "peanutbutter": "172470"
+        },
+        "note": "Cookie & Cream: 50 g için 173 kcal, 4,7 g protein, 37,5 g karbonhidrat, 0,4 g yağ. Süt gramla, muz kabuksuz, çilek sapsız tartılır. Şeker verisi tarif düzeyinde eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "The Best Summer Cream of Rice Recipes: Cold Prep & Overnight Bowls · Chocolate Cake Protein Pudding Bowl",
+        "publisher": "NF Supps",
+        "sourceUrl": "https://www.nfsupps.com/blogs/news/the-best-summer-cream-of-rice-recipes-cold-prep-overnight-bowls",
+        "accessedOn": "2026-10-19",
+        "kitchenTested": false,
+        "adaptation": "Fıstık ezmeli puding fikri temel alındı. Whey, muz ve çikolata parçaları çıkarıldı; kakao eklendi. Ürün değiştiği için karışım pişirilerek soğutuldu; ölçüler ve makrolar yeniden hesaplandı.",
+        "preparationSource": "https://proteinocean.com/cream-of-rice"
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-19",
+        "description": "Özgün yapay zekâ sunumu; üçüncü taraf fotoğraf kullanılmadı.",
+        "promptFile": "images/requested-cream-of-rice-pudding.provenance.json"
+      }
+    },
+    {
+      "id": "requested-cream-of-rice-parfait",
+      "addedOn": "2026-10-19",
+      "requestedBatch": "cream-of-rice-user-request",
+      "title": "Çilekli yoğurtlu Cookie & Cream kup",
+      "summary": "Cream of rice / Oreolu aroma sevenler için kaynaklardan uyarlanmış tek kişilik tarif. Hesap Proteinocean Cookie & Cream için; başka marka/aroma, tam yağlı süzme yoğurt veya ek bisküvi değerleri değiştirir. Ambalajdaki alerjen ve iz uyarılarını kontrol et. Mutfakta denenmedi; kapak özgün yapay zekâ görselidir.",
+      "category": "Tatlı",
+      "servings": 1,
+      "minutes": 140,
+      "difficulty": "easy",
+      "water": 160,
+      "image": "images/requested-cream-of-rice-parfait.png",
+      "items": [
+        [
+          "creamofrice-cookie-proteinocean",
+          40
+        ],
+        [
+          "greekyogurt",
+          150
+        ],
+        [
+          "strawberry",
+          100
+        ]
+      ],
+      "macros": {
+        "kcal": 258.9,
+        "protein": 19.7,
+        "carbs": 43.1,
+        "fat": 1.2
+      },
+      "allergens": [
+        "milk"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "hob"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Küçük tencere",
+        "Çırpıcı",
+        "Sığ soğutma kabı",
+        "Bıçak",
+        "Tatlı bardağı",
+        "Buzdolabı"
+      ],
+      "steps": [
+        "Kuru ürünü tart; çiğ toz olarak tüketme. Bu tarif Proteinocean Cookie & Cream için hazırlanmıştır; başka ürün kullanıyorsan ambalajındaki pişirme talimatını uygula. Gerçek Oreo bisküvisi eklenmez.",
+        "40 g tozu 160 ml suyla soğukken karıştır; kısık ateşte karıştırarak kıvam alana kadar pişir. Soğuk suda yalnızca bekletme: bu marka için önce pişirme gerekir.",
+        "Pişmiş kremayı sığ kaba al. Buharı azalınca kapatıp buzdolabına koy; oda sıcaklığında iki saatten fazla bırakma. Tamamen soğuması için yaklaşık 2 saat ayır.",
+        "Çilekleri yıka, saplarını çıkarıp 100 g tart ve dilimle. Bir bardağa soğuk pirinç kremasını, 150 g yağsız süzme yoğurdu ve çileği katmanla.",
+        "Bir bardak bir porsiyondur. Hazırlandıktan sonra soğuk tut, tercihen aynı gün tüket. Bisküvi tabanı, bal ve granola eklenmemiştir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Miktar × gramsPerUnit × 100 g besin değeri / 100; bir porsiyon, bir ondalık.",
+        "source": "Cream of Rice için satıcının markalı ürün tablosu; diğer malzemeler USDA FoodData Central source-checked kayıtları",
+        "sourceIds": {
+          "creamofrice-cookie-proteinocean": "proteinocean-cookie-cream-50g-label",
+          "greekyogurt": "170894",
+          "strawberry": "167762"
+        },
+        "note": "Cookie & Cream: 50 g için 173 kcal, 4,7 g protein, 37,5 g karbonhidrat, 0,4 g yağ. Süt gramla, muz kabuksuz, çilek sapsız tartılır. Şeker verisi tarif düzeyinde eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "The Best Summer Cream of Rice Recipes: Cold Prep & Overnight Bowls · Strawberry Cheesecake Overnight Bowl",
+        "publisher": "NF Supps",
+        "sourceUrl": "https://www.nfsupps.com/blogs/news/the-best-summer-cream-of-rice-recipes-cold-prep-overnight-bowls",
+        "accessedOn": "2026-10-19",
+        "kitchenTested": false,
+        "adaptation": "Çilek ve yoğurt birleşimi temel alındı; ürün değiştiği için soğuk ıslatma yerine önce pişirme ve soğutma uygulandı. Whey, granola ve bal çıkarıldı; ölçüler yeniden belirlendi.",
+        "preparationSource": "https://proteinocean.com/cream-of-rice"
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-19",
+        "description": "Özgün yapay zekâ sunumu; üçüncü taraf fotoğraf kullanılmadı.",
+        "promptFile": "images/requested-cream-of-rice-parfait.provenance.json"
+      }
+    },
+    {
+      "id": "requested-cream-of-rice-banana",
+      "addedOn": "2026-10-19",
+      "requestedBatch": "cream-of-rice-user-request",
+      "title": "Muzlu Cookie & Cream pirinç kreması",
+      "summary": "Cream of rice / Oreolu aroma sevenler için kaynaklardan uyarlanmış tek kişilik tarif. Hesap Proteinocean Cookie & Cream için; başka marka/aroma, tam yağlı süzme yoğurt veya ek bisküvi değerleri değiştirir. Ambalajdaki alerjen ve iz uyarılarını kontrol et. Mutfakta denenmedi; kapak özgün yapay zekâ görselidir.",
+      "category": "Kahvaltı",
+      "servings": 1,
+      "minutes": 15,
+      "difficulty": "easy",
+      "water": 0,
+      "image": "images/requested-cream-of-rice-banana.png",
+      "items": [
+        [
+          "creamofrice-cookie-proteinocean",
+          50
+        ],
+        [
+          "milk",
+          200
+        ],
+        [
+          "banana",
+          100
+        ]
+      ],
+      "macros": {
+        "kcal": 384,
+        "protein": 12.1,
+        "carbs": 69.9,
+        "fat": 7.3
+      },
+      "allergens": [
+        "milk"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "hob"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Küçük tencere",
+        "Çırpıcı",
+        "Bıçak",
+        "Kâse"
+      ],
+      "steps": [
+        "Kuru ürünü tart; çiğ toz olarak tüketme. Bu tarif Proteinocean Cookie & Cream için hazırlanmıştır; başka ürün kullanıyorsan ambalajındaki pişirme talimatını uygula. Gerçek Oreo bisküvisi eklenmez.",
+        "50 g pirinç kreması tozunu ve 200 g sütü küçük tencerede soğukken çırp. Kısık ateşte sürekli karıştırarak ambalajda belirtilen kıvama kadar pişir; yaklaşık 3–5 dakika sürebilir. Dibini tutturma; gerekirse az içme suyuyla aç.",
+        "Muzu soyup kabuksuz 100 g tart ve dilimle. Pirinç kremasını kâseye aktar, muz dilimlerini üzerine koy.",
+        "Bir kâse bir porsiyondur. Ilık tüket. Bal, bisküvi ve protein tozu bu tarife ve hesaba dahil değildir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Miktar × gramsPerUnit × 100 g besin değeri / 100; bir porsiyon, bir ondalık.",
+        "source": "Cream of Rice için satıcının markalı ürün tablosu; diğer malzemeler USDA FoodData Central source-checked kayıtları",
+        "sourceIds": {
+          "creamofrice-cookie-proteinocean": "proteinocean-cookie-cream-50g-label",
+          "milk": "172217",
+          "banana": "173944"
+        },
+        "note": "Cookie & Cream: 50 g için 173 kcal, 4,7 g protein, 37,5 g karbonhidrat, 0,4 g yağ. Süt gramla, muz kabuksuz, çilek sapsız tartılır. Şeker verisi tarif düzeyinde eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Cream of Rice · hazırlama ve meyveli kase önerileri",
+        "publisher": "Proteinocean / Per4m",
+        "sourceUrl": "https://per4mbetter.com/collections/cream-of-rice",
+        "accessedOn": "2026-10-19",
+        "kitchenTested": false,
+        "adaptation": "Meyve ekleme önerisi, Cookie & Cream ve muzla ölçülendirildi. Per4m hazırlama oranı yerine Proteinocean pişirme talimatı esas alındı.",
+        "preparationSource": "https://proteinocean.com/cream-of-rice"
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-19",
+        "description": "Özgün yapay zekâ sunumu; üçüncü taraf fotoğraf kullanılmadı.",
+        "promptFile": "images/requested-cream-of-rice-banana.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-18-creamy-carrot-lentil-soup",
       "addedOn": "2026-10-18",
       "title": "Sütlü havuç ve mercimek çorbası",
@@ -1177,5 +1433,30 @@
       }
     }
   ],
-  "ingredients": {}
+  "ingredients": {
+    "creamofrice-cookie-proteinocean": {
+      "name": "Cream of Rice Cookie & Cream (Proteinocean; kuru)",
+      "unit": "g",
+      "pack": 1000,
+      "price": 0,
+      "gramsPerUnit": 1,
+      "allergens": [],
+      "dietaryClass": "plant",
+      "nutrition": {
+        "kcal": 346,
+        "protein": 9.4,
+        "carbs": 75,
+        "fat": 0.8,
+        "source": "Özel Beslenme · Proteinocean Cookie & Cream ürün tablosu",
+        "sourceId": "proteinocean-cookie-cream-50g-label",
+        "sourceUrl": "https://www.ozelbeslenme.com/products/proteinocean-cream-of-rice-cookie-cream-1000g",
+        "basis": "100 g kuru ürün; yayımlanan 50 g servis değerleri ikiyle çarpıldı",
+        "dataType": "branded-product-label",
+        "retrievedAt": "2026-10-19",
+        "verification": "source-checked",
+        "checkedAt": "2026-10-19"
+      },
+      "note": "Cookie & Cream aromalı pirinç unu; gerçek Oreo bisküvisi içerdiği varsayılmadı. Başka marka veya aroma ile makrolar değişebilir. Çapraz bulaşma/iz alerjenleri ambalajdan kontrol edilmeli; glutensiz veya alerjensiz güvence verilmez."
+    }
+  }
 }
