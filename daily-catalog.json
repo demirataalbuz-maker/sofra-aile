@@ -87,21 +87,7 @@
         "createdOn": "2026-10-19",
         "description": "Özgün yapay zekâ sunumu; üçüncü taraf fotoğraf kullanılmadı.",
         "promptFile": "images/requested-cream-of-rice-pudding.provenance.json"
-      },
-      "stepPhotos": [
-        {
-          "step": 0,
-          "image": "images/guide-v11-weigh-ingredients-1bc0cc9.webp",
-          "caption": "Malzemeleri mutfak tartısında ölçün. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Dijital mutfak tartısındaki kasede yulaf ölçülüyor."
-        },
-        {
-          "step": 1,
-          "image": "images/guide-v11-stir-pudding-76d056f.webp",
-          "caption": "Muhallebiyi koyulaşana kadar karıştırın. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Tenceredeki koyu kıvamlı açık renk muhallebiyi karıştıran spatula."
-        }
-      ]
+      }
     },
     {
       "id": "requested-cream-of-rice-parfait",
@@ -188,18 +174,6 @@
         "promptFile": "images/requested-cream-of-rice-parfait.provenance.json"
       },
       "stepPhotos": [
-        {
-          "step": 0,
-          "image": "images/guide-v11-weigh-ingredients-1bc0cc9.webp",
-          "caption": "Malzemeleri mutfak tartısında ölçün. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Dijital mutfak tartısındaki kasede yulaf ölçülüyor."
-        },
-        {
-          "step": 1,
-          "image": "images/guide-v11-stir-pudding-76d056f.webp",
-          "caption": "Muhallebiyi koyulaşana kadar karıştırın. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Tenceredeki koyu kıvamlı açık renk muhallebiyi karıştıran spatula."
-        },
         {
           "step": 3,
           "image": "images/guide-v11-slice-strawberry-0cf1d80.webp",
@@ -290,18 +264,6 @@
         "promptFile": "images/requested-cream-of-rice-banana.provenance.json"
       },
       "stepPhotos": [
-        {
-          "step": 0,
-          "image": "images/guide-v11-weigh-ingredients-1bc0cc9.webp",
-          "caption": "Malzemeleri mutfak tartısında ölçün. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Dijital mutfak tartısındaki kasede yulaf ölçülüyor."
-        },
-        {
-          "step": 1,
-          "image": "images/technique-cook-rice-7efddaf.webp",
-          "caption": "Pilavın kapağını açarken buharı kendinden uzağa yönelt. Tanelerin yumuşamasını kontrol et.",
-          "alt": "Eldivenli el pilav tenceresinin kapağını buharı uzağa yönelterek kaldırıyor."
-        },
         {
           "step": 2,
           "image": "images/guide-v11-slice-banana-cc1c0c5.webp",
@@ -409,6 +371,12 @@
           "image": "images/technique-rinse-lentils-eaf6a8b.webp",
           "caption": "Mercimeği ince süzgeçte akan su altında yıkayıp süzdür.",
           "alt": "Süzgeçteki kırmızı mercimek suyla yıkanıyor."
+        },
+        {
+          "step": 1,
+          "image": "images/technique-simmer-lentil-soup-0b50ff1.webp",
+          "caption": "Mercimek ve sebzeleri hafif kabarcıklarla, yumuşayana kadar pişir.",
+          "alt": "Mercimek çorbası tencerede hafifçe kaynıyor."
         },
         {
           "step": 2,
@@ -529,21 +497,15 @@
       "stepPhotos": [
         {
           "step": 0,
-          "image": "images/guide-v11-soak-legumes-aeedb1e.webp",
-          "caption": "Önceden ıslatılıp yumuşayana kadar haşlanmış bakliyatı süzgeçte süzün. Teknik örneği; malzeme ve miktar için adım metnini izle.",
-          "alt": "Süzgeçte süzülen haşlanmış nohut ve fasulyeler."
+          "image": "images/guide-v11-chop-spinach-f07ae6a.webp",
+          "caption": "Yıkanıp süzülmüş ıspanak yapraklarını tahtada iri doğrayın. Teknik örneği; malzeme ve miktar için adım metnini izle.",
+          "alt": "Kesme tahtasında iri doğranan taze ıspanak yaprakları."
         },
         {
-          "step": 1,
-          "image": "images/technique-saute-vegetables-99544a4.webp",
-          "caption": "Sebzeleri orta ateşte spatulayla çevirerek yumuşatma örneği.",
-          "alt": "Tavada küçük sebze parçaları spatulayla çevriliyor."
-        },
-        {
-          "step": 3,
-          "image": "images/guide-v11-simmer-vegetables-4f4c28f.webp",
-          "caption": "Sebzeleri kısık ateşte, kapağı aralık bırakarak pişirin. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Kapağı aralık tencerede hafifçe kaynayan sebzeler."
+          "step": 4,
+          "image": "images/guide-v11-poach-eggs-skillet-9ab5331.webp",
+          "caption": "Sebzeli ve nohutlu harcın içinde açtığınız çukurlara yumurtaları kırıp kapağı kapalı pişirin. Teknik örneği; süre için adım metnini izle.",
+          "alt": "Geniş tavadaki sebzeli nohutlu harcın çukurlarına kırılmış dört yumurta."
         }
       ]
     },
@@ -636,16 +598,10 @@
       },
       "stepPhotos": [
         {
-          "step": 0,
-          "image": "images/guide-v11-weigh-ingredients-1bc0cc9.webp",
-          "caption": "Malzemeleri mutfak tartısında ölçün. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Dijital mutfak tartısındaki kasede yulaf ölçülüyor."
-        },
-        {
           "step": 1,
-          "image": "images/guide-v11-blend-smoothie-8ff0780.webp",
-          "caption": "Süt, muz ve yulafı kapaklı blendera alın. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Kapağı kapalı blender haznesinde süt, muz parçaları ve yulaf."
+          "image": "images/guide-v11-slice-banana-cc1c0c5.webp",
+          "caption": "Muzu eşit kalınlıkta dilimleyin. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
+          "alt": "Güvenli bıçak tutuşuyla tahtada dilimlenen muz ve muz dilimleri."
         }
       ]
     },
@@ -747,28 +703,16 @@
       },
       "stepPhotos": [
         {
-          "step": 0,
-          "image": "images/guide-v11-weigh-ingredients-1bc0cc9.webp",
-          "caption": "Malzemeleri mutfak tartısında ölçün. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Dijital mutfak tartısındaki kasede yulaf ölçülüyor."
-        },
-        {
-          "step": 1,
-          "image": "images/technique-arrange-vegetables-039123d.webp",
-          "caption": "Sebzeleri tepsiye üst üste yığmadan, tek kat halinde yayma örneği.",
-          "alt": "Kesilmiş sebzeler fırın tepsisine tek kat halinde diziliyor."
-        },
-        {
           "step": 2,
-          "image": "images/technique-rinse-lentils-eaf6a8b.webp",
-          "caption": "Mercimeği ince süzgeçte akan su altında yıkayıp süzdür.",
-          "alt": "Süzgeçteki kırmızı mercimek suyla yıkanıyor."
+          "image": "images/guide-v11-chop-spinach-f07ae6a.webp",
+          "caption": "Yıkanıp süzülmüş ıspanak yapraklarını tahtada iri doğrayın. Teknik örneği; malzeme ve miktar için adım metnini izle.",
+          "alt": "Kesme tahtasında iri doğranan taze ıspanak yaprakları."
         },
         {
           "step": 3,
-          "image": "images/guide-v11-whisk-cake-batter-600418e.webp",
-          "caption": "Yumurta, yoğurt/süt ve kuru malzemeleri kâsede topaksız bir harç olana kadar karıştırın. Teknik örneği; ölçüler için adım metnini izle.",
-          "alt": "Geniş kâsede çırpıcıyla karıştırılan kek ve muffin harcı."
+          "image": "images/guide-v11-mix-dressing-01f5367.webp",
+          "caption": "Limon suyu ve zeytinyağını küçük bir kasede çırpın. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
+          "alt": "Küçük kasede limon suyu ve zeytinyağını karıştıran çırpıcı."
         }
       ]
     },
@@ -862,27 +806,9 @@
       "stepPhotos": [
         {
           "step": 0,
-          "image": "images/technique-stir-yogurt-11be7e4.webp",
-          "caption": "Yoğurtlu sosu kâsede karıştırma tekniği. Miktar için adım metnini izle.",
-          "alt": "Kaşıkla kâsede yoğurtlu sos karıştırılıyor."
-        },
-        {
-          "step": 1,
-          "image": "images/guide-v11-slice-apple-7464f1b.webp",
-          "caption": "Elmanın çekirdeğini çıkarıp doğrayın. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Çekirdeği çıkarılmış elma dilimleri ve küçük elma küpleri."
-        },
-        {
-          "step": 2,
           "image": "images/guide-v11-weigh-ingredients-1bc0cc9.webp",
           "caption": "Malzemeleri mutfak tartısında ölçün. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
           "alt": "Dijital mutfak tartısındaki kasede yulaf ölçülüyor."
-        },
-        {
-          "step": 3,
-          "image": "images/guide-v11-cook-porridge-51272d4.webp",
-          "caption": "Yulafı süt ve elma parçalarıyla karıştırarak pişirin. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Küçük bir tencerede sütlü ve elmalı yulafı karıştıran tahta kaşık."
         }
       ]
     },
@@ -1003,16 +929,10 @@
           "alt": "Solda soyulmuş patates dilimleri, ortada düz şeritler, sağda küçük patates küpleri."
         },
         {
-          "step": 1,
-          "image": "images/technique-saute-vegetables-99544a4.webp",
-          "caption": "Sebzeleri orta ateşte spatulayla çevirerek yumuşatma örneği.",
-          "alt": "Tavada küçük sebze parçaları spatulayla çevriliyor."
-        },
-        {
-          "step": 3,
-          "image": "images/guide-v11-fish-thermometer-cfcbc21.webp",
-          "caption": "Balığın en kalın yerinin merkezinde 63 °C ölçün. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Pişmiş balık filetosunun kalın kısmına batırılmış gıda termometresi."
+          "step": 4,
+          "image": "images/guide-v11-chop-parsley-b7bd65c.webp",
+          "caption": "Yıkanmış maydanozu ince kıyın. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
+          "alt": "Kesme tahtasında ince kıyılmış taze maydanoz."
         }
       ]
     },
@@ -1093,15 +1013,9 @@
         },
         {
           "step": 1,
-          "image": "images/guide-v11-soak-legumes-aeedb1e.webp",
-          "caption": "Önceden ıslatılıp yumuşayana kadar haşlanmış bakliyatı süzgeçte süzün. Teknik örneği; malzeme ve miktar için adım metnini izle.",
-          "alt": "Süzgeçte süzülen haşlanmış nohut ve fasulyeler."
-        },
-        {
-          "step": 3,
-          "image": "images/guide-v11-cut-vegetable-sticks-b7fe1b6.webp",
-          "caption": "Sebzeleri çubuk şeklinde kesin. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Havuç ve salatalık kesme tahtasında eşit çubuklar halinde hazırlanmış."
+          "image": "images/guide-v11-chop-parsley-b7bd65c.webp",
+          "caption": "Yıkanmış maydanozu ince kıyın. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
+          "alt": "Kesme tahtasında ince kıyılmış taze maydanoz."
         }
       ],
       "nutritionCalculation": {
@@ -1261,9 +1175,9 @@
       "stepPhotos": [
         {
           "step": 0,
-          "image": "images/guide-v11-soak-legumes-aeedb1e.webp",
-          "caption": "Önceden ıslatılıp yumuşayana kadar haşlanmış bakliyatı süzgeçte süzün. Teknik örneği; malzeme ve miktar için adım metnini izle.",
-          "alt": "Süzgeçte süzülen haşlanmış nohut ve fasulyeler."
+          "image": "images/guide-v11-dice-carrot-056f9c3.webp",
+          "caption": "Havucu küçük küpler halinde doğrayın. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
+          "alt": "Kesme tahtasında havuç dilimleri, çubukları ve küçük küpleri görülüyor."
         },
         {
           "step": 1,
@@ -1272,16 +1186,10 @@
           "alt": "Tavada küçük sebze parçaları spatulayla çevriliyor."
         },
         {
-          "step": 3,
-          "image": "images/guide-v11-whisk-cake-batter-600418e.webp",
-          "caption": "Yumurta, yoğurt/süt ve kuru malzemeleri kâsede topaksız bir harç olana kadar karıştırın. Teknik örneği; ölçüler için adım metnini izle.",
-          "alt": "Geniş kâsede çırpıcıyla karıştırılan kek ve muffin harcı."
-        },
-        {
-          "step": 4,
-          "image": "images/technique-simmer-lentil-soup-0b50ff1.webp",
-          "caption": "Mercimek ve sebzeleri hafif kabarcıklarla, yumuşayana kadar pişir.",
-          "alt": "Mercimek çorbası tencerede hafifçe kaynıyor."
+          "step": 2,
+          "image": "images/guide-v11-simmer-vegetables-4f4c28f.webp",
+          "caption": "Sebzeleri kısık ateşte, kapağı aralık bırakarak pişirin. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
+          "alt": "Kapağı aralık tencerede hafifçe kaynayan sebzeler."
         }
       ]
     },
@@ -1398,24 +1306,6 @@
           "image": "images/guide-v11-slice-mushrooms-08f5d7d.webp",
           "caption": "Mantarları ince dilimleyin. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
           "alt": "Kesme tahtasında bütün ve ince dilimlenmiş kültür mantarları bulunuyor."
-        },
-        {
-          "step": 1,
-          "image": "images/technique-saute-vegetables-99544a4.webp",
-          "caption": "Sebzeleri orta ateşte spatulayla çevirerek yumuşatma örneği.",
-          "alt": "Tavada küçük sebze parçaları spatulayla çevriliyor."
-        },
-        {
-          "step": 2,
-          "image": "images/guide-v11-cook-porridge-51272d4.webp",
-          "caption": "Yulafı süt ve elma parçalarıyla karıştırarak pişirin. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Küçük bir tencerede sütlü ve elmalı yulafı karıştıran tahta kaşık."
-        },
-        {
-          "step": 3,
-          "image": "images/guide-v11-cook-porridge-51272d4.webp",
-          "caption": "Yulafı süt ve elma parçalarıyla karıştırarak pişirin. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Küçük bir tencerede sütlü ve elmalı yulafı karıştıran tahta kaşık."
         }
       ]
     },
@@ -1513,21 +1403,9 @@
         },
         {
           "step": 1,
-          "image": "images/guide-v11-weigh-ingredients-1bc0cc9.webp",
-          "caption": "Malzemeleri mutfak tartısında ölçün. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Dijital mutfak tartısındaki kasede yulaf ölçülüyor."
-        },
-        {
-          "step": 2,
-          "image": "images/technique-arrange-vegetables-039123d.webp",
-          "caption": "Sebzeleri tepsiye üst üste yığmadan, tek kat halinde yayma örneği.",
-          "alt": "Kesilmiş sebzeler fırın tepsisine tek kat halinde diziliyor."
-        },
-        {
-          "step": 3,
-          "image": "images/guide-v11-mix-dressing-01f5367.webp",
-          "caption": "Limon suyu ve zeytinyağını küçük bir kasede çırpın. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Küçük kasede limon suyu ve zeytinyağını karıştıran çırpıcı."
+          "image": "images/guide-v11-dry-chickpeas-cab7fae.webp",
+          "caption": "Haşlanmış nohutları temiz bezle iyice kurulayın. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
+          "alt": "Temiz mutfak bezinin arasında hafifçe bastırılarak kurulanan haşlanmış nohutlar."
         },
         {
           "step": 4,
@@ -1627,22 +1505,10 @@
       },
       "stepPhotos": [
         {
-          "step": 0,
-          "image": "images/guide-v11-fill-muffin-tin-618d910.webp",
-          "caption": "Yumurtalı karışımı muffin kalıplarına paylaştırın. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Ispanaklı yumurta karışımı yağlanmış muffin gözlerine üçte iki dolacak şekilde dökülüyor."
-        },
-        {
           "step": 1,
-          "image": "images/guide-v11-weigh-ingredients-1bc0cc9.webp",
-          "caption": "Malzemeleri mutfak tartısında ölçün. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Dijital mutfak tartısındaki kasede yulaf ölçülüyor."
-        },
-        {
-          "step": 4,
-          "image": "images/technique-stir-yogurt-11be7e4.webp",
-          "caption": "Yoğurtlu sosu kâsede karıştırma tekniği. Miktar için adım metnini izle.",
-          "alt": "Kaşıkla kâsede yoğurtlu sos karıştırılıyor."
+          "image": "images/guide-v11-mash-banana-01bbc9a.webp",
+          "caption": "Muzu çatalla ezin. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
+          "alt": "Beyaz kasedeki olgun muz çatalla eziliyor."
         }
       ]
     },
@@ -1724,18 +1590,6 @@
       "stepPhotos": [
         {
           "step": 0,
-          "image": "images/guide-v11-slice-strawberry-0cf1d80.webp",
-          "caption": "Çilekleri yıkayıp saplarını ayıklayarak dilimleyin. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
-          "alt": "Kesme tahtasında sapları ayıklanmış ve dilimlenmiş taze çilekler."
-        },
-        {
-          "step": 1,
-          "image": "images/technique-stir-yogurt-11be7e4.webp",
-          "caption": "Yoğurtlu sosu kâsede karıştırma tekniği. Miktar için adım metnini izle.",
-          "alt": "Kaşıkla kâsede yoğurtlu sos karıştırılıyor."
-        },
-        {
-          "step": 3,
           "image": "images/guide-v11-slice-strawberry-0cf1d80.webp",
           "caption": "Çilekleri yıkayıp saplarını ayıklayarak dilimleyin. Teknik örneği; malzeme, miktar ve süre için adım metnini izle.",
           "alt": "Kesme tahtasında sapları ayıklanmış ve dilimlenmiş taze çilekler."
