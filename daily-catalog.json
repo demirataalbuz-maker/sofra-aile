@@ -1,6 +1,99 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-20-braised-leek-white-beans",
+      "addedOn": "2026-10-20",
+      "title": "Yoğurt eşliğinde beyaz fasulyeli pırasa",
+      "summary": "İri pırasa parçaları ve haşlanmış beyaz fasulyeyle hazırlanan iki kişilik, az sulu tencere yemeği. Good Food tarifinden uyarlama; krema yerine yanında yağsız süzme yoğurt var. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Bakliyat",
+      "servings": 2,
+      "minutes": 35,
+      "difficulty": "easy",
+      "water": 200,
+      "image": "images/daily-2026-10-20-braised-leek-white-beans.png",
+      "items": [
+        [
+          "whitebean",
+          400
+        ],
+        [
+          "leek",
+          350
+        ],
+        [
+          "oil",
+          15
+        ],
+        [
+          "greekyogurt",
+          100
+        ],
+        [
+          "lemon",
+          10
+        ]
+      ],
+      "macros": {
+        "kcal": 481.7,
+        "protein": 27.2,
+        "carbs": 77.2,
+        "fat": 8.9
+      },
+      "allergens": [
+        "milk"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "hob"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Geniş kapaklı tava veya yayvan tencere",
+        "Bıçak",
+        "Kesme tahtası",
+        "Süzgeç",
+        "Kaşık",
+        "İki servis tabağı"
+      ],
+      "steps": [
+        "Pırasanın kökünü ve sert koyu yeşil yapraklarını ayır. Kat aralarını iyice yıka; temizlenmiş kısmından 350 g tartıp yaklaşık 5 cm uzunluğunda kes. Önceden haşlanmış, süzülmüş beyaz fasulyeden 400 g tart. Kuru fasulyeyi doğrudan kullanma.",
+        "Yayvan tencerede 15 g zeytinyağını orta ateşte ısıt. Pırasaları ekleyip yaklaşık 5 dakika nazikçe çevir; yüzeyleri hafif renk alsın, yanmasın.",
+        "İki kişilik tarif için 200 ml sıcak içme suyu ve fasulyeyi ekle. Hafif kaynayınca kapağı kapatıp kısık ateşte 5 dakika pişir. Kişi sayısını değiştirirsen suyu da orantıla.",
+        "Kapağı aç; yaklaşık 10–15 dakika, pırasalar çatalla kolay delinecek kadar yumuşayıp suyun çoğu çekilene kadar pişir. Kurumaya başlarsa az sıcak su ekle. Fasulyeler zaten pişmiş olduğundan sertçe karıştırıp ezme.",
+        "Ocaktan alınca 10 g limon suyunu ekle. İki tabağa eşit paylaştır; her birinin yanında 50 g yağsız süzme yoğurt sun. Bir tabak bir porsiyondur. Yoğurt hesaba dahildir; ekmek, pilav ve ekstra yağ dahil değildir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "whitebean": "175203",
+          "leek": "169246",
+          "oil": "171413",
+          "greekyogurt": "170894",
+          "lemon": "167747"
+        },
+        "note": "Fasulye haşlanmış ve süzülmüş, pırasa temizlenmiş çiğ ağırlık; limon suyu gramla ölçülür. Yoğurt yağsızdır. Su enerji içermez. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Braised butter beans & leeks",
+        "publisher": "Good Food / Silvana Franco",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/braised-butter-beans-leeks/",
+        "accessedOn": "2026-10-20",
+        "kitchenTested": false,
+        "adaptation": "Pırasa ve pişmiş fasulyeyi az sıvıda kapaklı pişirme yöntemi temel alındı. İri butter bean yerine katalogdaki beyaz fasulye; tereyağı yerine zeytinyağı; bulyon yerine su kullanıldı. Alkol ve otlar çıkarıldı. Krema yerine yoğurt ayrı sunuldu, limon eklendi. İki kişilik ölçüler ve makrolar yeniden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-20",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-10-20-braised-leek-white-beans.provenance.json"
+      }
+    },
+    {
       "id": "requested-cream-of-rice-pudding",
       "addedOn": "2026-10-19",
       "requestedBatch": "cream-of-rice-user-request",
