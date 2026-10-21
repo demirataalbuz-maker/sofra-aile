@@ -1,6 +1,93 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-21-apple-yogurt-toast",
+      "addedOn": "2026-10-21",
+      "title": "Elmalı süzme yoğurtlu açık tost",
+      "summary": "Tam buğday ekmeği üzerinde yağsız süzme yoğurt, ince elma dilimleri ve az bal. Kaynak tarifte önerilen yoğurt alternatifiyle tek kişilik kahvaltı uyarlaması. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Kahvaltı",
+      "servings": 1,
+      "minutes": 10,
+      "difficulty": "easy",
+      "image": "images/daily-2026-10-21-apple-yogurt-toast.png",
+      "items": [
+        [
+          "bread",
+          60
+        ],
+        [
+          "greekyogurt",
+          150
+        ],
+        [
+          "apple",
+          100
+        ],
+        [
+          "honey",
+          5
+        ]
+      ],
+      "macros": {
+        "kcal": 306.9,
+        "protein": 23,
+        "carbs": 48.9,
+        "fat": 2.9
+      },
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "hob"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Yapışmaz tava",
+        "Spatula",
+        "Bıçak",
+        "Kesme tahtası",
+        "Kaşık",
+        "Servis tabağı"
+      ],
+      "steps": [
+        "Toplam 60 g gelen iki küçük dilim tam buğday ekmeği tart. Yağsız ve koyu kıvamlı süzme yoğurttan 150 g ayır. Elmayı yıka; çekirdeğini ve sapını çıkarıp kabuklu yenilebilir kısmından 100 g tart.",
+        "Yapışmaz tavayı orta-kısık ateşte ısıt. Ekmeği yağ eklemeden her yüzü yaklaşık 1–2 dakika hafifçe kızart; yanmaması için kontrol et. Tabağa alıp 1 dakika ilk sıcaklığının geçmesini bekle.",
+        "Elmayı yaklaşık 2–3 mm ince dilimle. Yoğurdu ekmeklerin üzerine eşit yay; elma dilimlerini hafifçe üst üste bindirerek yerleştir.",
+        "Toplam 5 g balı iki dilimin üzerine paylaştır. İki dilimin tamamı bir porsiyondur. Yoğurt yumuşatmadan hemen servis et; ekmek yağlanmaz ve ilave kuruyemiş bu hesaba dahil değildir. Yağlı süzme yoğurt kullanırsan makrolar değişir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Tek porsiyon; miktar × gramsPerUnit × 100 g besin değeri / 100; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "bread": "172688",
+          "greekyogurt": "170894",
+          "apple": "171688",
+          "honey": "169640"
+        },
+        "note": "Elma kabuklu ve çekirdeksiz, ekmek kızartılmadan önce tartılır. Yoğurt yağsızdır. Bal içerir; şekersiz/ilave şekersiz olarak etiketlenmedi. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Cottage Cheese Toast with Apples",
+        "publisher": "In the Kitchen with Steff / Steffanie Williams",
+        "sourceUrl": "https://inthekitchenwithsteff.com/cottage-cheese-toast-with-apples/",
+        "accessedOn": "2026-10-21",
+        "kitchenTested": false,
+        "adaptation": "Kaynakta açıkça önerilen sade Greek yogurt alternatifi kullanıldı. Ekşi mayalı ekmek yerine tam buğday ekmeği, düşük miktarda tartılmış bal ve tek kişilik gram ölçüleri belirlendi. Türkçe adımlar özgün yazıldı; makrolar kaynaktan kopyalanmadan yeniden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-21",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-10-21-apple-yogurt-toast.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-20-braised-leek-white-beans",
       "addedOn": "2026-10-20",
       "title": "Yoğurt eşliğinde beyaz fasulyeli pırasa",
