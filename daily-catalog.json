@@ -1,6 +1,99 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-22-apple-beet-cabbage-salad",
+      "addedOn": "2026-10-22",
+      "title": "Elmalı pancarlı çıtır lahana salatası",
+      "summary": "Beyaz lahana, çiğ pancar ve elmayla hazırlanan iki kişilik yan salata. Good Food tarifinden sadeleştirilmiş uyarlama; tek başına ana öğün yerine geçmez. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Salata",
+      "servings": 2,
+      "minutes": 15,
+      "difficulty": "easy",
+      "image": "images/daily-2026-10-22-apple-beet-cabbage-salad.png",
+      "items": [
+        [
+          "cabbage",
+          200
+        ],
+        [
+          "beet",
+          100
+        ],
+        [
+          "apple",
+          150
+        ],
+        [
+          "lemon",
+          20
+        ],
+        [
+          "oil",
+          10
+        ],
+        [
+          "parsley",
+          10
+        ]
+      ],
+      "macros": {
+        "kcal": 133.7,
+        "protein": 2.5,
+        "carbs": 21.9,
+        "fat": 5.4
+      },
+      "allergens": [],
+      "dietTags": [
+        "vegetarian",
+        "vegan"
+      ],
+      "equipment": [],
+      "tools": [
+        "Mutfak tartısı",
+        "Rende",
+        "Bıçak",
+        "Kesme tahtası",
+        "Geniş kâse",
+        "Küçük sos kâsesi",
+        "İki servis kâsesi"
+      ],
+      "steps": [
+        "Sebze ve meyveleri iyice yıka. Lahananın dış yapraklarını ve sert göbeğini çıkarıp 200 g tart. Pancarı soy, 100 g tart. Elmanın sapını ve çekirdeğini çıkarıp kabuklu yenilebilir kısmından 150 g tart. Maydanozu yıkayıp süz, 10 g ayır.",
+        "Lahanayı çok ince şeritler halinde kes. Çiğ pancarı ince rendele; elleri ve yüzeyi boyayabileceği için ayrı kapta hazırla. Elmayı ince dilimle, maydanozu kıy.",
+        "20 g limon suyu ve 10 g zeytinyağını küçük kâsede çırp. Lahana, pancar ve elmayı geniş kâseye al; sosu döküp nazikçe karıştır.",
+        "Maydanozu ekle. İki kâseye eşit paylaştır; bir kâse bir porsiyon yan salatadır. Hemen servis et. Yoğurt, mayonez, nar veya kuruyemiş eklenmemiştir; ilave malzeme besin değerlerini değiştirir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "cabbage": "169975",
+          "beet": "169145",
+          "apple": "171688",
+          "lemon": "167747",
+          "oil": "171413",
+          "parsley": "170416"
+        },
+        "note": "Lahana ve pancar temizlenmiş çiğ, elma kabuklu ve çekirdeksiz tartılır. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Red cabbage, beetroot & apple salad",
+        "publisher": "Good Food team",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/red-cabbage-beetroot-apple-salad",
+        "accessedOn": "2026-10-22",
+        "kitchenTested": false,
+        "adaptation": "İnce kıyılmış lahana, rendelenmiş çiğ pancar ve elma birleşimi temel alındı. Kırmızı yerine beyaz lahana kullanıldı; sirke ve nar çıkarıldı, limon-yağ sosu ölçülendirildi. İki kişilik yan salata olarak yeniden hesaplandı; kaynak metin kopyalanmadı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-22",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-10-22-apple-beet-cabbage-salad.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-21-apple-yogurt-toast",
       "addedOn": "2026-10-21",
       "title": "Elmalı süzme yoğurtlu açık tost",
