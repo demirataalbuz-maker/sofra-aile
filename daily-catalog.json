@@ -1,6 +1,112 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-23-yogurt-mushroom-pasta",
+      "addedOn": "2026-10-23",
+      "title": "Yoğurt soslu mantarlı tam buğday makarna",
+      "summary": "Mantar stroganoff yönteminden uyarlanan iki kişilik vejetaryen makarna. Krema yerine yağsız süzme yoğurt kullanılır; yoğurt ocak kapatıldıktan sonra eklenir. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Vejetaryen",
+      "servings": 2,
+      "minutes": 30,
+      "difficulty": "easy",
+      "water": 100,
+      "image": "images/daily-2026-10-23-yogurt-mushroom-pasta.png",
+      "items": [
+        [
+          "wwpasta",
+          140
+        ],
+        [
+          "mushroom",
+          400
+        ],
+        [
+          "onion",
+          100
+        ],
+        [
+          "garlic",
+          6
+        ],
+        [
+          "oil",
+          10
+        ],
+        [
+          "greekyogurt",
+          250
+        ],
+        [
+          "parsley",
+          10
+        ]
+      ],
+      "macros": {
+        "kcal": 434.6,
+        "protein": 29.5,
+        "carbs": 68.4,
+        "fat": 8.3
+      },
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "hob"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Tencere",
+        "Geniş tava",
+        "Süzgeç",
+        "Bıçak",
+        "Kesme tahtası",
+        "Çırpıcı",
+        "Kâse"
+      ],
+      "steps": [
+        "140 g tam buğday makarnayı kuru tart. 400 g mantarı temizleyip dilimle. Soyulmuş soğandan 100 g, sarımsaktan 6 g tartıp kıy. 10 g maydanozu yıkayıp doğra; 250 g yağsız süzme yoğurdu ayrı kâseye al.",
+        "Makarnayı bol kaynar suda paketindeki süre kadar haşla. Süzmeden önce bir bardak haşlama suyunu ayır. Makarnayı süz; yağ ekleme.",
+        "Tavada 10 g zeytinyağıyla soğanı orta ateşte 5 dakika yumuşat. Sarımsağı katıp kısa süre çevir. Mantarları ekle; sık karıştırarak yaklaşık 7–10 dakika, suyunun çoğu çekilene kadar pişir.",
+        "İki kişilik tarif için mantarlara 100 ml sıcak içme suyu ekle; birkaç dakika hafif kaynatıp sosu koyulaştır. Kişi sayısını değiştirirsen suyu da orantıla. Ocağı kapat, kaynamanın durması için 2 dakika bekle.",
+        "Yoğurdu kâsede çırp. Tavadan biraz ılık sos ekleyip karıştır; sonra yoğurdu tavaya yavaşça yedir. Makarnayı ve maydanozu kat. Gerekirse ayırdığın makarna suyundan azar azar ekle. Yoğurtlu sosu tekrar kaynatma; kesilebilir.",
+        "İki tabağa eşit böl, bekletmeden servis et. Bir tabak bir porsiyondur. Peynir, krema veya ek yağ bu hesaba dahil değildir; farklı yağ oranında yoğurt makroları değiştirir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "wwpasta": "169738",
+          "mushroom": "169251",
+          "onion": "170000",
+          "garlic": "169230",
+          "oil": "171413",
+          "greekyogurt": "170894",
+          "parsley": "170416"
+        },
+        "note": "Makarna kuru, mantar ve sebzeler temizlenmiş çiğ ağırlık; yoğurt yağsızdır. Haşlama suyu makarnanın hesabından ayrıca sayılmaz. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Mushroom stroganoff",
+        "publisher": "Good Food / Lucy Netherton",
+        "sourceUrl": "https://www.bbcgoodfoodme.com/recipes/mushroom-stroganoff/",
+        "accessedOn": "2026-10-23",
+        "kitchenTested": false,
+        "adaptation": "Soğan ve mantarı soteleyip ocak kapalıyken sütlü sos ekleme yöntemi temel alındı. Pirinç yerine tam buğday makarna; ekşi krema yerine yağsız süzme yoğurt kullanıldı. Paprika, Worcestershire ve bulyon çıkarıldı. Malzemeler tartılarak makrolar yeniden hesaplandı; adımlar özgün Türkçe yazıldı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-23",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-10-23-yogurt-mushroom-pasta.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-22-apple-beet-cabbage-salad",
       "addedOn": "2026-10-22",
       "title": "Elmalı pancarlı çıtır lahana salatası",
