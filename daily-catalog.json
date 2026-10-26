@@ -1,6 +1,105 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-26-sweet-potato-feta-rounds",
+      "addedOn": "2026-10-26",
+      "title": "Peynirli yoğurtlu fırın tatlı patates dilimleri",
+      "summary": "Fırınlanmış kalın tatlı patates halkalarının üzerinde peynirli yoğurt kreması. Tesco tarifinden iki kişilik tuzlu ara öğün uyarlaması. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Ara öğün",
+      "servings": 2,
+      "minutes": 55,
+      "difficulty": "easy",
+      "image": "images/daily-2026-10-26-sweet-potato-feta-rounds.png",
+      "items": [
+        [
+          "sweetpotato",
+          300
+        ],
+        [
+          "oil",
+          8
+        ],
+        [
+          "feta",
+          60
+        ],
+        [
+          "greekyogurt",
+          150
+        ],
+        [
+          "lemon",
+          10
+        ],
+        [
+          "parsley",
+          5
+        ]
+      ],
+      "macros": {
+        "kcal": 290.1,
+        "protein": 14.4,
+        "carbs": 34.5,
+        "fat": 10.8
+      },
+      "allergens": [
+        "milk"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "oven"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Bıçak",
+        "Kesme tahtası",
+        "Fırın tepsisi",
+        "Pişirme kâğıdı",
+        "Fırın eldiveni",
+        "Çatal",
+        "Kâse",
+        "Kaşık"
+      ],
+      "steps": [
+        "Fırını alt-üst 200 °C’ye ısıt. Tatlı patatesi yıka, soy ve yenilebilir kısmından 300 g tart. Yaklaşık 2 cm kalınlığında halkalar kes; dilim sayısı patatesin çapına göre değişebilir.",
+        "Dilimleri toplam 8 g zeytinyağıyla kapla. Pişirme kâğıdı serilmiş tepsiye tek kat diz. Orta rafta yaklaşık 30–40 dakika, yarısında çevirerek pişir. Çatal ortasına kolay girmeli; süre fırına göre değişir.",
+        "Bu sırada 60 g beyaz peyniri çatalla iyice ez. 150 g yağsız süzme yoğurt ve 10 g limon suyunu ekleyip kremamsı olana kadar karıştır. 5 g yıkanıp süzülmüş maydanozu kıy.",
+        "Tepsiyi eldivenle çıkar; dilimlerin ilk sıcaklığı geçene kadar yaklaşık 5 dakika bekle. Peynirli yoğurdu üzerlerine eşit paylaştır, maydanozu serp.",
+        "Dilimleri adetle değil, toplam miktarı iki eşit tabağa bölerek servis et. Bir tabak bir porsiyon ara öğündür. İncir, nar, balzamik sos ve ek yağ bu tarife dahil değildir. Farklı peynir veya yağlı yoğurt makroları değiştirir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "sweetpotato": "168482",
+          "oil": "171413",
+          "feta": "173420",
+          "greekyogurt": "170894",
+          "lemon": "167747",
+          "parsley": "170416"
+        },
+        "note": "Tatlı patates soyulmuş çiğ tartılır. Beyaz peynir katalogdaki feta verisiyle yaklaşık hesaplandı; yoğurt yağsızdır. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Roasted sweet potato rounds",
+        "publisher": "Tesco Recipes team",
+        "sourceUrl": "https://www.tesco.com/recipes/en-GB/recipe/roasted-sweet-potato-rounds",
+        "accessedOn": "2026-10-26",
+        "kitchenTested": false,
+        "adaptation": "Kalın tatlı patates halkalarını fırınlayıp peynir-yoğurt karışımıyla sunma yöntemi temel alındı. İncir, nar, roka, kekik ve balzamik sos çıkarıldı; maydanoz eklendi. İki kişilik gram ölçüleri, yoğurt/peynir oranı ve porsiyon hesabı yeniden belirlendi. Adımlar özgün Türkçe yazıldı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-26",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-10-26-sweet-potato-feta-rounds.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-23-yogurt-mushroom-pasta",
       "addedOn": "2026-10-23",
       "title": "Yoğurt soslu mantarlı tam buğday makarna",
