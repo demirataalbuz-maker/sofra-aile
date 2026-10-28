@@ -1,6 +1,110 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-28-broccoli-pea-soup",
+      "addedOn": "2026-10-28",
+      "title": "Süzme yoğurt eşliğinde brokoli ve bezelye çorbası",
+      "summary": "Brokoli ve bezelyenin birlikte püre edildiği iki kişilik yeşil çorba. Good Food tarifinden uyarlama; ricotta yerine yağsız süzme yoğurtla sunulur. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Çorba",
+      "servings": 2,
+      "minutes": 40,
+      "difficulty": "easy",
+      "water": 600,
+      "image": "images/daily-2026-10-28-broccoli-pea-soup.png",
+      "items": [
+        [
+          "broccoli",
+          300
+        ],
+        [
+          "peas",
+          250
+        ],
+        [
+          "onion",
+          100
+        ],
+        [
+          "garlic",
+          5
+        ],
+        [
+          "oil",
+          10
+        ],
+        [
+          "greekyogurt",
+          150
+        ],
+        [
+          "lemon",
+          10
+        ]
+      ],
+      "macros": {
+        "kcal": 260.5,
+        "protein": 19.1,
+        "carbs": 35.5,
+        "fat": 6.4
+      },
+      "allergens": [
+        "milk"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "hob",
+        "blender"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Tencere",
+        "Bıçak",
+        "Kesme tahtası",
+        "El blenderı",
+        "Kepçe",
+        "İki çorba kâsesi"
+      ],
+      "steps": [
+        "Brokoliyi yıka, sert sap kabuğunu ayır; çiçekleri ve yumuşak saplarından 300 g tartıp küçük kes. 250 g sade dondurulmuş bezelye tart. Soyulmuş soğandan 100 g, sarımsaktan 5 g ayırıp doğra.",
+        "Tencerede 10 g zeytinyağıyla soğanı orta-kısık ateşte 7–8 dakika yumuşat. Sarımsağı ekle, 1 dakika karıştır; yakma.",
+        "Brokoliyi, bezelyeyi ve iki kişilik tarif için 600 ml sıcak içme suyunu ekle. Kaynayınca ateşi kıs, kapağı kapatıp 15–20 dakika, sebzeler kolay ezilene kadar pişir. Kişi sayısını değiştirirsen suyu orantıla. Bezelyenin paketindeki pişirme talimatını da uygula; gerekiyorsa süreyi uzat.",
+        "Tencereyi ocaktan al; kaynamanın durmasını bekle. El blenderının başını sıvı içinde tutarak pürüzsüzleştir; sıcak çorbayı sıçratma ve kapalı sürahi blenderına kaynar halde doldurma. 10 g limon suyunu karıştır; gerekirse az sıcak suyla kıvamını aç.",
+        "Çorbayı iki kâseye eşit böl. Toplam 150 g yağsız süzme yoğurdu, her kâseye 75 g olacak şekilde üzerine veya yanında sun. Bir kâse bir porsiyondur; yoğurt hesaba dahildir, ekmek ve ilave yağ dahil değildir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "broccoli": "170379",
+          "peas": "170016",
+          "onion": "170000",
+          "garlic": "169230",
+          "oil": "171413",
+          "greekyogurt": "170894",
+          "lemon": "167747"
+        },
+        "note": "Sebzeler temizlenmiş çiğ ağırlık; bezelye katalogdaki sade dondurulmuş, pişirilmemiş yeşil bezelye verisiyle hesaplandı. Yoğurt yağsızdır. Su enerji içermez. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Broccoli & pea soup with minty ricotta",
+        "publisher": "Good Food / Esther Clark",
+        "sourceUrl": "https://www.bbcgoodfoodme.com/recipes/broccoli-pea-soup-minty-ricotta/",
+        "accessedOn": "2026-10-28",
+        "kitchenTested": false,
+        "adaptation": "Brokoli ve bezelyeyi soğanla pişirip püre etme yöntemi temel alındı. Kereviz, nane, çam fıstığı ve ekmek çıkarıldı; bulyon yerine su, ricotta yerine yağsız süzme yoğurt kullanıldı. İki kişilik miktarlar ve makrolar yeniden hesaplandı. Adımlar özgün Türkçe yazıldı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-28",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-10-28-broccoli-pea-soup.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-26-sweet-potato-feta-rounds",
       "addedOn": "2026-10-26",
       "title": "Peynirli yoğurtlu fırın tatlı patates dilimleri",
