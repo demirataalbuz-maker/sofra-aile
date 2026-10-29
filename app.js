@@ -12,8 +12,8 @@ import {createSync} from './sync.mjs?v=21';
 import {account} from './account-ui.mjs?v=21';
 import {api,readSession} from './cloud.mjs?v=16';
 import {dateKey,newEntry,trackingState,captureDay} from './tracking.mjs?v=13';
-import {tracker} from './tracking-ui.mjs?v=25';
-import {WEB_VERSION,newerVersion,readJson,readCatalog,latestRecipeDate,canRefreshPage} from './updates.mjs?v=25';
+import {tracker} from './tracking-ui.mjs?v=26';
+import {WEB_VERSION,newerVersion,readJson,readCatalog,latestRecipeDate,canRefreshPage} from './updates.mjs?v=26';
 import {SEASONS,selectedSeason} from './seasons.mjs?v=6';
 import {mergeCatalog} from './catalog.mjs?v=5';
 /* Local-first Sofra. Cloud access stays disabled until a verified backend is configured. */

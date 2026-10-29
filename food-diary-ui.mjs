@@ -1,4 +1,4 @@
-import {diaryFoods,searchFoods,parseFoodQuery,foodAmount,frequentFoods,foodIcon} from './food-diary.mjs?v=25';
+import {diaryFoods,searchFoods,parseFoodQuery,foodAmount,frequentFoods,foodIcon} from './food-diary.mjs?v=26';
 import {findExternalFood,missingFoodLink} from './external-food.mjs?v=24';
 export function foodDiary({catalog,entries,esc,fmt,add}){
  const foods=diaryFoods(catalog),frequent=frequentFoods(entries);
