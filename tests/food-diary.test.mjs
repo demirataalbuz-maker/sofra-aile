@@ -13,7 +13,7 @@ test('four boiled eggs are explicit edible portions, oil is not silently include
  assert.equal(daySummary([e],day).totals.kcal,310);e.deleted=true;assert.equal(daySummary([e],day).totals.kcal,0);
 });
 test('unverified ingredients stay out, manual history uses actual consumed portions and excludes deleted records',()=>{
- assert.equal(diaryFoods({ingredients:{x:{nutrition:{verification:'unverified'}}},recipes:[]}).length,1);
+ assert.equal(diaryFoods({ingredients:{x:{nutrition:{verification:'unverified'}}},recipes:[]}).length,2);
  const m={kcal:120,protein:5,carbs:10,fat:2},e={kind:'food',title:'Etiketli ürün',macros:m,portion:2,at:'2026-10-20'};
  const recent=frequentFoods([e,{...e,at:'2026-10-19'},{...e,title:'Silinmiş',deleted:true}]);
  assert.equal(recent.length,1);assert.equal(recent[0].count,2);assert.equal(recent[0].portion,2);

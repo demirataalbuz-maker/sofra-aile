@@ -1,7 +1,7 @@
 import {bindWaterPush} from './water-push.mjs?v=21';
 import {waterPanel} from './water-ui.mjs?v=13';
 import {numeric} from './tracking.mjs?v=13';
-import {foodDiary} from './food-diary-ui.mjs?v=24';
+import {foodDiary} from './food-diary-ui.mjs?v=25';
 import {planningBlock} from './health.mjs?v=11';
 import {dateKey,newEntry,daySummary,trackingState,dailyExport,nutrients} from './tracking.mjs?v=13';
 export function tracker(host){
@@ -14,7 +14,7 @@ export function tracker(host){
  let diaryAdd;
  const diary=foodDiary({catalog,entries:t.entries,esc,fmt,add:(...args)=>diaryAdd(...args)});
  const number=(name,label,min,max,step='1',value='')=>`<label>${label}<input name="${name}" type="number" min="${min}" max="${max}" step="${step}" required value="${value}" inputmode="decimal"></label>`;
- const html=`<h1 class="heading">Günlük takibim</h1><p class="lead">Önerilen menü ayrı, gerçekten yediklerin ayrı. Yalnızca kaydettiğin miktarlar sayılır.</p><label class="trackdate">Gün <input id="trackDate" type="date" max="${dateKey()}" value="${day}"></label>
+ const html=`<div class="diarytabs"><button class="${ui.page==='diary'?'primary':'secondary'}" data-page="diary">🍽️ Ne yedim?</button><button class="${ui.page!=='diary'?'primary':'secondary'}" data-page="tracking">💧 Su ve günlük özet</button></div><h1 class="heading">${ui.page==='diary'?'Bugün ne yedin?':'Günlük takibim'}</h1><p class="lead">Önerilen menü ayrı, gerçekten yediklerin ayrı. Yalnızca kaydettiğin miktarlar sayılır.</p><label class="trackdate">Gün <input id="trackDate" type="date" max="${dateKey()}" value="${day}"></label>
  ${waterPanel({profile:p,t,current:day===dateKey(),snapshot:t.snapshots[day],consumed:s.water,fmt,esc})}
  ${diary.html}
  ${target?`<section class="panel"><h2>Bugün kalan payın</h2><p class="hint">Yalnızca kaydettiğin ve besin değeri bilinen yiyeceklere göre. ${s.unknownCount?'Besin değeri bilinmeyen kayıt var; bu hesap eksik.':''} Önerilmiş menü tüketilmiş sayılmaz.</p><div class="nutrients">${[['Kalori','kcal',target],...(p.mode==='macro'?[['Protein','protein',+p.protein],['Karbonhidrat','carbs',+p.carbs],['Yağ','fat',+p.fat]]:[])].map(([label,k,goal])=>{const delta=goal-s.totals[k];return `<div class="nutrient"><strong>${fmt(Math.abs(delta))}</strong>${label} ${k==='kcal'?'kcal':'g'} ${delta<0?'hedefin üzerinde':'kaldı'}</div>`}).join('')}</div></section>`:''}
@@ -28,6 +28,7 @@ export function tracker(host){
   const q=s=>document.querySelector(s);const act=fn=>{const before=structuredClone(state.tracking);try{fn();if(!save())throw Error('Depolama dolu; bu değişiklik telefonuna kaydedilemedi.');render()}catch(e){state.tracking=before;render();toast(e.message)}};
   const add=(kind,data)=>act(()=>{t.entries.push(newEntry(kind,data,day));t.closedDays[day]=false});
   diaryAdd=add;diary.bind();
+  if(ui.page==='diary'){const all=[...document.querySelectorAll('.panel')];for(const section of all)if(section.querySelector('#waterForm,#weightForm,#exportDay'))section.hidden=true;}
   q('#trackDate').onchange=e=>{if(!e.target.value||e.target.value>dateKey())return;ui.trackDate=e.target.value;render()};
   document.querySelectorAll('[data-water]').forEach(b=>b.onclick=()=>add('water',{ml:+b.dataset.water}));
   q('#waterForm').onsubmit=e=>{e.preventDefault();add('water',{ml:new FormData(e.target).get('ml')})};

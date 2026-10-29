@@ -12,8 +12,8 @@ import {createSync} from './sync.mjs?v=21';
 import {account} from './account-ui.mjs?v=21';
 import {api,readSession} from './cloud.mjs?v=16';
 import {dateKey,newEntry,trackingState,captureDay} from './tracking.mjs?v=13';
-import {tracker} from './tracking-ui.mjs?v=24';
-import {WEB_VERSION,newerVersion,readJson,readCatalog,latestRecipeDate,canRefreshPage} from './updates.mjs?v=24';
+import {tracker} from './tracking-ui.mjs?v=25';
+import {WEB_VERSION,newerVersion,readJson,readCatalog,latestRecipeDate,canRefreshPage} from './updates.mjs?v=25';
 import {SEASONS,selectedSeason} from './seasons.mjs?v=6';
 import {mergeCatalog} from './catalog.mjs?v=5';
 /* Local-first Sofra. Cloud access stays disabled until a verified backend is configured. */
@@ -22,7 +22,7 @@ const storeKey='sofra-aile-v1';
 let installPrompt=null,registration=null,refreshing=false,lastAttempt=0,lastCheck='',catalogCached=false,updateReady=false,contentPending=false,booted=false;
 const launchParams=new URLSearchParams(location.search);
 captureInvitation();
-const ui={page:['tracking','plan','account','family','inbox','weekly'].includes(launchParams.get('page'))?launchParams.get('page'):'explore',query:'',category:'Tümü',limit:24,recipe:null,servings:2,method:-1,returnPage:'explore'};
+const ui={page:['diary','tracking','plan','account','family','inbox','weekly'].includes(launchParams.get('page'))?launchParams.get('page'):'explore',query:'',category:'Tümü',limit:24,recipe:null,servings:2,method:-1,returnPage:'explore'};
 let catalog={recipes:[],ingredients:{}};
 let weeklyScreen=null;
 let credits=[],trackingView=null,accountView=null,familyScreen=null,inboxScreen=null;
@@ -68,10 +68,10 @@ const today=()=>dateKey();
 const recipe=id=>catalog.recipes.find(r=>r.id===id);
 function save(){captureDay(state);try{localStorage.setItem(storeKey,JSON.stringify(state));cloudSync.queue();cloudFamily.queue();queueWaterPush(state);return true;}catch{toast('Telefon depolama alanı dolu; değişiklik kaydedilemedi.');return false;}}
 function toast(message){let el=$('#toast');if(!el){el=document.createElement('div');el.id='toast';el.style.cssText='position:fixed;z-index:20;bottom:95px;left:50%;transform:translateX(-50%);background:#35251e;color:#fff;border-radius:12px;padding:11px 17px;box-shadow:0 6px 25px #0004;font-size:14px;min-width:180px;text-align:center';document.body.append(el)}el.textContent=message;el.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.hidden=true,2800)}
-function nav(){return `<nav class="nav" aria-label="Alt menü"><button data-page="explore" class="${ui.page==='explore'||(ui.page==='detail'&&ui.returnPage==='explore')?'on':''}"><b>⌕</b>Tarifler</button><button data-page="plan" class="${ui.page==='plan'||ui.page==='cooking'||ui.page==='alternatives'||(ui.page==='detail'&&ui.returnPage==='plan')?'on':''}"><b>▦</b>Bugün</button><button data-page="tracking" class="${ui.page==='tracking'?'on':''}"><b>◉</b>Takip</button><button data-page="family" class="${ui.page==='family'?'on':''}"><b>♧</b>Aile</button><button data-page="profile" class="${ui.page==='profile'?'on':''}"><b>♙</b>Profil</button><button data-page="basket" class="${ui.page==='basket'?'on':''}"><b>☑</b>Liste <span>${state.basket.filter(x=>!x.done).length||''}</span></button></nav>`}
+function nav(){return `<nav class="nav" aria-label="Alt menü"><button data-page="explore" class="${ui.page==='explore'||(ui.page==='detail'&&ui.returnPage==='explore')?'on':''}"><b>⌕</b>Tarifler</button><button data-page="plan" class="${ui.page==='plan'||ui.page==='cooking'||ui.page==='alternatives'||(ui.page==='detail'&&ui.returnPage==='plan')?'on':''}"><b>▦</b>Bugün</button><button data-page="diary" class="${ui.page==='diary'||ui.page==='tracking'?'on':''}"><b>◉</b>Ne yedim?</button><button data-page="family" class="${ui.page==='family'?'on':''}"><b>♧</b>Aile</button><button data-page="profile" class="${ui.page==='profile'?'on':''}"><b>♙</b>Profil</button><button data-page="basket" class="${ui.page==='basket'?'on':''}"><b>☑</b>Liste <span>${state.basket.filter(x=>!x.done).length||''}</span></button></nav>`}
 function header(){return `<header class="top"><div class="brandrow"><div class="brand"><span class="mark">S</span><strong>sofra.</strong></div><div class="appcontrols"><span class="sub">${catalog.recipes.length} tarif</span><button class="appsettings" data-page="weekly">Haftalık</button><button class="appsettings" data-page="account">Hesap</button><button class="appsettings" data-page="application">Uygulama</button></div></div></header>`}
 function footer(){return `<p class="foot">Tarif ve makro değerleri yaklaşık bilgi içindir. Fotoğraflar sunum veya teknik örneğidir. ${cloudSync.linked()?'Kayıtların Google hesabınla eşitleniyor; Hesap bölümünden yönetebilirsin.':'Kayıtların bu cihazda saklanır; tarayıcı verilerini silmek kayıtlarını da siler.'} <a href="./kaynaklar.html">Görsel kaynakları</a> · <a href="./gizlilik.html">Gizlilik</a></p>`}
-function render(){const app=$('#app');app.className='app';app.innerHTML=(ui.page==='detail'?detail():header()+(ui.page==='explore'?explore():ui.page==='plan'?plan():ui.page==='cooking'?cookingSetup():ui.page==='weekly'?weeklyPage():ui.page==='alternatives'?alternatives():ui.page==='family'?familyPage():ui.page==='profile'?profile():ui.page==='inbox'?inboxPage():ui.page==='application'?application():ui.page==='tracking'?trackingPage():ui.page==='account'?accountPage():basket()))+footer()+nav();bind();showUpdateNotice();}
+function render(){const app=$('#app');app.className='app';app.innerHTML=(ui.page==='detail'?detail():header()+(ui.page==='explore'?explore():ui.page==='plan'?plan():ui.page==='cooking'?cookingSetup():ui.page==='weekly'?weeklyPage():ui.page==='alternatives'?alternatives():ui.page==='family'?familyPage():ui.page==='profile'?profile():ui.page==='inbox'?inboxPage():ui.page==='application'?application():(ui.page==='tracking'||ui.page==='diary')?trackingPage():ui.page==='account'?accountPage():basket()))+footer()+nav();bind();showUpdateNotice();}
 function explore(){let cats=['Tümü','Kahvaltı','Tavuk','Et','Sebze','Bakliyat','Balık','Tatlı','Ara öğün'];return `<h1 class="heading">Bugün ne pişirelim?</h1><p class="lead">Tarifini seç, adımlara bak, eksikleri listeye ekle.</p>${state.profile?.allergies?.length?'<p class="allergen-legend"><span class="warning-mark" aria-hidden="true">!</span> Seçtiğin alerjenleri içeren tarifler işaretli. İşaret olmaması alerjensiz olduğunu garanti etmez.</p>':''}<input class="search" id="search" type="search" inputmode="search" placeholder="Yemek veya malzeme ara" aria-label="Tarif ara" value="${esc(ui.query)}"><div class="chips" aria-label="Kategoriler">${cats.map(c=>`<button class="chip ${ui.category===c?'on':''}" data-category="${esc(c)}">${esc(c)}</button>`).join('')}</div><div id="results"></div>`}
 function visibleRecipes(){const q=ui.query.trim().toLocaleLowerCase('tr-TR');return catalog.recipes.filter(r=>(ui.category==='Tümü'||r.category===ui.category)&&(!q||(r.title+' '+r.summary+' '+(r.items||[]).map(([id])=>catalog.ingredients[id]?.name||'').join(' ')).toLocaleLowerCase('tr-TR').includes(q)))}
 function renderCards(){const box=$('#results');if(!box)return;const all=visibleRecipes();if(!all.length){box.innerHTML='<div class="empty">Bu aramada tarif bulamadık. Başka bir yemek veya malzeme dene.</div>';return}box.innerHTML=`<p class="meta">${all.length} tarif</p><div class="grid">${all.slice(0,ui.limit).map(recipeCard).join('')}</div>${all.length>ui.limit?'<button class="more" id="more">Daha fazla tarif</button>':''}`;box.querySelectorAll('[data-recipe]').forEach(b=>b.onclick=()=>openDetail(b.dataset.recipe));const more=$('#more');if(more)more.onclick=()=>{ui.limit+=24;renderCards()}}
@@ -176,7 +176,7 @@ function bind(){
   });
   if(ui.page==='weekly')weeklyScreen.bind();
   if(ui.page==='family')familyScreen.bind();
-  if(ui.page==='tracking')trackingView.bind();
+  if(ui.page==='tracking'||ui.page==='diary')trackingView.bind();
   if(ui.page==='inbox')inboxScreen.bind();
   if(ui.page==='account')bindAccount();
   document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{ui.familyMemberId=null;ui.page=b.dataset.page;render();scrollTo(0,0);if(booted&&(contentPending||Date.now()-lastAttempt>60000))refreshContent()});
