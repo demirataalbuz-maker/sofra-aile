@@ -1,6 +1,120 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-29-cauliflower-chickpea-traybake",
+      "addedOn": "2026-10-29",
+      "title": "Nohutlu karnabahar tepsisi ve yoğurt",
+      "summary": "Karnabahar, nohut ve biberin birlikte fırınlandığı iki kişilik vejetaryen yemek. BBC Food tarifinden ekmeksiz, sade yoğurtlu uyarlama. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Vejetaryen",
+      "servings": 2,
+      "minutes": 60,
+      "difficulty": "easy",
+      "image": "images/daily-2026-10-29-cauliflower-chickpea-traybake.png",
+      "items": [
+        [
+          "cauliflower",
+          400
+        ],
+        [
+          "chickpea",
+          300
+        ],
+        [
+          "pepper",
+          150
+        ],
+        [
+          "onion",
+          100
+        ],
+        [
+          "garlic",
+          6
+        ],
+        [
+          "oil",
+          15
+        ],
+        [
+          "lemon",
+          20
+        ],
+        [
+          "greekyogurt",
+          200
+        ],
+        [
+          "parsley",
+          10
+        ]
+      ],
+      "macros": {
+        "kcal": 464.8,
+        "protein": 28.9,
+        "carbs": 64.8,
+        "fat": 12.6
+      },
+      "allergens": [
+        "milk"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "oven"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Geniş fırın tepsisi",
+        "Pişirme kâğıdı",
+        "Bıçak",
+        "Kesme tahtası",
+        "Kâse",
+        "Spatula",
+        "Fırın eldiveni"
+      ],
+      "steps": [
+        "Fırını alt-üst 220 °C’ye ısıt. Karnabaharı yıkayıp benzer büyüklükte küçük çiçeklere ayır; yenilebilir kısmından 400 g tart. Biberin sap ve çekirdeklerini çıkarıp 150 g tart, iri parçalara kes. Soyulmuş soğandan 100 g tartıp dilimle. 6 g sarımsağı kıy.",
+        "Önceden haşlanmış ve süzülmüş nohuttan 300 g tart; konserve kullanıyorsan durulayıp süz. Kuru nohudu doğrudan kullanma. Geniş kâsede 15 g zeytinyağı, 20 g limon suyu ve sarımsağı karıştır.",
+        "Sebze ve nohudu sosla harmanla. Pişirme kâğıdı serili tepsiye tek kat yay; üst üste yığma. Orta rafta yaklaşık 40–45 dakika pişir. Yarısında spatulayla çevir. Karnabahar çatalla kolay delinmeli; süre fırına ve parça büyüklüğüne göre değişir.",
+        "10 g maydanozu yıkayıp süz ve kıy. Tepsiyi eldivenle çıkar, maydanozu sebzelere karıştır. 200 g yağsız süzme yoğurdu iki servis kabına eşit böl.",
+        "Tepsideki yemeği iki tabağa eşit paylaştır; her tabağın yanında 100 g yoğurt sun. Bir tabak bir porsiyondur. Pide, susam, acı sos ve ek yağ bu tarifin hesabına dahil değildir. Farklı yağ oranında yoğurt makroları değiştirir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "cauliflower": "169986",
+          "chickpea": "173757",
+          "pepper": "170427",
+          "onion": "170000",
+          "garlic": "169230",
+          "oil": "171413",
+          "lemon": "167747",
+          "greekyogurt": "170894",
+          "parsley": "170416"
+        },
+        "note": "Nohut haşlanmış-süzülmüş; sebzeler temizlenmiş çiğ ağırlıktır. Yoğurt yağsızdır. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Chickpea traybake pittas",
+        "publisher": "BBC Food / Rhiannon Lambert",
+        "sourceUrl": "https://www.bbc.co.uk/food/recipes/falafel_traybake_35592",
+        "accessedOn": "2026-10-29",
+        "kitchenTested": false,
+        "adaptation": "Sebzeleri ve pişmiş nohudu yağ-limon-sarımsakla fırınlama yöntemi temel alındı. Pide, marul, baharat karışımı, susam ve acı/naneli sos çıkarıldı. Yoğurt sade ve yağsız seçildi; iki kişilik miktarlar ve makrolar yeniden hesaplandı. Resmî sayfa erişilemedi; BBC Food metninin arama motorundaki kopyası incelendi.",
+        "retrievedCopy": "https://bbc.com.im/food/recipes/falafel_traybake_35592"
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-29",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-10-29-cauliflower-chickpea-traybake.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-28-broccoli-pea-soup",
       "addedOn": "2026-10-28",
       "title": "Süzme yoğurt eşliğinde brokoli ve bezelye çorbası",
