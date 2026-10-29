@@ -1,7 +1,7 @@
 import {bindWaterPush} from './water-push.mjs?v=21';
 import {waterPanel} from './water-ui.mjs?v=13';
 import {numeric} from './tracking.mjs?v=13';
-import {foodDiary} from './food-diary-ui.mjs?v=23';
+import {foodDiary} from './food-diary-ui.mjs?v=24';
 import {planningBlock} from './health.mjs?v=11';
 import {dateKey,newEntry,daySummary,trackingState,dailyExport,nutrients} from './tracking.mjs?v=13';
 export function tracker(host){
