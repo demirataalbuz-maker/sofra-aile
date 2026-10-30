@@ -1,6 +1,101 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-10-30-banana-tahini-soft-serve",
+      "addedOn": "2026-10-30",
+      "title": "Kakaolu tahin soslu muz dondurması",
+      "summary": "Dondurulmuş muzun sütle çekildiği, kakaolu tahin sosuyla sunulan iki kişilik yumuşak soğuk tatlı. Good Food tarifinden uyarlama. Bal içerir; şekersiz değildir. Mutfakta denenmedi; kapak yapay zekâ ile üretilmiş temsili sunumdur.",
+      "category": "Tatlı",
+      "servings": 2,
+      "minutes": 195,
+      "difficulty": "easy",
+      "water": 20,
+      "image": "images/daily-2026-10-30-banana-tahini-soft-serve.png",
+      "items": [
+        [
+          "banana",
+          240
+        ],
+        [
+          "milk",
+          60
+        ],
+        [
+          "tahini",
+          20
+        ],
+        [
+          "cocoa",
+          8
+        ],
+        [
+          "honey",
+          10
+        ]
+      ],
+      "macros": {
+        "kcal": 208.9,
+        "protein": 4.8,
+        "carbs": 37.4,
+        "fat": 7.3
+      },
+      "allergens": [
+        "milk",
+        "sesame"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "blender",
+        "freezer"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Bıçak",
+        "Kesme tahtası",
+        "Dondurucuya uygun tepsi",
+        "Güçlü mutfak robotu",
+        "Isıya dayanıklı kâse",
+        "Kaşık",
+        "İki tatlı kâsesi"
+      ],
+      "steps": [
+        "Olgun muzları soy; kabuksuz kısmından 240 g tart. Küçük dilimler halinde kesip dondurucuya uygun tepsiye tek kat yay. En az 3 saat, tamamen donana kadar dondur. Toplam süre bu beklemeyi içerir.",
+        "Tahin kavanozunu karıştırıp 20 g tahin tart. 8 g şekersiz kakao, 10 g bal ve iki kişilik tarif için 20 ml sıcak içme suyuyla kâsede pürüzsüz sos yap. Kişi sayısı değişirse suyu da orantıla. Ilımaya bırak.",
+        "Donmuş muz dilimlerini güçlü mutfak robotuna koy. 60 g sütü azar azar ekleyerek kısa aralıklarla çek. Cihazı durdurup bıçak tamamen durduktan sonra kenarları sıyır. Koyu, kaşıkla alınabilir kıvam oluşunca bırak; cihaz donmuş meyve işlemeye uygun olmalı.",
+        "Karışımı iki küçük kâseye eşit paylaştır. Kakaolu tahin sosunu ikisine eşit dök. Bir kâse bir porsiyondur. Yumuşak dondurma kıvamında hemen tüket; bekledikçe erir. Ek bal, bisküvi veya çikolata bu hesaba dahil değildir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Miktar × gramsPerUnit × 100 g besin değeri / 100; toplam / 2; bir ondalık.",
+        "source": "USDA FoodData Central · SR Legacy 2018; katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "banana": "173944",
+          "milk": "172217",
+          "tahini": "170189",
+          "cocoa": "169593",
+          "honey": "169640"
+        },
+        "note": "Muz kabuksuz tartılır; süt tam yağlıdır. Su enerji içermez. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Banana, chocolate & tahini cheat's ice cream",
+        "publisher": "Good Food",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/banana-chocolate-tahini-cheats-ice-cream",
+        "accessedOn": "2026-10-30",
+        "kitchenTested": false,
+        "adaptation": "Donmuş muz-süt tabanı ve kakaolu tahin sosu yöntemi temel alındı. Şurup yerine az bal kullanıldı; vanilya, kahve ve tuz çıkarıldı. İki kişilik gram ölçüleri ve makrolar yeniden hesaplandı. Adımlar özgün Türkçe yazıldı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-10-30",
+        "description": "Özgün yapay zekâ görseli; harici fotoğraf kullanılmadı, temsili sunum.",
+        "promptFile": "images/daily-2026-10-30-banana-tahini-soft-serve.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-29-cauliflower-chickpea-traybake",
       "addedOn": "2026-10-29",
       "title": "Nohutlu karnabahar tepsisi ve yoğurt",
