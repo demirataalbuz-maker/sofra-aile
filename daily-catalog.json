@@ -1,6 +1,110 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-01-leek-spinach-breakfast",
+      "addedOn": "2026-11-01",
+      "title": "Pırasalı ıspanaklı yoğurtlu kahvaltı yumurtası",
+      "summary": "Yumuşak pırasa ve ıspanağın yoğurtla buluştuğu, üzerine tavada yumurta konan iki kişilik kahvaltı. Good Food Green eggs tarifinden uyarlama. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Kahvaltı",
+      "servings": 2,
+      "minutes": 25,
+      "difficulty": "easy",
+      "water": 30,
+      "image": "images/daily-2026-11-01-leek-spinach-breakfast.png",
+      "items": [
+        [
+          "leek",
+          250
+        ],
+        [
+          "spinach",
+          200
+        ],
+        [
+          "garlic",
+          6
+        ],
+        [
+          "egg",
+          2
+        ],
+        [
+          "greekyogurt",
+          150
+        ],
+        [
+          "oil",
+          12
+        ],
+        [
+          "lemon",
+          10
+        ]
+      ],
+      "macros": {
+        "kcal": 273.6,
+        "protein": 18.9,
+        "carbs": 25.8,
+        "fat": 11.8
+      },
+      "allergens": [
+        "egg",
+        "milk"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Kapaklı geniş tava",
+        "Küçük yapışmaz tava",
+        "Bıçak",
+        "Kesme tahtası",
+        "Spatula",
+        "Kâse"
+      ],
+      "steps": [
+        "Pırasanın kökünü ve sert koyu yeşil kısımlarını ayır. Kat aralarını iyice yıkayıp temizlenmiş kısmından 250 g tart ve ince yarım halkalar kes. Ispanağı yıkayıp süz; 200 g tart. 6 g sarımsağı soyup ince kıy.",
+        "Geniş tavaya 8 g zeytinyağı ve pırasayı koy. Orta-kısık ateşte 30 ml su ekleyip kapağı kapalı yaklaşık 8–10 dakika yumuşat; arada karıştır. Su tamamen biterse yanmaması için ateşi azalt.",
+        "Sarımsağı ekleyip bir dakika karıştır. Ispanağı iki seferde tavaya al; her eklemede solmasını bekle. Kapağı açık 3–5 dakika pişir; fazla suyu buharlaşsın. Tavayı ocaktan al, bir dakika beklet ve 150 g yağsız süzme yoğurdu karıştır.",
+        "Küçük yapışmaz tavada kalan 4 g zeytinyağını ısıt. İki yumurtayı kır; toplam kabuksuz ağırlık yaklaşık 100 g olmalı. Kısık ateşte kapağı kapalı pişir; beyazı ve sarısı tamamen katılaşsın. Pişirme süresi tavaya göre değişir.",
+        "Sebzeli yoğurt karışımını iki tabağa eşit böl; her birinin üzerine bir yumurta koy. Toplam 10 g limon suyunu iki tabağa paylaştır. Bir tabak bir porsiyondur. Ekmek, ek yağ ve baharatlar hesaba dahil değildir; farklı yağ oranında yoğurt değerleri değiştirir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "leek": "169246",
+          "spinach": "168462",
+          "garlic": "169230",
+          "egg": "171287",
+          "greekyogurt": "170894",
+          "oil": "171413",
+          "lemon": "167747"
+        },
+        "note": "Sebzeler temizlenmiş çiğ ağırlık, yumurta 2 × 50 g kabuksuz, yoğurt yağsızdır. Su enerji içermez. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Green eggs",
+        "publisher": "Good Food / Sophie Godwin",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/green-eggs",
+        "accessedOn": "2026-11-01",
+        "kitchenTested": false,
+        "adaptation": "Pırasa ve ıspanağı soteleyip yoğurtla karıştırma, üzerine tavada yumurta koyma yöntemi temel alındı. Tohum baharatlar ve pul biber çıkarıldı; yoğurt artırılıp yağ ölçüldü. İki kişilik gramlar ve makrolar yeniden hesaplandı; yumurta tam pişiriliyor."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-01",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-01-leek-spinach-breakfast.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-10-30-banana-tahini-soft-serve",
       "addedOn": "2026-10-30",
       "title": "Kakaolu tahin soslu muz dondurması",
