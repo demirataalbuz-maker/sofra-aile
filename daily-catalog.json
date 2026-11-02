@@ -1,6 +1,127 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-02-warm-lentil-tahini-salad",
+      "addedOn": "2026-11-02",
+      "title": "Tahin yoğurt soslu ılık mercimek ve sebze salatası",
+      "summary": "Sotelenmiş havuç ve kabağın haşlanmış mercimekle harmanlandığı iki kişilik ılık salata. Good Food tarifinden uyarlama. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Salata",
+      "servings": 2,
+      "minutes": 30,
+      "difficulty": "easy",
+      "water": 50,
+      "image": "images/daily-2026-11-02-warm-lentil-tahini-salad.png",
+      "items": [
+        [
+          "lentilCooked",
+          400
+        ],
+        [
+          "carrot",
+          200
+        ],
+        [
+          "zucchini",
+          200
+        ],
+        [
+          "onion",
+          80
+        ],
+        [
+          "tahini",
+          20
+        ],
+        [
+          "greekyogurt",
+          150
+        ],
+        [
+          "oil",
+          10
+        ],
+        [
+          "lemon",
+          20
+        ],
+        [
+          "garlic",
+          5
+        ],
+        [
+          "parsley",
+          10
+        ]
+      ],
+      "macros": {
+        "kcal": 461.7,
+        "protein": 30.3,
+        "carbs": 63.3,
+        "fat": 12.1
+      },
+      "allergens": [
+        "milk",
+        "sesame"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Geniş tava",
+        "Kapak",
+        "Bıçak",
+        "Kesme tahtası",
+        "Süzgeç",
+        "Kâse",
+        "Çırpıcı",
+        "Spatula"
+      ],
+      "steps": [
+        "Önceden haşlanmış ve süzülmüş mercimekten 400 g tart; konserve kullanıyorsan durulayıp süz. Kuru mercimeği bu miktarla doğrudan kullanma. Temizlenmiş havuçtan 200 g, kabaktan 200 g ve soyulmuş soğandan 80 g tart. Havucu ince çubuk, kabağı küçük parça, soğanı ince dilim kes.",
+        "Tavada 10 g zeytinyağını ısıt. Havuç ve soğanı ekleyip orta ateşte 5 dakika karıştır. 30 ml su koy; kapağı kapalı 5 dakika yumuşat. Kabağı ekleyip kapağı açık 5–7 dakika pişir. Sebzeler çatalla delinebilmeli; havuç sertse biraz daha pişir.",
+        "Mercimeği sebzelere ekleyip karıştırarak iyice ısıt. 10 g maydanozu yıkayıp kıy. Tavayı ocaktan al ve maydanozu ekle.",
+        "Ayrı kâsede 20 g tahin, 150 g yağsız süzme yoğurt, 20 g limon suyu, ince rendelenmiş 5 g sarımsak ve kalan 20 ml suyu pürüzsüzleşene kadar karıştır.",
+        "Salatayı ve sosu iki tabağa eşit böl. Bir tabak bir porsiyondur. Yanında ekmek veya ek yağ kullanırsan ayrıca kaydet; bunlar hesaba dahil değildir. Farklı yağ oranında yoğurt kullanmak değerleri değiştirir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "lentilCooked": "172421",
+          "carrot": "170393",
+          "zucchini": "169291",
+          "onion": "170000",
+          "tahini": "170189",
+          "greekyogurt": "170894",
+          "oil": "171413",
+          "lemon": "167747",
+          "garlic": "169230",
+          "parsley": "170416"
+        },
+        "note": "Mercimek haşlanmış-süzülmüş, sebzeler temizlenmiş çiğ ağırlıktır. Yoğurt yağsızdır. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Lentil salad with tahini dressing",
+        "publisher": "Good Food Middle East / Sara Buenfeld",
+        "sourceUrl": "https://www.bbcgoodfoodme.com/recipes/lentil-salad-tahini-dressing/",
+        "accessedOn": "2026-11-02",
+        "kitchenTested": false,
+        "adaptation": "Havuç-kabak-soğanı soteleyip pişmiş mercimekle birleştirme ve tahin-yoğurt sosuyla sunma yöntemi temel alındı. Tatlı patates, tohum, bulyon, nane ve baharatlar çıkarıldı. Kolza yağı yerine zeytinyağı, limon kabuğu yerine suyu ve yağsız süzme yoğurt kullanıldı. İki kişilik ölçüler ve makrolar yeniden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-02",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-02-warm-lentil-tahini-salad.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-01-leek-spinach-breakfast",
       "addedOn": "2026-11-01",
       "title": "Pırasalı ıspanaklı yoğurtlu kahvaltı yumurtası",
