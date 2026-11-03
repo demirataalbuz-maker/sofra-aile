@@ -1,6 +1,100 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-03-salmon-pea-parcels",
+      "addedOn": "2026-11-03",
+      "title": "Kağıtta bezelyeli somon ve yoğurt",
+      "summary": "Somon, ince pırasa ve bezelyenin kapalı pişirme kâğıdında piştiği iki kişilik fırın yemeği. Good Food tarifinden kremasız uyarlama. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Balık",
+      "servings": 2,
+      "minutes": 35,
+      "difficulty": "easy",
+      "water": 30,
+      "image": "images/daily-2026-11-03-salmon-pea-parcels.png",
+      "items": [
+        [
+          "salmon",
+          300
+        ],
+        [
+          "leek",
+          200
+        ],
+        [
+          "peas",
+          100
+        ],
+        [
+          "greekyogurt",
+          150
+        ],
+        [
+          "lemon",
+          20
+        ]
+      ],
+      "macros": {
+        "kcal": 458,
+        "protein": 42.4,
+        "carbs": 24.4,
+        "fat": 20.9
+      },
+      "allergens": [
+        "fish",
+        "milk"
+      ],
+      "dietTags": [],
+      "equipment": [
+        "oven"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Fırın tepsisi",
+        "Fırına uygun pişirme kâğıdı",
+        "Bıçak",
+        "Kesme tahtası",
+        "Mutfak termometresi",
+        "Fırın eldiveni",
+        "Kâse"
+      ],
+      "steps": [
+        "Fırını alt-üst 190 °C’ye ısıt. Kılçıksız, derisiz somonu iki adet 150 g filetoya ayır. Donmuşsa önce buzdolabında çözdür. Çiğ balığın değdiği araçları diğer yiyeceklerden ayrı tut.",
+        "Pırasayı kat araları dahil yıka; temizlenmiş kısmından 200 g tart ve çok ince halkalar kes. Dondurulmuş bezelyeden 100 g tart. İki büyük pişirme kâğıdını tepsiye ser; her birinin ortasına pırasanın ve bezelyenin yarısını koy.",
+        "Her sebze yatağına bir fileto yerleştir. Her pakete 15 ml su ve 5 g limon suyu ekle. Kâğıdın kenarlarını birkaç kez katlayıp buharı içeride tutacak şekilde kapat; balığın çevresinde boşluk bırak.",
+        "Orta rafta yaklaşık 20–25 dakika pişir. Paketi eldivenle, buharı yüzünden uzak tutarak aç. Somonun en kalın yeri termometrede en az 63 °C olmalı; gerekirse yeniden kapatıp pişirmeye devam et. Pırasa da yumuşamış olmalı.",
+        "150 g yağsız süzme yoğurdu kalan 10 g limon suyuyla karıştır. İki paketi ayrı tabaklarda, her birinin yanında sosun yarısıyla sun. Bir paket ve sosu bir porsiyondur. Patates, pilav, ekmek ve ek yağ hesaba dahil değildir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "salmon": "175167",
+          "leek": "169246",
+          "peas": "170016",
+          "greekyogurt": "170894",
+          "lemon": "167747"
+        },
+        "note": "Somon ve pırasa çiğ yenilebilir ağırlık; bezelye dondurulmuş-pişmemiş, yoğurt yağsızdır. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Leeky salmon in a parcel",
+        "publisher": "Good Food / Mary Cadogan",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/leeky-salmon-parcel",
+        "accessedOn": "2026-11-03",
+        "kitchenTested": false,
+        "adaptation": "Somon-pırasa-bezelyeyi pişirme kâğıdında pişirme ve fırın seçeneği temel alındı. Crème fraîche çıkarıldı; yağsız yoğurt pişirme sonrasında ayrı sos olarak eklendi. Tarhun çıkarıldı, limon ve az su eklendi; miktarlar ve makrolar yeniden hesaplandı. Pişirme süresi termometre kontrolüyle verildi.",
+        "foodSafetySource": "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures"
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-03",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-03-salmon-pea-parcels.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-02-warm-lentil-tahini-salad",
       "addedOn": "2026-11-02",
       "title": "Tahin yoğurt soslu ılık mercimek ve sebze salatası",
