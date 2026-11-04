@@ -1,6 +1,114 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-04-carrot-hummus-snack",
+      "addedOn": "2026-11-04",
+      "title": "Havuçlu humus ve salatalık çubukları",
+      "summary": "Haşlanmış havucun nohut ve tahinle püre edildiği dört kişilik tuzlu ara öğün. Good Food tariflerinden ev yapımı uyarlama. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Ara öğün",
+      "servings": 4,
+      "minutes": 40,
+      "difficulty": "easy",
+      "water": 60,
+      "image": "images/daily-2026-11-04-carrot-hummus-snack.png",
+      "items": [
+        [
+          "chickpea",
+          300
+        ],
+        [
+          "carrot",
+          250
+        ],
+        [
+          "tahini",
+          30
+        ],
+        [
+          "oil",
+          10
+        ],
+        [
+          "lemon",
+          30
+        ],
+        [
+          "garlic",
+          5
+        ],
+        [
+          "cucumber",
+          400
+        ]
+      ],
+      "macros": {
+        "kcal": 233.9,
+        "protein": 9.3,
+        "carbs": 32.7,
+        "fat": 8.8
+      },
+      "allergens": [
+        "sesame"
+      ],
+      "dietTags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "equipment": [
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Tencere",
+        "Süzgeç",
+        "Mutfak robotu",
+        "Bıçak",
+        "Kesme tahtası",
+        "Spatula",
+        "Dört küçük servis kâsesi"
+      ],
+      "steps": [
+        "Havucu yıka, soy ve temizlenmiş kısmından 250 g tart. Küçük, benzer büyüklükte parçalar kes. Tencerede üzerini geçecek suyla yaklaşık 15–20 dakika, çatalla kolay ezilene kadar haşla. Süz ve ılımaya bırak. Haşlama suyu ölçülü 60 ml sudan ayrıdır ve kullanılmaz.",
+        "Önceden haşlanmış-süzülmüş nohuttan 300 g tart. Konserve kullanıyorsan durulayıp iyice süz. Kuru nohudu doğrudan kullanma. 5 g sarımsağı soy.",
+        "Nohut, ılımış havuç, 30 g tahin, 10 g zeytinyağı, 30 g limon suyu, sarımsak ve 60 ml içme suyunu robota koy. Pürüzsüzleşene kadar aralıklı çek; robotu durdurup kenarları spatulayla sıyır. Cihazın sıcak yiyecek kullanım talimatına uy.",
+        "Salatalığı yıka; yenilebilir kısmından 400 g tart ve çubuklar kes. Humusu iyice karıştırıp dört kâseye eşit tartarak paylaştır. Her birinin yanında 100 g salatalık sun.",
+        "Bir kâse humus ve 100 g salatalık bir porsiyondur. Üstüne ek yağ dökme; ekmek, kraker ve ek malzemeler hesaba dahil değildir. Bekleteceksen kapalı kapta buzdolabına al."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 4; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "chickpea": "173757",
+          "carrot": "170393",
+          "tahini": "170189",
+          "oil": "171413",
+          "lemon": "167747",
+          "garlic": "169230",
+          "cucumber": "168409"
+        },
+        "note": "Nohut haşlanmış-süzülmüş, havuç ve salatalık temizlenmiş çiğ ağırlıktır. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Carrot hummus with pitta dippers; Hummus",
+        "publisher": "Good Food / Good Food team; Esther Clark",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/carrot-hummus-pitta-dippers",
+        "additionalSources": [
+          "https://www.bbcgoodfood.com/recipes/hummus"
+        ],
+        "accessedOn": "2026-11-04",
+        "kitchenTested": false,
+        "adaptation": "Haşlanmış havucu humusa karıştırma fikri temel alındı. Hazır humus yerine nohut-tahin-limon-sarımsak-yağ ile evde hazırlanıyor; kişniş çıkarıldı, pide yerine salatalık kondu. Dört kişilik gramlar ve makrolar yeniden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-04",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-04-carrot-hummus-snack.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-03-salmon-pea-parcels",
       "addedOn": "2026-11-03",
       "title": "Kağıtta bezelyeli somon ve yoğurt",
