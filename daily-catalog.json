@@ -1,6 +1,104 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-05-apple-oat-crunch-cups",
+      "addedOn": "2026-11-05",
+      "title": "Elmalı çıtır yulaflı yoğurt kupası",
+      "summary": "Pişmiş elma ve fırınlanmış yulaf kümelerinin soğuk yoğurtla katmanlandığı iki kişilik tatlı. Good Food tarifinden uyarlama. İlave şeker içermez; meyve ve yoğurt doğal şeker içerdiğinden şekersiz olarak değerlendirilmez. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Tatlı",
+      "servings": 2,
+      "minutes": 45,
+      "difficulty": "easy",
+      "water": 40,
+      "image": "images/daily-2026-11-05-apple-oat-crunch-cups.png",
+      "items": [
+        [
+          "apple",
+          300
+        ],
+        [
+          "oats",
+          40
+        ],
+        [
+          "greekyogurt",
+          300
+        ],
+        [
+          "oil",
+          5
+        ],
+        [
+          "cinnamon",
+          1
+        ]
+      ],
+      "macros": {
+        "kcal": 265.6,
+        "protein": 18.3,
+        "carbs": 40,
+        "fat": 4.7
+      },
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "oven",
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Küçük tencere",
+        "Kapak",
+        "Fırın tepsisi",
+        "Pişirme kâğıdı",
+        "Bıçak",
+        "Kesme tahtası",
+        "Kâse",
+        "Spatula",
+        "İki servis kupası"
+      ],
+      "steps": [
+        "Fırını alt-üst 180 °C’ye ısıt. Elmaları yıka; çekirdek yatağını çıkar, kabuğunu bırak ve yenilebilir kısmından 300 g tart. Küçük küpler kes. Tencerede 40 ml suyla, kapağı kapalı yaklaşık 6–10 dakika yumuşat; arada karıştır.",
+        "Pişmiş elmanın yaklaşık 40 gramını çatalla ez. Kâsede 40 g yulaf, 1 g tarçın, 5 g zeytinyağı ve toplam yoğurttan ayırdığın 30 gramla karıştır. Ezilmiş elmayı ekle; kaşıkla küçük kümeler oluştur.",
+        "Kümeleri pişirme kâğıtlı tepsiye seyrek yay. Yaklaşık 15–20 dakika pişir; yarısında dikkatle çevir. Altın rengi olup sertleşmeye başlayınca çıkar. Fırına göre süre değişir; yakmadan kontrol et. Elmayı ve yulafı oda sıcaklığına yaklaşana kadar ılıt.",
+        "Kalan 270 g yağsız süzme yoğurdu iki kupaya eşit böl. Kalan elmayı ve çıtır yulafı da eşit paylaştırıp katmanla. Çıtır kalması için yulafı servis anında ekle.",
+        "Bir kupa bir porsiyondur. Bal, şurup ve kuruyemiş hesaba dahil değildir. Bekleteceksen yoğurt ve elmayı kapalı kapta buzdolabında, soğumuş yulafı ayrı tut. Farklı yağ oranında yoğurt değerleri değiştirir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "apple": "171688",
+          "oats": "173904",
+          "greekyogurt": "170894",
+          "oil": "171413",
+          "cinnamon": "171320"
+        },
+        "note": "Elma kabuklu, çekirdeksiz çiğ ağırlık; yulaf kuru, yoğurt yağsızdır. Tüm şeker verileri doğrulanmadığından sayısal şeker değeri eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Healthy apple crunch",
+        "publisher": "Good Food / Sara Buenfeld",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/healthy-apple-crunch",
+        "accessedOn": "2026-11-05",
+        "kitchenTested": false,
+        "adaptation": "Pişmiş elmanın bir bölümü ve yoğurtla yulaf kümeleri oluşturma yöntemi temel alındı. Soya yoğurdu yerine yağsız süzme yoğurt, kolza yağı yerine zeytinyağı kullanıldı; vanilya çıkarıldı. Elma kabuklu bırakıldı. Son aşamada birlikte fırınlamak yerine soğuk kupalarda katmanlanıyor. İki kişilik miktarlar ve makrolar yeniden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-05",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-05-apple-oat-crunch-cups.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-04-carrot-hummus-snack",
       "addedOn": "2026-11-04",
       "title": "Havuçlu humus ve salatalık çubukları",
