@@ -1,6 +1,114 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-06-mushroom-potato-soup",
+      "addedOn": "2026-11-06",
+      "title": "Yoğurt eşliğinde mantarlı patates çorbası",
+      "summary": "Kültür mantarı, patates ve havuçla hazırlanan, taneli bırakılıp yoğurtla sunulan iki kişilik çorba. Good Food tarifinden uyarlama. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Çorba",
+      "servings": 2,
+      "minutes": 45,
+      "difficulty": "easy",
+      "water": 600,
+      "image": "images/daily-2026-11-06-mushroom-potato-soup.png",
+      "items": [
+        [
+          "mushroom",
+          400
+        ],
+        [
+          "potato",
+          200
+        ],
+        [
+          "carrot",
+          100
+        ],
+        [
+          "onion",
+          80
+        ],
+        [
+          "garlic",
+          5
+        ],
+        [
+          "oil",
+          10
+        ],
+        [
+          "greekyogurt",
+          200
+        ],
+        [
+          "parsley",
+          5
+        ]
+      ],
+      "macros": {
+        "kcal": 265.3,
+        "protein": 19.6,
+        "carbs": 37.1,
+        "fat": 6.4
+      },
+      "allergens": [
+        "milk"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Kapaklı tencere",
+        "Bıçak",
+        "Kesme tahtası",
+        "Spatula",
+        "Kepçe",
+        "Ölçü kabı"
+      ],
+      "steps": [
+        "Güvenilir satıcıdan alınmış kültür mantarlarını temizle; 400 g tartıp dilimle. Patates ve havucu soy; temizlenmiş kısmından sırasıyla 200 g ve 100 g tartıp küçük küpler kes. 80 g soğanı doğra, 5 g sarımsağı kıy.",
+        "Tencerede 10 g zeytinyağını ısıt. Soğanı orta-kısık ateşte 5–7 dakika yumuşat; yanmaması için karıştır. Mantarları ekleyip 5–7 dakika, suyunu bırakıp biraz çekene kadar pişir.",
+        "Sarımsak, patates ve havucu ekle, bir dakika karıştır. 600 ml sıcak içme suyu koy. Kaynayınca ateşi kıs, kapağı hafif aralık bırak ve yaklaşık 20 dakika pişir. Patates ve havuç çatalla kolay delinmeli; sertse pişirmeyi sürdür.",
+        "5 g maydanozu yıkayıp kıy. Çorbaya ekle ve ocaktan al. Blender kullanmadan taneli bırak. Suyun bir kısmı buharlaşacağı için bitmiş çorbanın tamamını iki kâseye eşit paylaştır.",
+        "Her kâseyi yanında veya üzerinde 100 g yağsız süzme yoğurtla sun. Yoğurdu tencerede kaynatma. Bir kâse ve yoğurdu bir porsiyondur. Ekmek, ceviz, bulyon ve ek yağ hesaba dahil değildir; farklı yağ oranında yoğurt değerleri değiştirir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "mushroom": "169251",
+          "potato": "170026",
+          "carrot": "170393",
+          "onion": "170000",
+          "garlic": "169230",
+          "oil": "171413",
+          "greekyogurt": "170894",
+          "parsley": "170416"
+        },
+        "note": "Sebzeler temizlenmiş çiğ yenilebilir ağırlık; yoğurt yağsızdır. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Mushroom & potato soup",
+        "publisher": "Good Food Middle East / Sara Buenfeld",
+        "sourceUrl": "https://www.bbcgoodfoodme.com/recipes/mushroom-potato-soup/",
+        "accessedOn": "2026-11-06",
+        "kitchenTested": false,
+        "adaptation": "Soğan, mantar, sarımsak, patates ve havucu soteleyip suda pişirme, yoğurtla sunma yöntemi temel alındı. Kuru porçini, bulyon, kekik ve ceviz çıkarıldı. Kolza yağı yerine zeytinyağı ve yağsız süzme yoğurt kullanıldı. İki kişilik miktarlar ve makrolar yeniden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-06",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-06-mushroom-potato-soup.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-05-apple-oat-crunch-cups",
       "addedOn": "2026-11-05",
       "title": "Elmalı çıtır yulaflı yoğurt kupası",
