@@ -1,6 +1,99 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-07-white-bean-breakfast-eggs",
+      "addedOn": "2026-11-07",
+      "title": "Domatesli beyaz fasulyeli kahvaltı yumurtası",
+      "summary": "Domates sosunda fasulye ve ıspanağın üzerine yumurta pişirilen iki kişilik kahvaltı tavası. Good Food tarifinden jambonsuz, ocakta uyarlama. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Kahvaltı",
+      "servings": 2,
+      "minutes": 35,
+      "difficulty": "easy",
+      "water": 30,
+      "image": "images/daily-2026-11-07-white-bean-breakfast-eggs.png",
+      "items": [
+        [
+          "whitebean",
+          300
+        ],
+        [
+          "tomato",
+          400
+        ],
+        [
+          "spinach",
+          150
+        ],
+        [
+          "egg",
+          4
+        ],
+        [
+          "oil",
+          5
+        ]
+      ],
+      "macros": {
+        "kcal": 426.9,
+        "protein": 31.1,
+        "carbs": 48.9,
+        "fat": 13.2
+      },
+      "allergens": [
+        "egg"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Kapaklı geniş yapışmaz tava",
+        "Bıçak",
+        "Kesme tahtası",
+        "Süzgeç",
+        "Kaşık",
+        "Spatula"
+      ],
+      "steps": [
+        "Önceden haşlanmış-süzülmüş beyaz fasulyeden 300 g tart. Konserve kullanıyorsan durulayıp süz. Kuru fasulyeyi doğrudan kullanma. Domatesi yıka, sapını çıkar ve 400 g tartıp küçük doğra. Ispanağı iyice yıkayıp süz; 150 g tart.",
+        "Tavaya 5 g zeytinyağı, domates ve 30 ml suyu koy. Orta ateşte yaklaşık 10–12 dakika, domates yumuşayıp sos koyulaşana kadar pişir; ara sıra karıştır. Fasulyeyi ekleyip 3 dakika ısıt.",
+        "Ispanağı iki seferde ekle ve yapraklar solana kadar 3–5 dakika karıştır. Sos tamamen kurumasın; yanma başlamadan ateşi kıs.",
+        "Kaşığın arkasıyla karışımda dört çukur aç. Her çukura bir yumurta kır; toplam kabuksuz ağırlık yaklaşık 200 g olmalı. Kapağı kapatıp kısık ateşte yaklaşık 7–10 dakika pişir. Beyazları ve sarıları tamamen katılaşana kadar sürdür; süre tavaya göre değişir.",
+        "Tavadaki sebze-fasulye karışımını iki tabağa eşit böl ve her birine iki yumurta koy. Bir tabak bir porsiyondur. Ekmek, peynir ve ek yağ hesaba dahil değildir; eklersen ayrıca kaydet."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "whitebean": "175203",
+          "tomato": "170457",
+          "spinach": "168462",
+          "egg": "171287",
+          "oil": "171413"
+        },
+        "note": "Fasulye haşlanmış-süzülmüş; sebzeler çiğ yenilebilir ağırlık, yumurta 4 × 50 g kabuksuzdur. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Saucy bean baked eggs",
+        "publisher": "Good Food / Esther Clark",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/saucy-bean-baked-eggs",
+        "accessedOn": "2026-11-07",
+        "kitchenTested": false,
+        "adaptation": "Domates-fasulye-ıspanak karışımında çukurlar açıp yumurta pişirme yöntemi temel alındı. Karışık konserve fasulye yerine haşlanmış beyaz fasulye, konserve domates yerine taze domates kullanıldı. Jambon çıkarıldı; ölçülü yağ ve su eklendi. Fırın ızgarası yerine kapaklı tavada yumurtalar tam pişiriliyor. İki kişilik ölçüler ve makrolar yeniden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-07",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-07-white-bean-breakfast-eggs.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-06-mushroom-potato-soup",
       "addedOn": "2026-11-06",
       "title": "Yoğurt eşliğinde mantarlı patates çorbası",
