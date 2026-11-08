@@ -1,6 +1,95 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-08-chicken-cabbage-saute",
+      "addedOn": "2026-11-08",
+      "title": "Limonlu sarımsaklı lahana ve tavuk sote",
+      "summary": "İnce tavuk şeritleri ve lahanayla iki kişilik pratik tava yemeği. Virginia Cooperative Extension tarifinden sosu sadeleştirilmiş uyarlama. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Tavuk",
+      "servings": 2,
+      "minutes": 30,
+      "difficulty": "easy",
+      "water": 40,
+      "image": "images/daily-2026-11-08-chicken-cabbage-saute.png",
+      "items": [
+        [
+          "chicken",
+          350
+        ],
+        [
+          "cabbage",
+          400
+        ],
+        [
+          "garlic",
+          6
+        ],
+        [
+          "oil",
+          10
+        ],
+        [
+          "lemon",
+          20
+        ]
+      ],
+      "macros": {
+        "kcal": 310.9,
+        "protein": 42.2,
+        "carbs": 13.3,
+        "fat": 9.8
+      },
+      "allergens": [],
+      "dietTags": [],
+      "equipment": [
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Geniş yapışmaz tava",
+        "Bıçak",
+        "Sebze ve çiğ tavuk için ayrı kesme tahtaları",
+        "Spatula",
+        "Gıda termometresi"
+      ],
+      "steps": [
+        "Lahananın dış yapraklarını ve sert göbeğini ayır. Yıkayıp süzdükten sonra 400 g tart ve ince şeritler kes. Sarımsağı soyup 6 g tart ve kıy; 20 g limon suyu hazırla.",
+        "350 g çiğ, derisiz tavuk göğsünü ayrı tahtada ince şeritler kes. Çiğ tavuğu yıkama; ardından ellerini ve temas eden araçları temizle.",
+        "Tavada 10 g zeytinyağını orta-yüksek ateşte ısıt. Tavuğu ekle; gerekirse iki partide, toplam yaklaşık 6–8 dakika çevirerek pişir. En kalın parçanın merkezi en az 74°C olmalı. Temiz tabağa al.",
+        "Aynı tavaya lahanayı koy; 4–5 dakika karıştır. Sarımsağı ve 40 ml suyu ekleyip 2–3 dakika daha, lahana hafif diri kalana kadar pişir.",
+        "Pişmiş tavuğu tavaya geri koy. Limon suyunu ekle, 1 dakika karıştırıp ısıt. İki tabağa eşit böl; bir tabak bir porsiyondur. Pilav, ekmek ve ek sos bu hesaba dahil değildir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "chicken": "171077",
+          "cabbage": "169975",
+          "garlic": "169230",
+          "oil": "171413",
+          "lemon": "167747"
+        },
+        "note": "Tavuk ve temizlenmiş sebzeler çiğ yenilebilir ağırlıktır. Pişirme suyu enerji içermez. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Chicken Cabbage Stir Fry",
+        "publisher": "Virginia Cooperative Extension / Virginia Family Nutrition Program",
+        "sourceUrl": "https://ext.vt.edu/content/dam/ext_vt_edu/topics/food-health/family-nutrition-program/recipes/main-dishes/poultry/chicken-cabbage-stir-fry.pdf",
+        "accessedOn": "2026-11-08",
+        "kitchenTested": false,
+        "adaptation": "Tavuk şeritleri ve ince lahanayı tavada soteleme yöntemi temel alındı. Nişasta, soya sosu ve zencefil çıkarıldı; taze sarımsak, limon ve ölçülü zeytinyağı kullanıldı. İki kişilik miktarlar ve makrolar yeniden hesaplandı.",
+        "foodSafetySource": "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures"
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-08",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-08-chicken-cabbage-saute.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-07-white-bean-breakfast-eggs",
       "addedOn": "2026-11-07",
       "title": "Domatesli beyaz fasulyeli kahvaltı yumurtası",
