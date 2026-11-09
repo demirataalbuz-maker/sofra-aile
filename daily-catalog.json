@@ -1,6 +1,108 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-09-pea-ricotta-fritters",
+      "addedOn": "2026-11-09",
+      "title": "Bezelyeli ricotta mücveri",
+      "summary": "Tavada pişen sekiz küçük bezelye mücveri; iki adet bir ara öğün porsiyonudur. Good Food tarifinden sadeleştirilmiş uyarlama. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Ara öğün",
+      "servings": 4,
+      "minutes": 35,
+      "difficulty": "easy",
+      "water": 500,
+      "image": "images/daily-2026-11-09-pea-ricotta-fritters.png",
+      "items": [
+        [
+          "peas",
+          250
+        ],
+        [
+          "lor-peyniri",
+          150
+        ],
+        [
+          "flour",
+          60
+        ],
+        [
+          "egg",
+          2
+        ],
+        [
+          "parsley",
+          10
+        ],
+        [
+          "oil",
+          10
+        ]
+      ],
+      "macros": {
+        "kcal": 217.7,
+        "protein": 10.9,
+        "carbs": 23,
+        "fat": 9.1
+      },
+      "allergens": [
+        "milk",
+        "gluten",
+        "egg"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Tencere",
+        "Süzgeç",
+        "Karıştırma kâsesi",
+        "Çatal",
+        "Geniş yapışmaz tava",
+        "Spatula",
+        "Gıda termometresi"
+      ],
+      "steps": [
+        "250 g dondurulmuş bezelyeyi yaklaşık 500 ml kaynar suda paketindeki süreye göre pişir. Süzüp soğuk sudan geçir; iyice süzüp soğut. Suyu hamura katma. Maydanozu yıkayıp 10 g tart ve ince kıy.",
+        "Kâsede iki yumurtayı (kabuksuz yaklaşık 100 g) çırp. 150 g tam yağlı ricotta ve 60 g buğday ununu karıştır. Bezelye ve maydanozu ekle; çatalla bezelyelerin bir kısmını ezerek kaşıkla şekillenebilen koyu karışım yap.",
+        "Tavada toplam 10 g zeytinyağının yarısını orta-kısık ateşte ısıt. Karışımın yarısından dört küçük, yaklaşık 1 cm kalınlığında disk oluştur. Bir yüzünü yaklaşık 3–4 dakika, diğerini 3 dakika pişir. Kalan yağ ve karışımla dört tane daha yap.",
+        "Merkezi ıslak hamur kalmayacak şekilde pişir; yumurtalı mücverin iç sıcaklığı en az 71°C olmalı. Dışı erken koyulaşırsa ateşi azaltıp pişirmeyi sürdür.",
+        "Sekiz mücveri dört eşit porsiyona ayır: iki mücver bir porsiyondur. Sos ve ekmek hesaba dahil değildir. Normal unla kabartıcısız yapıldığı için kabarık pankek dokusu bekleme."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 4; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "peas": "170016",
+          "lor-peyniri": "170851",
+          "flour": "169761",
+          "egg": "171287",
+          "parsley": "170416",
+          "oil": "171413"
+        },
+        "note": "Bezelye dondurulmuş-pişmemiş tartılır; haşlama suyu süzülür. Peynir hesabı tam yağlı ricotta referansıdır, farklı lor etiketiyle değerler değişir. Tüm yağ hesaba katıldı; şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Pea & ricotta fritters",
+        "publisher": "Good Food",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/pea-ricotta-fritters",
+        "accessedOn": "2026-11-09",
+        "kitchenTested": false,
+        "adaptation": "Bezelye-ricotta-yumurta-un karışımından sekiz tava mücveri yöntemi temel alındı. Kendinden kabaran un yerine normal un kullanıldı; kabartıcı, taze soğan, dereotu ve limon kabuğu çıkarıldı. Ricotta ve un azaltıldı; isteğe bağlı üst malzemeler eklenmedi. Dört ara öğün porsiyonu için yeniden hesaplandı.",
+        "foodSafetySource": "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures"
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-09",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-09-pea-ricotta-fritters.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-08-chicken-cabbage-saute",
       "addedOn": "2026-11-08",
       "title": "Limonlu sarımsaklı lahana ve tavuk sote",
