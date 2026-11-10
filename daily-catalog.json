@@ -1,6 +1,107 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-10-apple-spinach-walnut-salad",
+      "addedOn": "2026-11-10",
+      "title": "Elmalı cevizli ıspanak salatası",
+      "summary": "Çiğ ıspanak, elma, ceviz ve beyaz peynirle iki kişilik yan salata. Good Food tarifinden uyarlama; tek başına dengeli ana öğün sayılmaz. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Salata",
+      "servings": 2,
+      "minutes": 15,
+      "difficulty": "easy",
+      "image": "images/daily-2026-11-10-apple-spinach-walnut-salad.png",
+      "items": [
+        [
+          "spinach",
+          150
+        ],
+        [
+          "apple",
+          200
+        ],
+        [
+          "feta",
+          80
+        ],
+        [
+          "walnut",
+          30
+        ],
+        [
+          "lemon",
+          20
+        ],
+        [
+          "oil",
+          6
+        ],
+        [
+          "parsley",
+          5
+        ]
+      ],
+      "macros": {
+        "kcal": 303,
+        "protein": 10.5,
+        "carbs": 21,
+        "fat": 21.9
+      },
+      "allergens": [
+        "milk",
+        "nuts"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [],
+      "tools": [
+        "Mutfak tartısı",
+        "Bıçak",
+        "Kesme tahtası",
+        "Salata kurutucu veya süzgeç",
+        "Geniş kâse",
+        "Küçük sos kâsesi",
+        "Kaşık"
+      ],
+      "steps": [
+        "Ispanağın bozuk yapraklarını ve sert saplarını ayır. Yaprakları akan içme suyuyla iyice yıka ve kurut; yenilebilir kısmından 150 g tart. Maydanozu da yıkayıp kurut ve 5 g kıy.",
+        "Elmayı yıka, sapını ve çekirdek evini çıkar. Kabuklu yenilebilir kısmından 200 g tartıp ince dilimle. 20 g limon suyunun yarısıyla nazikçe karıştır.",
+        "Kalan limon suyunu 6 g zeytinyağıyla küçük kâsede çırp. 30 g ceviz içini iri kır; 80 g beyaz peyniri ufala.",
+        "Ispanak, elma ve maydanozu geniş kâsede sosla hafifçe karıştır. İki tabağa eşit böl; her tabağa ceviz ve peynirin yarısını ekleyip hemen servis et.",
+        "Bir tabak bir porsiyon yan salatadır. Hesap feta referanslı peynirle yapıldı; kullandığın peynirin etiketi farklıysa değerler değişir. Ekmek ve diğer eklemeleri ayrıca kaydet."
+      ],
+      "nutritionCalculation": {
+        "basis": "Porsiyon başına; miktar × gramsPerUnit × 100 g besin değeri / 100, toplam / 2; bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "spinach": "168462",
+          "apple": "171688",
+          "feta": "173420",
+          "walnut": "170187",
+          "lemon": "167747",
+          "oil": "171413",
+          "parsley": "170416"
+        },
+        "note": "Elma kabuklu ve çekirdeksiz, yeşillikler temizlenmiş çiğ ağırlıktır. Peynir feta referansıdır. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Pear, chicory & blue cheese salad",
+        "publisher": "Good Food Middle East / Good Food",
+        "sourceUrl": "https://www.bbcgoodfoodme.com/recipes/pear-chicory-and-blue-cheese-salad/",
+        "accessedOn": "2026-11-10",
+        "kitchenTested": false,
+        "adaptation": "Meyve, yeşillik, ceviz, peynir ve limon-yağ sosu birleşimi temel alındı. Armut yerine elma, hindiba yerine ıspanak, küflü peynir yerine feta referanslı beyaz peynir ve ceviz yağı yerine zeytinyağı kullanıldı. İki kişilik yan salatanın ölçüleri ve makroları yeniden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-10",
+        "description": "Özgün yapay zekâ görseli; üçüncü taraf fotoğraf kullanılmadı, temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-10-apple-spinach-walnut-salad.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-09-pea-ricotta-fritters",
       "addedOn": "2026-11-09",
       "title": "Bezelyeli ricotta mücveri",
