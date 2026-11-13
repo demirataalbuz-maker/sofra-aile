@@ -1,6 +1,91 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-13-leek-lentil-soup",
+      "addedOn": "2026-11-13",
+      "title": "Pırasalı havuçlu mercimek çorbası",
+      "summary": "Kuru mercimek, pırasa ve havucun birlikte ağır ağır piştiği iki kişilik taneli çorba. Good Food tarifinden uyarlama. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Çorba",
+      "servings": 2,
+      "minutes": 70,
+      "difficulty": "easy",
+      "water": 1000,
+      "image": "images/daily-2026-11-13-leek-lentil-soup.png",
+      "items": [
+        [
+          "lentil",
+          120
+        ],
+        [
+          "carrot",
+          250
+        ],
+        [
+          "leek",
+          200
+        ],
+        [
+          "parsley",
+          10
+        ]
+      ],
+      "macros": {
+        "kcal": 325.3,
+        "protein": 17.6,
+        "carbs": 64.5,
+        "fat": 1.3
+      },
+      "allergens": [],
+      "dietTags": [
+        "vegetarian",
+        "vegan"
+      ],
+      "equipment": [
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Tencere",
+        "Bıçak",
+        "Kesme tahtası",
+        "Süzgeç",
+        "Kepçe"
+      ],
+      "steps": [
+        "120 g kuru mercimeği ayıkla ve süzgeçte yıka. Havucu temizleyip 250 g tart ve küçük küpler kes. Pırasayı katlarının arasındaki toprak gidene kadar yıka; yenilebilir kısmından 200 g tartıp ince halkalar kes.",
+        "Tencereye mercimeği ve 1 litre içme suyunu koy. Kaynatıp ateşi kıs; 5 dakika pişir.",
+        "Havuç ve pırasayı ekle. Kapağı hafif aralık bırakarak kısık ateşte yaklaşık 45–55 dakika, mercimek ve sebzeler tamamen yumuşayana kadar pişir. Ara sıra karıştır; su erken azalırsa yanmadan az miktarda sıcak su ekle.",
+        "Yıkanıp kıyılmış 10 g maydanozu ekle. Blenderdan geçirme; taneli servis et. Çorbayı iki eşit porsiyona böl. Yağ, yoğurt ve ekmek hesaba dahil değildir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Miktar × gramsPerUnit × 100 g besin değeri / 100; toplam / 2, bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "lentil": "172420",
+          "carrot": "170393",
+          "leek": "169246",
+          "parsley": "170416"
+        },
+        "note": "Mercimek kuru, sebzeler temizlenmiş çiğ tartılır; tüm pişirme suyu tüketilir. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Lentil soup",
+        "publisher": "Good Food / bevieevey",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/lentil-soup",
+        "accessedOn": "2026-11-13",
+        "kitchenTested": false,
+        "adaptation": "Mercimek, havuç ve pırasayı birlikte uzun süre kaynatma yöntemi temel alındı. Kırmızı mercimek yerine katalogdaki kuru mercimek referansı kullanıldı; et/sebze suyu yerine suyla iki porsiyon için yeniden ölçülendirildi. Kaynağın makroları kopyalanmadı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-13",
+        "description": "Özgün yapay zekâ görseli; temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-13-leek-lentil-soup.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-10-apple-spinach-walnut-salad",
       "addedOn": "2026-11-10",
       "title": "Elmalı cevizli ıspanak salatası",
