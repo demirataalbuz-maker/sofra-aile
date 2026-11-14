@@ -1,6 +1,104 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-14-baked-banana-porridge",
+      "addedOn": "2026-11-14",
+      "title": "Yoğurt eşliğinde muzlu fırın yulafı",
+      "summary": "Muz ve cevizle fırında pişen kremamsı yulaf kahvaltısı. Good Food tarifinden yoğurt eşliğinde uyarlama. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Kahvaltı",
+      "servings": 2,
+      "minutes": 35,
+      "difficulty": "easy",
+      "water": 300,
+      "image": "images/daily-2026-11-14-baked-banana-porridge.png",
+      "items": [
+        [
+          "oats",
+          100
+        ],
+        [
+          "banana",
+          200
+        ],
+        [
+          "milk",
+          150
+        ],
+        [
+          "walnut",
+          20
+        ],
+        [
+          "cinnamon",
+          1
+        ],
+        [
+          "greekyogurt",
+          200
+        ]
+      ],
+      "macros": {
+        "kcal": 449.9,
+        "protein": 21.8,
+        "carbs": 65.6,
+        "fat": 13
+      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "nuts"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "oven"
+      ],
+      "temperature": "190°C alt-üst / 170°C fanlı",
+      "tools": [
+        "Mutfak tartısı",
+        "Çatal",
+        "Karıştırma kâsesi",
+        "Küçük fırın kabı",
+        "Fırın eldiveni"
+      ],
+      "steps": [
+        "Fırını 190°C alt-üst veya 170°C fanlı ısıt. Muzların kabuğunu soy; yenilebilir kısmından toplam 200 g tart. Muzları boyuna ikiye kes, yaklaşık 50 g kısmını çatalla ez.",
+        "100 g yulaf, ezilmiş muz, 150 g süt, 300 ml su ve 1 g tarçını karıştır. Yaklaşık 18–20 cm genişliğinde küçük fırın kabına dök.",
+        "Kalan muz parçalarını üzerine yerleştir. 20 g ceviz içini iri kırıp serp. Kabı fırının orta rafında yaklaşık 25–30 dakika, yulaf sıvının çoğunu çekip kremamsı hale gelene kadar pişir. Bu bir kek değildir; içi nemli kalır.",
+        "Eldivenle çıkar ve 5 dakika dinlendir. İki eşit porsiyona böl; her porsiyonun yanında 100 g yağsız süzme yoğurt servis et. Yoğurt hesaba dahildir. Bal ve ek süt eklersen ayrıca kaydet."
+      ],
+      "nutritionCalculation": {
+        "basis": "Miktar × gramsPerUnit × 100 g besin değeri / 100; toplam / 2, bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "oats": "173904",
+          "banana": "173944",
+          "milk": "172217",
+          "walnut": "170187",
+          "cinnamon": "171320",
+          "greekyogurt": "170894"
+        },
+        "note": "Muz kabuksuz, yulaf kuru tartılır; 200 g yağsız süzme yoğurt dahil. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Baked banana porridge",
+        "publisher": "Good Food / Sophie Godwin",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/baked-banana-porridge",
+        "accessedOn": "2026-11-14",
+        "kitchenTested": false,
+        "adaptation": "Muzun bir bölümünü ezip süt-su-yulafla birleştirme, kalan muzu ve cevizi üstüne koyup fırınlama yöntemi temel alındı. Tuz çıkarıldı; muz ve ceviz gramla ölçülendirildi. Yanına yağsız süzme yoğurt eklendi ve tüm malzemelerden iki porsiyon makrosu yeniden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-14",
+        "description": "Özgün yapay zekâ görseli; temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-14-baked-banana-porridge.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-13-leek-lentil-soup",
       "addedOn": "2026-11-13",
       "title": "Pırasalı havuçlu mercimek çorbası",
