@@ -1,6 +1,100 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-15-salmon-spinach-pasta",
+      "addedOn": "2026-11-15",
+      "title": "Somonlu ıspanaklı tam buğday makarna",
+      "summary": "Somon parçaları, taze domates ve ıspanakla iki kişilik makarna. Good Food tarifinden uyarlama. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Balık",
+      "servings": 2,
+      "minutes": 30,
+      "difficulty": "easy",
+      "water": 1500,
+      "image": "images/daily-2026-11-15-salmon-spinach-pasta.png",
+      "items": [
+        [
+          "wwpasta",
+          120
+        ],
+        [
+          "salmon",
+          250
+        ],
+        [
+          "spinach",
+          150
+        ],
+        [
+          "tomato",
+          250
+        ],
+        [
+          "oil",
+          5
+        ]
+      ],
+      "macros": {
+        "kcal": 533.1,
+        "protein": 37.1,
+        "carbs": 51.6,
+        "fat": 21.6
+      },
+      "allergens": [
+        "gluten",
+        "fish"
+      ],
+      "dietTags": [],
+      "equipment": [
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Tencere",
+        "Süzgeç",
+        "Geniş tava",
+        "Bıçak",
+        "Kesme tahtası",
+        "Spatula",
+        "Gıda termometresi"
+      ],
+      "steps": [
+        "150 g ıspanağı ve 250 g domatesi yıka. Ispanağı süz, domatesi küçük doğra. Derisiz ve kılçıksız çiğ somondan 250 g tart.",
+        "120 g kuru tam buğday makarnayı yaklaşık 1,5 litre kaynar suda paket süresine göre haşla. Süzmeden önce 100 ml pişirme suyu ayır.",
+        "Tavada 5 g zeytinyağını ısıt. Domatesi ekleyip orta ateşte 5–7 dakika, suyunu salıp yumuşayana kadar pişir. Somonu ekle; kalınlığına göre yaklaşık 6–10 dakika çevirerek pişir. En kalın kısmı 63°C olmalı.",
+        "Somonu spatulayla iri parçalara ayır. Süzülmüş makarna ve ıspanağı ekle; yapraklar solana kadar 2–3 dakika karıştır. Gerekirse ayırdığın sudan azar azar ekleyerek kıvamını aç.",
+        "İki tabağa eşit böl. Bir tabak bir porsiyondur. Peynir, krema ve ek yağ hesaba dahil değildir."
+      ],
+      "nutritionCalculation": {
+        "basis": "Miktar × gramsPerUnit × 100 g besin değeri / 100; toplam / 2, bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "wwpasta": "169738",
+          "salmon": "175167",
+          "spinach": "168462",
+          "tomato": "170457",
+          "oil": "171413"
+        },
+        "note": "Makarna kuru, balık ve sebzeler çiğ yenilebilir ağırlıktır. Şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Salmon & spinach pasta",
+        "publisher": "Good Food / Sophie Godwin",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/salmon-spinach-pasta",
+        "accessedOn": "2026-11-15",
+        "kitchenTested": false,
+        "adaptation": "Pişmiş somonu makarna ve ıspanakla birleştirme yöntemi temel alındı. Yağlı kuru domates yerine taze domates ve ölçülü zeytinyağı, normal penne yerine tam buğday makarna kullanıldı; miktarlar ve makrolar yeniden hesaplandı.",
+        "foodSafetySource": "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures"
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-15",
+        "description": "Özgün yapay zekâ görseli; temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-15-salmon-spinach-pasta.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-14-baked-banana-porridge",
       "addedOn": "2026-11-14",
       "title": "Yoğurt eşliğinde muzlu fırın yulafı",
