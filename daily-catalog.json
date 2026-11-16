@@ -1,6 +1,87 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-16-stewed-apple-yogurt",
+      "addedOn": "2026-11-16",
+      "title": "Tarçınlı yumuşak elma ve süzme yoğurt",
+      "summary": "Tencerede az suyla yumuşatılmış elma ve soğuk yoğurtla iki kişilik sade tatlı. Good Food tarifinden uyarlama. İlave şeker kullanılmaz; meyve ve süt doğal şeker içerir. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Tatlı",
+      "servings": 2,
+      "minutes": 25,
+      "difficulty": "easy",
+      "water": 40,
+      "image": "images/daily-2026-11-16-stewed-apple-yogurt.png",
+      "items": [
+        [
+          "apple",
+          400
+        ],
+        [
+          "cinnamon",
+          1
+        ],
+        [
+          "greekyogurt",
+          300
+        ]
+      ],
+      "macros": {
+        "kcal": 193.7,
+        "protein": 15.8,
+        "carbs": 33.4,
+        "fat": 0.9
+      },
+      "allergens": [
+        "milk"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Bıçak",
+        "Kesme tahtası",
+        "Kapaklı küçük tencere",
+        "Kaşık",
+        "İki servis kâsesi"
+      ],
+      "steps": [
+        "Elmaları iyice yıka. Sap ve çekirdek evlerini çıkar; kabuklu yenilebilir kısmından 400 g tart. Yaklaşık 1–2 cm küpler kes.",
+        "Elmayı tencereye al; 1 g tarçın ve 40 ml su ekle. Kısık ateşte hafif kaynamaya getir. Kapağını kapatıp 12–18 dakika, parçalar çatalla kolay ezilene kadar pişir. Ara sıra karıştır; dibi kurumaya başlarsa az sıcak su ekle.",
+        "Ocağı kapatıp elmayı 5 dakika ılıt. Püre yapmadan iki kâseye eşit böl. Her kâseye 150 g yağsız süzme yoğurt ekle.",
+        "Bir kâse bir porsiyondur. Kuru üzüm, bal, şurup ve granola bu tarifte yoktur; eklenirse ayrıca kaydet."
+      ],
+      "nutritionCalculation": {
+        "basis": "Miktar × gramsPerUnit × 100 g besin değeri / 100; toplam / 2, bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "apple": "171688",
+          "cinnamon": "171320",
+          "greekyogurt": "170894"
+        },
+        "note": "Elma kabuklu ve çekirdeksiz tartılır; pişirme suyu dökülmez. Şeker sayısal verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Cinnamon-stewed apple",
+        "publisher": "Good Food team",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/cinnamon-stewed-apple",
+        "accessedOn": "2026-11-16",
+        "kitchenTested": false,
+        "adaptation": "Elmayı tarçın ve az suyla kapaklı tencerede yumuşatıp yoğurtla servis etme yöntemi temel alındı. Kabuk korundu, kuru üzüm ve isteğe bağlı akçaağaç şurubu çıkarıldı. Yoğurt miktarı artırıldı; iki porsiyon makrosu yeniden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-16",
+        "description": "Özgün yapay zekâ görseli; temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-16-stewed-apple-yogurt.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-15-salmon-spinach-pasta",
       "addedOn": "2026-11-15",
       "title": "Somonlu ıspanaklı tam buğday makarna",
