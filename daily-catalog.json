@@ -1,6 +1,118 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-17-italian-chickpea-stew",
+      "addedOn": "2026-11-17",
+      "title": "Patatesli nohut ve ıspanak yemeği",
+      "summary": "Nohut, küçük doğranmış patates, domates ve ıspanakla hazırlanan iki kişilik sıcak ana yemek. Good Food tarifinden uyarlama. Mutfakta denenmedi; kapak yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Bakliyat",
+      "servings": 2,
+      "minutes": 40,
+      "difficulty": "easy",
+      "water": 150,
+      "image": "images/daily-2026-11-17-italian-chickpea-stew.png",
+      "items": [
+        [
+          "chickpea",
+          300
+        ],
+        [
+          "potato",
+          250
+        ],
+        [
+          "spinach",
+          150
+        ],
+        [
+          "onion",
+          100
+        ],
+        [
+          "garlic",
+          6
+        ],
+        [
+          "tomato",
+          250
+        ],
+        [
+          "lemon",
+          20
+        ],
+        [
+          "parsley",
+          10
+        ],
+        [
+          "oil",
+          10
+        ]
+      ],
+      "macros": {
+        "kcal": 454.7,
+        "protein": 20,
+        "carbs": 77.2,
+        "fat": 9.7
+      },
+      "allergens": [],
+      "dietTags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "equipment": [
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Bıçak",
+        "Kesme tahtası",
+        "Tencere",
+        "Kapak",
+        "Süzgeç",
+        "Tahta kaşık"
+      ],
+      "steps": [
+        "Patatesi soyup 250 g tart ve 1 cm küpler kes. Ispanağı yıka; soğanı, sarımsağı ve domatesi doğra. Haşlanmış nohudu süzüp durula ve 300 g tart.",
+        "Patatesi kaynar suda 12–15 dakika, çatalla delinecek kadar yumuşayana dek haşla; süz.",
+        "Tencerede 10 g yağı ısıt. 100 g soğan ve 6 g sarımsağı orta ateşte 4–5 dakika karıştırarak yumuşat. 250 g domates ve 150 ml suyu ekleyip 8 dakika hafif kaynat.",
+        "300 g haşlanmış nohut ve haşlanmış patatesi ekleyip 5 dakika ısıt. 150 g ıspanağı katıp 2–3 dakika, yapraklar sönene kadar pişir.",
+        "Ocaktan alınca 20 g limon suyunu karıştır. 10 g doğranmış maydanozu üstüne serpip iki eşit kâseye böl. Bir kâse bir porsiyondur."
+      ],
+      "nutritionCalculation": {
+        "basis": "Miktar × gramsPerUnit × 100 g besin değeri / 100; toplam / 2, bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "chickpea": "173757",
+          "potato": "170026",
+          "spinach": "168462",
+          "onion": "170000",
+          "garlic": "169230",
+          "tomato": "170457",
+          "lemon": "167747",
+          "parsley": "170416",
+          "oil": "171413"
+        },
+        "note": "Nohut haşlanmış ve süzülmüş, patates soyulmuş yenilebilir miktar olarak tartılır. Haşlama suyu dökülür; yemeğe eklenen suyun enerjisi yoktur. Şeker sayısal verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Italian chickpea stew",
+        "publisher": "Good Food team",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/1240/italian-chickpea-stew",
+        "accessedOn": "2026-11-17",
+        "kitchenTested": false,
+        "adaptation": "Patatesi ayrı haşlayıp soğan, sarımsak, domates, nohut ve ıspanakla kısa süre birlikte pişirme yöntemi temel alındı. Şarap, biber, nane ve fazladan yağ çıkarıldı; gramajlar ve iki porsiyon makrosu yeniden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-17",
+        "description": "Özgün yapay zekâ görseli; temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-17-italian-chickpea-stew.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-16-stewed-apple-yogurt",
       "addedOn": "2026-11-16",
       "title": "Tarçınlı yumuşak elma ve süzme yoğurt",
