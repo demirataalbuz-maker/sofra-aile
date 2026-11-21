@@ -1,6 +1,113 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-21-aubergine-lentil-bake",
+      "addedOn": "2026-11-21",
+      "title": "Fırında patlıcanlı mercimek katları",
+      "summary": "Közlenmiş patlıcan dilimleri, mercimekli domates sosu ve kaşarla fırında pişen sıcak ana yemek. Good Food tarifinden uyarlama; mutfakta denenmedi, görsel temsili ve yapay zekâ üretimidir.",
+      "category": "Ana yemek",
+      "servings": 2,
+      "minutes": 70,
+      "difficulty": "easy",
+      "image": "images/daily-2026-11-21-aubergine-lentil-bake.png",
+      "items": [
+        [
+          "eggplant",
+          400
+        ],
+        [
+          "lentilCooked",
+          280
+        ],
+        [
+          "onion",
+          100
+        ],
+        [
+          "garlic",
+          6
+        ],
+        [
+          "tomato",
+          300
+        ],
+        [
+          "basil",
+          5
+        ],
+        [
+          "oil",
+          15
+        ],
+        [
+          "kasar",
+          60
+        ]
+      ],
+      "macros": {
+        "kcal": 436,
+        "protein": 24.4,
+        "carbs": 52.1,
+        "fat": 16.8
+      },
+      "allergens": [
+        "milk"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "oven",
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Bıçak",
+        "Kesme tahtası",
+        "Fırın tepsisi",
+        "Tencere",
+        "Fırın kabı",
+        "Kaşık"
+      ],
+      "steps": [
+        "Fırını 220°C’ye ısıt. Patlıcanları uzunlamasına dilimle, tepsiye dizip yağın yarısıyla hafifçe yağla. 15–20 dakika yumuşayana kadar fırınla; yarısında çevir.",
+        "Bu sırada soğanı ve sarımsağı kalan yağla tavada 4–5 dakika yumuşat. Doğranmış domates ve 100 ml suyu ekleyip 10 dakika pişir. Haşlanmış mercimek ve kıyılmış fesleğeni karıştır.",
+        "Fırın kabına mercimekli sostan bir kat yay. Patlıcan dilimlerini üst üste diz; malzeme bitene kadar katları tekrarla.",
+        "Rendelenmiş kaşarı üstüne serpip 200°C’de 15 dakika, üstü eriyip hafif kızarana kadar pişir. 5 dakika dinlendirip iki porsiyona böl."
+      ],
+      "nutritionCalculation": {
+        "basis": "Miktar × gramsPerUnit × 100 g besin değeri / 100; toplam / 2, bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "eggplant": "169228",
+          "lentilCooked": "172421",
+          "onion": "170000",
+          "garlic": "169230",
+          "tomato": "170457",
+          "basil": "172232",
+          "oil": "171413",
+          "kasar": "170850"
+        },
+        "note": "Mercimek pişmiş ve süzülmüş ağırlıktır; kaşar USDA cheddar benzeri kayıtla yaklaşık temsil edilir."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Layered aubergine & lentil bake",
+        "publisher": "Good Food team",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/layered-aubergine-lentil-bake",
+        "accessedOn": "2026-11-21",
+        "kitchenTested": false,
+        "adaptation": "Patlıcanı fırınlama ve mercimek-domates sosuyla katlama tekniği uyarlandı; kabak ve mozzarella çıkarıldı, haşlanmış mercimek ve kaşar kullanıldı. Besin değerleri katalog malzemelerinden yeniden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-21",
+        "description": "Özgün yapay zekâ görseli; temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-21-aubergine-lentil-bake.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-17-italian-chickpea-stew",
       "addedOn": "2026-11-17",
       "title": "Patatesli nohut ve ıspanak yemeği",
