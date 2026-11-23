@@ -1,6 +1,104 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-23-warm-tuna-potato-spinach-salad",
+      "addedOn": "2026-11-23",
+      "title": "Ilık ton balıklı patates ve ıspanak salatası",
+      "summary": "Yumuşak patates, yeşil fasulye, ıspanak ve ton balığı; fesleğenli yağ sosuyla ılık servis edilir. Good Food tarifinden uyarlama; mutfakta denenmedi, kapak görseli yapay zekâ üretimi temsili sunumdur.",
+      "category": "Salata",
+      "servings": 2,
+      "minutes": 30,
+      "difficulty": "easy",
+      "image": "images/daily-2026-11-23-warm-tuna-potato-spinach-salad.png",
+      "items": [
+        [
+          "potato",
+          400
+        ],
+        [
+          "tuna",
+          180
+        ],
+        [
+          "greenbean",
+          160
+        ],
+        [
+          "spinach",
+          80
+        ],
+        [
+          "tomato",
+          150
+        ],
+        [
+          "oil",
+          12
+        ],
+        [
+          "basil",
+          8
+        ]
+      ],
+      "macros": {
+        "kcal": 332.9,
+        "protein": 25,
+        "carbs": 45.1,
+        "fat": 7.6
+      },
+      "allergens": [
+        "fish"
+      ],
+      "dietTags": [],
+      "equipment": [
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Bıçak",
+        "Kesme tahtası",
+        "Tencere",
+        "Süzgeç",
+        "Salata kâsesi"
+      ],
+      "steps": [
+        "Patatesleri yıka, iri parçaları ikiye kes. Kaynar suda 12–15 dakika yumuşayana kadar haşla. Son 4 dakikada yeşil fasulyeleri ekleyip birlikte pişir. Süz.",
+        "Patates ve fasulye sıcakken doğranmış ıspanağı ekle; ıspanak hafifçe sönene kadar karıştır.",
+        "Süzülmüş ton balığını iri parçalara ayır. Domatesleri ikiye böl. Zeytinyağıyla birlikte salataya ekleyip ezmeden harmanla.",
+        "Fesleğeni ince kıyıp üzerine serpiştir. İki tabağa böl ve ılık servis et."
+      ],
+      "nutritionCalculation": {
+        "basis": "Miktar × gramsPerUnit × 100 g besin değeri / 100; toplam / 2, bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "potato": "170026",
+          "tuna": "173709",
+          "greenbean": "169961",
+          "spinach": "168462",
+          "tomato": "170457",
+          "oil": "171413",
+          "basil": "172232"
+        },
+        "note": "Ton balığı süzülmüş ağırlıktır; ilave pesto kullanılmadı. Sayısal şeker değeri eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Warm potato & tuna salad with pesto dressing",
+        "publisher": "Good Food team",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/warm-potato-tuna-salad-pesto-dressing",
+        "accessedOn": "2026-11-23",
+        "kitchenTested": false,
+        "adaptation": "Haşlanmış patates, yeşil fasulye, ıspanak ve ton balığını ılık harmanlama yöntemi uyarlandı. Pesto çıkarılıp fesleğen ve ölçülü yağ kullanıldı; gramajlar ve porsiyon makroları kaynaklı katalog besin değerlerinden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-23",
+        "description": "Özgün yapay zekâ görseli; temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-23-warm-tuna-potato-spinach-salad.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-21-aubergine-lentil-bake",
       "addedOn": "2026-11-21",
       "title": "Fırında patlıcanlı mercimek katları",
