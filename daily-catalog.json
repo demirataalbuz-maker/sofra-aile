@@ -1,6 +1,115 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-24-tofu-broccoli-rice-noodles",
+      "addedOn": "2026-11-24",
+      "title": "Brokolili tofu ve pirinç eriştesi",
+      "summary": "Tavada kızarmış tofu, brokoli ve pirinç eriştesi; soya ve tahinli hafif sosla harmanlanır. Good Food tarifinden uyarlama. Mutfakta denenmedi; kapak görseli yapay zekâyla üretilmiş temsili sunumdur.",
+      "category": "Ana yemek",
+      "servings": 2,
+      "minutes": 30,
+      "difficulty": "easy",
+      "image": "images/daily-2026-11-24-tofu-broccoli-rice-noodles.png",
+      "items": [
+        [
+          "tofu",
+          250
+        ],
+        [
+          "broccoli",
+          200
+        ],
+        [
+          "ricenoodle",
+          140
+        ],
+        [
+          "soysauce",
+          20
+        ],
+        [
+          "garlic",
+          5
+        ],
+        [
+          "ginger",
+          5
+        ],
+        [
+          "tahini",
+          12
+        ],
+        [
+          "oil",
+          5
+        ]
+      ],
+      "macros": {
+        "kcal": 537.6,
+        "protein": 30.6,
+        "carbs": 69.3,
+        "fat": 17.5
+      },
+      "allergens": [
+        "soy",
+        "sesame",
+        "gluten"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Bıçak",
+        "Kesme tahtası",
+        "Tencere",
+        "Süzgeç",
+        "Geniş tava",
+        "Küçük kâse",
+        "Spatula"
+      ],
+      "steps": [
+        "Pirinç eriştesini paket talimatına göre sıcak suda yumuşat; süzüp kenara al. Tofuyu kurulayıp küp doğra, brokoliyi küçük çiçeklere ayır.",
+        "Tavada yağı orta ateşte ısıt. Tofuyu tek kat halinde 6–8 dakika, her yanı hafif kızarana dek çevirerek pişir. Tavadan al.",
+        "Aynı tavada brokoliyi ve 2 yemek kaşığı suyu 4–5 dakika pişir; brokoli yumuşayıp diri kalmalı. Sarımsak ve zencefili ekleyip 30 saniye karıştır.",
+        "Küçük kâsede soya sosu, tahin ve 2 yemek kaşığı sıcak suyu pürüzsüz olana dek karıştır. Tofuyu, erişteyi ve sosu tavaya ekle; 2–3 dakika harmanlayıp iyice ısıt. İki kâseye böl."
+      ],
+      "nutritionCalculation": {
+        "basis": "Miktar × gramsPerUnit × 100 g besin değeri / 100; toplam / 2, bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "tofu": "172475",
+          "broccoli": "170379",
+          "ricenoodle": "169742",
+          "soysauce": "174277",
+          "garlic": "169230",
+          "ginger": "169231",
+          "tahini": "170189",
+          "oil": "171413"
+        },
+        "note": "Pirinç eriştesi kuru ağırlıktadır. Soya sosu buğday içeren shoyu olarak alınmıştır; glütensiz seçenek seçilirse alerjen değişir. Şeker değeri eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Sesame noodles with tofu",
+        "publisher": "Good Food team",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/sesame-noodles-tofu",
+        "accessedOn": "2026-11-24",
+        "kitchenTested": false,
+        "adaptation": "Tofu ve sebzeyi tavada pişirip erişteyle harmanlama yöntemi temel alındı. Buğday eriştesi pirinç eriştesiyle, yeşil sebze brokoliyle değiştirildi; susam yağı ve tohum yerine az tahin kullanıldı. Porsiyon makroları katalog besin verisinden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-24",
+        "description": "Özgün yapay zekâ görseli; temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-24-tofu-broccoli-rice-noodles.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-23-warm-tuna-potato-spinach-salad",
       "addedOn": "2026-11-23",
       "title": "Ilık ton balıklı patates ve ıspanak salatası",
