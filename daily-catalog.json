@@ -1,6 +1,109 @@
 {
   "recipes": [
     {
+      "id": "daily-2026-11-25-sweetcorn-zucchini-fritters",
+      "addedOn": "2026-11-25",
+      "title": "Mısırlı kabak mücveri ve yoğurt",
+      "summary": "Mısır ve rendelenmiş kabağı hafif yumurtalı hamura katıp tavada altın rengi kızart; yanında yoğurtla servis et. Good Food tarifinden uyarlama. Mutfakta denenmedi, görsel yapay zekâ üretimi temsili sunumdur.",
+      "category": "Kahvaltı",
+      "servings": 2,
+      "minutes": 30,
+      "difficulty": "easy",
+      "image": "images/daily-2026-11-25-sweetcorn-zucchini-fritters.png",
+      "items": [
+        [
+          "cornCooked",
+          200
+        ],
+        [
+          "zucchini",
+          150
+        ],
+        [
+          "flour",
+          70
+        ],
+        [
+          "egg",
+          3
+        ],
+        [
+          "milk",
+          50
+        ],
+        [
+          "oil",
+          10
+        ],
+        [
+          "greekyogurt",
+          100
+        ]
+      ],
+      "macros": {
+        "kcal": 417.4,
+        "protein": 22.4,
+        "carbs": 51.9,
+        "fat": 14.4
+      },
+      "allergens": [
+        "egg",
+        "milk",
+        "gluten"
+      ],
+      "dietTags": [
+        "vegetarian"
+      ],
+      "equipment": [
+        "stove"
+      ],
+      "tools": [
+        "Mutfak tartısı",
+        "Rende",
+        "Karıştırma kâsesi",
+        "Tava",
+        "Spatula",
+        "Süzgeç",
+        "Kâğıt havlu"
+      ],
+      "steps": [
+        "Kabağı rendele. Temiz bir bez içinde suyunu iyice sık. Mısırın suyunu süzüp taneleri kurula.",
+        "Kâsede mısır, kabak, un, 50 g çırpılmış yumurta ve sütü karıştır. Akışkan ama kaşıkla alınabilen bir hamur elde et.",
+        "Tavada yağın yarısını orta ateşte ısıt. Hamurdan dört eşit kaşık dolusu koyup hafifçe bastır; her yüzünü 3–4 dakika, altın rengi ve içi pişene kadar kızart. Kalan hamuru ikinci partide pişir.",
+        "Mücverleri kâğıt havluya al. İki tabağa paylaştır ve her tabağa 50 g yoğurt koyarak sıcak servis et."
+      ],
+      "nutritionCalculation": {
+        "basis": "Miktar × gramsPerUnit × 100 g besin değeri / 100; toplam / 2, bir ondalığa yuvarlandı.",
+        "source": "USDA FoodData Central · SR Legacy 2018; ana katalogdaki source-checked kayıtlar",
+        "sourceIds": {
+          "cornCooked": "168399",
+          "zucchini": "169291",
+          "flour": "169761",
+          "egg": "171287",
+          "milk": "172217",
+          "oil": "171413",
+          "greekyogurt": "170894"
+        },
+        "note": "Mısır süzülmüş, kabak sıkıldıktan önceki yenilebilir miktardır. Yağ tavada kalan miktar dahil toplam eklenen yağ üzerinden hesaplandı; şeker verisi eklenmedi."
+      },
+      "recipeProvenance": {
+        "type": "source-based-adaptation",
+        "sourceTitle": "Sweetcorn & courgette fritters",
+        "publisher": "Chelsie Collins / Good Food",
+        "sourceUrl": "https://www.bbcgoodfood.com/recipes/sweetcorn-courgette-fritters",
+        "accessedOn": "2026-11-25",
+        "kitchenTested": false,
+        "adaptation": "Mısır, kabak, yumurta, süt ve unla tavada mücver yapma yöntemi uyarlandı. Beş yumurtalı poşe eşliği çıkarıldı; yoğurtla sunuldu. İki porsiyon miktarları ve makrolar mevcut kaynaklı katalog malzemelerinden yeniden hesaplandı."
+      },
+      "imageProvenance": {
+        "type": "ai-generated",
+        "tool": "built-in image_gen",
+        "createdOn": "2026-11-25",
+        "description": "Özgün yapay zekâ görseli; temsili sunumdur.",
+        "promptFile": "images/daily-2026-11-25-sweetcorn-zucchini-fritters.provenance.json"
+      }
+    },
+    {
       "id": "daily-2026-11-24-tofu-broccoli-rice-noodles",
       "addedOn": "2026-11-24",
       "title": "Brokolili tofu ve pirinç eriştesi",
